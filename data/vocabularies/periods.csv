@@ -1,0 +1,61 @@
+label,start,stop
+Palaeolithic,-500000,-10001
+Lower Palaeolithic,-500000,-150001
+Middle Palaeolithic,-150000,-40001
+Upper Palaeolithic,-40000,-10001
+Mesolithic,-10000,-4001
+Early Mesolithic,-10000,-7001
+Late Mesolithic,-7000,-4001
+Neolithic,-4000,-2351
+Early Neolithic,-4000,-3301
+Middle Neolithic,-3300,-2901
+Late Neolithic,-2900,-2351
+Bronze Age,-2350,-801
+Early Bronze Age,-2350,-1601
+Middle Bronze Age,-1600,-1201
+Late Bronze Age,-1200,-801
+Iron Age,-800,42
+Early Iron Age,-800,-401
+Middle Iron Age,-400,-101
+Late Iron Age,-100,42
+Roman,43,409
+Romano-British,43,409
+Early Medieval,410,1065
+Anglo-Saxon,410,1065
+Saxon,410,1065
+Viking,800,1065
+Norman,1066,1153
+Medieval,1066,1484
+Post-Medieval,1485,1900
+Tudor,1485,1602
+Elizabethan,1558,1602
+Stuart,1603,1713
+Jacobean,1603,1624
+Georgian,1714,1836
+Regency,1811,1819
+Hanoverian,1714,1836
+Victorian,1837,1901
+Edwardian,1901,1910
+Prehistoric,-500000,42
+Precambrian,-4600000000,-538800001
+Cambrian,-538800000,-485400001
+Ordovician,-485400000,-443800001
+Silurian,-443800000,-419200001
+Devonian,-419200000,-358900001
+Carboniferous,-358900000,-298900001
+Permian,-298900000,-251900001
+Triassic,-251900000,-201400001
+Jurassic,-201400000,-145000001
+Cretaceous,-145000000,-66000001
+Tertiary,-66000000,-2580001
+Palaeogene,-66000000,-23030001
+Palaeocene,-66000000,-56000001
+Eocene,-56000000,-33900001
+Oligocene,-33900000,-23030001
+Neogene,-23030000,-2580001
+Miocene,-23030000,-5333001
+Pliocene,-5333000,-2580001
+Quaternary,-2580000,
+Pleistocene,-2580000,-9701
+Devensian,-115000,-9701
+Holocene,-9700,

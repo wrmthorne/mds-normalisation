@@ -1,0 +1,125 @@
+[project]
+name = "mds-norm"
+version = "0.1.0"
+description = "Cost-routed normalisation of Museum Data Service collection records"
+readme = "README.md"
+requires-python = ">=3.12"
+dependencies = [
+    "aiohttp>=3.14.1",
+    "codecarbon>=3.2.8",
+    "ftfy>=6.3.1",
+    "httpx>=0.28.1",
+    "ipykernel>=7.3.0",
+    "ipywidgets>=8.1.8",
+    "lark>=1.3.1",
+    "matplotlib>=3.11.1",
+    "mds-data-model",
+    "nbconvert>=7.17.1",
+    "plotly>=6.8.0",
+    "polars>=1.42.1",
+    "probablepeople>=0.5.6",
+    "pyarrow>=25.0.0",
+    "rapidfuzz>=3.14.5",
+    "scikit-learn>=1.9.0",
+    "scipy-stubs~=1.18.0",
+    "sentence-transformers>=5.6.0",
+    "tenacity>=9.1.4",
+    "transformers>=4.55,<5",
+    "zstandard>=0.25.0",
+]
+
+[dependency-groups]
+dev = [
+    "kaleido>=1.3.0",
+    "pytest>=8",
+]
+
+[tool.uv.sources]
+mds-data-model = { git = "https://github.com/wrmthorne/mds-data-model.git" }
+
+[tool.ruff]
+line-length = 119
+extend-exclude = ["notebooks", "migrations"]
+
+[tool.ruff.format]
+skip-magic-trailing-comma = true
+docstring-code-format = true
+# preview = true                    # fluent layout for method chains
+
+[tool.ruff.lint]
+select = [
+    "F", "E", "W",                  # pyflakes, pycodestyle
+    "I",                            # import sorting
+    "N",                            # naming
+    "D",                            # docstring style
+    "UP",                           # pyupgrade
+    "ANN",                          # missing annotations
+    "S",                            # bandit
+    "B",                            # bugbear
+    "A",                            # builtin shadowing
+    "C4",                           # comprehensions
+    "DTZ",                          # naive datetimes
+    "T20",                          # stray print / pprint
+    "PT",                           # pytest style
+    "RET", "SIM", "PIE",            # simplification
+    "TID",                          # import hygiene, banned APIs
+    "ARG",                          # unused arguments
+    "PTH",                          # os.path -> pathlib
+    "ERA",                          # commented-out code
+    "PL",                           # pylint subset
+    "TRY", "BLE",                   # over-broad exception handling
+    "PERF", "FLY",                  # perf, str-join
+    "FURB",                         # stdlib idioms
+    "RUF",                          # ruff-specific, incl. RUF100 stale noqa
+]
+ignore = [
+    "TRY003",                       # long messages inside raise
+    "TD003",                        # TODO must link an issue
+    "D1",                           # docstrings are optional; write one only where the name is not enough
+    "D400", "D415",                 # a one-line docstring does not end in a full stop
+    "PLC0415",                      # torch, sentence-transformers and the vLLM clients are imported where used
+    "RUF001", "RUF003",             # ×, –, ′ and curly quotes are corpus characters the parsers match on
+    "BLE001",                       # a stage guards each record so one bad value cannot end a 7M-record run
+    "PLR0911", "PLR0912", "PLR0915",  # the parsers and the compile stage branch per format, by design
+    "S104",                         # the energy agent binds every interface so the serving host can reach it
+    "S105",                         # the constants named *_TOKEN* hold regexes, not credentials
+    "S310",                         # urlopen goes to the energy agent URL the caller passes
+    "S314",                         # the XML parsed is the vocabulary dumps fetch_vocabs.sh downloads
+    "S603", "S607",                 # the subprocesses run local tools with literal arguments
+]
+
+[tool.ruff.lint.pydocstyle]
+convention = "google"               # or "numpy"; auto-disables conflicting D rules
+
+[tool.ruff.lint.pycodestyle]
+max-doc-length = 119                # activates W505 for over-long docstring lines
+
+[tool.ruff.lint.pylint]
+max-args = 8
+
+[tool.ruff.lint.isort]
+known-first-party = ["mds_norm"]
+split-on-trailing-comma = false     # matches format.skip-magic-trailing-comma
+
+[tool.ruff.lint.per-file-ignores]
+"tests/**/*.py" = ["S101", "ANN", "ARG", "PLR2004"]
+"__init__.py" = ["F401"]
+# every stage and experiment is also a command-line program and reports its progress on stdout
+"scripts/**/*.py" = ["T20"]
+"experiments/**/*.py" = ["T20"]
+"src/mds_norm/pipeline/**/*.py" = ["T20"]
+"src/mds_norm/evaluation/**/*.py" = ["T20"]
+"src/mds_norm/findability/**/*.py" = ["T20"]
+"src/mds_norm/utils/energy.py" = ["T20"]
+
+
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[tool.hatch.build.targets.wheel]
+packages = ["src/mds_norm", "experiments"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+pythonpath = ["tests", "scripts"]

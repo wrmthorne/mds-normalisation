@@ -1,0 +1,46 @@
+{
+  "fields": ["clean", "notation"],
+  "groups": [
+    {
+      "name": "marked — the prefilter must admit every one of these",
+      "cases": [
+        {"raw": "oak?", "expected": {"clean": "oak", "notation": "?"}},
+        {"raw": "oak ?", "expected": {"clean": "oak", "notation": "?"}},
+        {"raw": "oak??", "expected": {"clean": "oak", "notation": "??"}},
+        {"raw": "alabaster (?)", "expected": {"clean": "alabaster", "notation": "(?)"}},
+        {"raw": "alabaster [?]", "expected": {"clean": "alabaster", "notation": "[?]"}},
+        {"raw": "?oak", "expected": {"clean": "oak", "notation": "?"}},
+        {"raw": "[silver]", "expected": {"clean": "silver", "notation": "[]"}},
+        {"raw": "[ silver gilt ]", "expected": {"clean": "silver gilt", "notation": "[]"}},
+        {"raw": "probably oak", "expected": {"clean": "oak", "notation": "probably"}},
+        {"raw": "Probably oak", "expected": {"clean": "oak", "notation": "Probably"}},
+        {"raw": "oak, probably", "expected": {"clean": "oak", "notation": "probably"}},
+        {"raw": "oak; possibly", "expected": {"clean": "oak", "notation": "possibly"}},
+        {"raw": "oak (probably)", "expected": {"clean": "oak", "notation": "probably"}},
+        {"raw": "circa 1850", "expected": {"clean": "1850", "notation": "circa"}},
+        {"raw": "c. 1850", "expected": {"clean": "1850", "notation": "c."}},
+        {"raw": "ca.1850", "expected": {"clean": "1850", "notation": "ca."}},
+        {"raw": "probably oak?", "expected": {"clean": "oak", "notation": "?+probably"}},
+        {"raw": "[oak?]", "expected": {"clean": "oak", "notation": "[]+?"}}
+      ]
+    },
+    {
+      "name": "unmarked",
+      "cases": [
+        {"raw": "oak", "expected": null, "note": "unmarked"},
+        {"raw": "", "expected": null, "note": "empty"},
+        {"raw": "?", "expected": null, "note": "marker only: disguised null"},
+        {"raw": "(?)", "expected": null},
+        {"raw": "[?]", "expected": null},
+        {"raw": "???", "expected": null},
+        {"raw": "https://example.org/page?id=3", "expected": null, "note": "URL query string"},
+        {"raw": "see http://example.org?", "expected": null, "note": "URL present anywhere"},
+        {"raw": "record.php?item=12&type=4", "expected": null, "note": "query string without scheme"},
+        {"raw": "C. Smith", "expected": null, "note": "initial, not circa"},
+        {"raw": "ca. Smith", "expected": null, "note": "circa requires a digit"},
+        {"raw": "oak [inner] frame", "expected": null, "note": "brackets not whole-value"},
+        {"raw": "presumably", "expected": null, "note": "marker only"}
+      ]
+    }
+  ]
+}

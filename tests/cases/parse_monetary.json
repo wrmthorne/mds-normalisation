@@ -1,0 +1,94 @@
+{
+  "fields": ["currency_system", "normalised_pence", "uncertain", "context"],
+  "defaults": {"uncertain": false},
+  "groups": [
+    {
+      "name": "decimal, bare pound",
+      "cases": [
+        {"raw": "£15.00", "expected": {"currency_system": "gbp_decimal", "normalised_pence": 1500}},
+        {"raw": "£8.00", "expected": {"currency_system": "gbp_decimal", "normalised_pence": 800}},
+        {"raw": "£0.75 for 3", "expected": {"currency_system": "gbp_decimal", "normalised_pence": 75, "context": "for 3"}},
+        {"raw": "£4.50", "expected": {"currency_system": "gbp_decimal", "normalised_pence": 450}},
+        {"raw": "£5", "expected": {"currency_system": "gbp_decimal", "normalised_pence": 500}},
+        {"raw": "£11.00 for all collection", "expected": {"currency_system": "gbp_decimal", "normalised_pence": 1100, "context": "for all collection"}},
+        {"raw": "£50 for set of 25", "expected": {"currency_system": "gbp_decimal", "normalised_pence": 5000, "context": "for set of 25"}},
+        {"raw": "£7 for 2 specimens.", "expected": {"currency_system": "gbp_decimal", "normalised_pence": 700, "context": "for 2 specimens."}},
+        {"raw": "£16 for 3", "expected": {"currency_system": "gbp_decimal", "normalised_pence": 1600, "context": "for 3"}}
+      ]
+    },
+    {
+      "name": "pre-decimal, full L/S/D and L-S-D",
+      "cases": [
+        {"raw": "£12/10/- for box of 60 minerals.", "expected": {"currency_system": "gbp_lsd", "normalised_pence": 3000, "context": "for box of 60 minerals."}},
+        {"raw": "£12/10/- for box of 60 minerals", "expected": {"currency_system": "gbp_lsd", "normalised_pence": 3000, "context": "for box of 60 minerals"}},
+        {"raw": "£4-10-0 for set", "expected": {"currency_system": "gbp_lsd", "normalised_pence": 1080, "context": "for set"}},
+        {"raw": "£5-10-0 for set of 5", "expected": {"currency_system": "gbp_lsd", "normalised_pence": 1320, "context": "for set of 5"}},
+        {"raw": "£3-10-0", "expected": {"currency_system": "gbp_lsd", "normalised_pence": 840}},
+        {"raw": "£1-10-0", "expected": {"currency_system": "gbp_lsd", "normalised_pence": 360}}
+      ]
+    },
+    {
+      "name": "shillings/pence only",
+      "cases": [
+        {"raw": "2/-", "expected": {"currency_system": "gbp_lsd", "normalised_pence": 24}},
+        {"raw": "2/6", "expected": {"currency_system": "gbp_lsd", "normalised_pence": 30}},
+        {"raw": "5/-", "expected": {"currency_system": "gbp_lsd", "normalised_pence": 60}},
+        {"raw": "5/0", "expected": {"currency_system": "gbp_lsd", "normalised_pence": 60}},
+        {"raw": "15/-", "expected": {"currency_system": "gbp_lsd", "normalised_pence": 180}},
+        {"raw": "1/-", "expected": {"currency_system": "gbp_lsd", "normalised_pence": 12}},
+        {"raw": "1/6", "expected": {"currency_system": "gbp_lsd", "normalised_pence": 18}},
+        {"raw": "6/0", "expected": {"currency_system": "gbp_lsd", "normalised_pence": 72}},
+        {"raw": "3/0", "expected": {"currency_system": "gbp_lsd", "normalised_pence": 36}},
+        {"raw": "3/0 for 3", "expected": {"currency_system": "gbp_lsd", "normalised_pence": 36, "context": "for 3"}},
+        {"raw": "5/6", "expected": {"currency_system": "gbp_lsd", "normalised_pence": 66}},
+        {"raw": "3/6", "expected": {"currency_system": "gbp_lsd", "normalised_pence": 42}},
+        {"raw": "3/-", "expected": {"currency_system": "gbp_lsd", "normalised_pence": 36}},
+        {"raw": "10/-", "expected": {"currency_system": "gbp_lsd", "normalised_pence": 120}},
+        {"raw": "25/-", "expected": {"currency_system": "gbp_lsd", "normalised_pence": 300}, "note": "over the 19s carry boundary — no pounds slot"},
+        {"raw": "20/-", "expected": {"currency_system": "gbp_lsd", "normalised_pence": 240}}
+      ]
+    },
+    {
+      "name": "spelled-out denominations, as the probe scan's price pattern finds them",
+      "cases": [
+        {"raw": "1450 pounds", "expected": {"currency_system": "gbp_decimal", "normalised_pence": 145000}},
+        {"raw": "96 pounds", "expected": {"currency_system": "gbp_decimal", "normalised_pence": 9600}},
+        {"raw": "1 pound", "expected": {"currency_system": "gbp_decimal", "normalised_pence": 100}},
+        {"raw": "17 shillings", "expected": {"currency_system": "gbp_lsd", "normalised_pence": 204}},
+        {"raw": "71 pence", "expected": {"currency_system": "gbp_lsd", "normalised_pence": 71}},
+        {"raw": "1 penny", "expected": {"currency_system": "gbp_lsd", "normalised_pence": 1}},
+        {"raw": "5 pounds for set of 3", "expected": {"currency_system": "gbp_decimal", "normalised_pence": 500, "context": "for set of 3"}}
+      ]
+    },
+    {
+      "name": "bracketed — cataloguer-supplied estimate, still decomposed",
+      "cases": [
+        {"raw": "[7/6]", "expected": {"currency_system": "gbp_lsd", "normalised_pence": 90, "uncertain": true}},
+        {"raw": "[17s 6d]", "expected": {"currency_system": "gbp_lsd", "normalised_pence": 210, "uncertain": true}},
+        {"raw": "[5/-]", "expected": {"currency_system": "gbp_lsd", "normalised_pence": 60, "uncertain": true}},
+        {"raw": "[2/-]", "expected": {"currency_system": "gbp_lsd", "normalised_pence": 24, "uncertain": true}}
+      ]
+    },
+    {
+      "name": "ambiguous multi-amount — refused, no invention",
+      "cases": [
+        {"raw": "5/- and 3/6 for 7", "expected": null}
+      ]
+    },
+    {
+      "name": "guineas",
+      "cases": [
+        {"raw": "2 gns", "expected": {"currency_system": "gbp_guinea", "normalised_pence": 504}},
+        {"raw": "2 guineas", "expected": {"currency_system": "gbp_guinea", "normalised_pence": 504}},
+        {"raw": "1 gn", "expected": {"currency_system": "gbp_guinea", "normalised_pence": 252}}
+      ]
+    },
+    {
+      "name": "unparseable",
+      "cases": [
+        {"raw": "", "expected": null},
+        {"raw": "donated", "expected": null}
+      ]
+    }
+  ]
+}

@@ -1,0 +1,32 @@
+{"status": "labelled", "verdict": "correct", "gold": {"atoms": ["side moulded in the form of a face (? Queen Victoria)"], "prose": true}, "id": "ato-0c5474bff0d5", "note": null, "ts": "2026-07-11T00:00:00", "annotator": "wrmthorne"}
+{"status": "labelled", "verdict": "correct", "gold": {"atoms": ["Figure Study / Composition"]}, "id": "ato-d141c4832926", "note": null, "ts": "2026-07-11T00:00:00", "annotator": "wrmthorne"}
+{"status": "labelled", "verdict": "correct", "gold": {"atoms": ["Human remains", "Perspex"]}, "id": "ato-fbfa7fc4816d", "note": null, "ts": "2026-07-11T00:00:00", "annotator": "wrmthorne"}
+{"status": "labelled", "verdict": "correct", "gold": {"atoms": ["A TREE OF LIBERTY planted by Jack Lang, Yves Jouffa, Michel Blum, Francois Leotard, Dominique Bozo, Catherine Millet, Myriam Salamon, Yves Hayat, COMMITTEE OF PUBLIC SAFETY, LITTLE SPARTA"], "prose": true}, "id": "ato-4414ca2bf569", "note": "Misplaced field", "ts": "2026-07-11T00:00:00", "annotator": "wrmthorne"}
+{"status": "labelled", "verdict": "correct", "gold": {"atoms": []}, "id": "ato-a57ebfc8ff53", "note": null, "ts": "2026-07-11T00:00:00", "annotator": "wrmthorne"}
+{"status": "labelled", "verdict": "accept", "gold": {"atoms": ["Western Han Dynasty", "c. 202 BC – AD 24"]}, "id": "ato-eaf0c38111d2", "note": null, "ts": "2026-07-11T00:00:00", "annotator": "wrmthorne"}
+{"status": "labelled", "verdict": "correct", "gold": {"atoms": [], "prose": true}, "id": "ato-4414ca2bf569", "note": "misplaced_field", "annotator": "wrmthorne", "ts": "2026-07-11T00:00:00"}
+{"status": "labelled", "verdict": "correct", "gold": {"atoms": ["moulded", "Queen Victoria"], "prose": true}, "id": "ato-0c5474bff0d5", "note": null, "annotator": "wrmthorne", "ts": "2026-07-11T00:00:00"}
+{"status": "labelled", "verdict": "correct", "gold": {"atoms": ["16th Century", "Mid-17th Century"]}, "id": "ato-a57ebfc8ff53", "note": null, "annotator": "wrmthorne", "ts": "2026-07-11T00:00:00"}
+{"status": "labelled", "verdict": "correct", "gold": {"atoms": ["Printed"]}, "id": "ato-eb77388d98e4", "note": null, "annotator": "wrmthorne", "ts": "2026-07-11T00:00:00"}
+{"status": "labelled", "verdict": "correct", "gold": {"atoms": ["woven", "printed"], "prose": true}, "id": "ato-c9e0efd85f79", "note": null, "annotator": "wrmthorne", "ts": "2026-07-11T00:00:00"}
+{"status": "labelled", "verdict": "accept", "gold": {"atoms": ["Cahun Collection"]}, "id": "ato-c908041298e4", "note": null, "annotator": "wrmthorne", "ts": "2026-07-11T00:00:00"}
+{"status": "labelled", "verdict": "accept", "gold": {"atoms": ["Crawford Collection"]}, "id": "ato-d5109dec2529", "note": null, "annotator": "wrmthorne", "ts": "2026-07-11T00:00:00"}
+{"status": "labelled", "verdict": "accept", "gold": {"atoms": ["Crown of Thorns"]}, "id": "ato-d083792ebbc7", "note": null, "annotator": "wrmthorne", "ts": "2026-07-11T00:00:00"}
+{"status": "labelled", "verdict": "correct", "gold": {"atoms": ["loops (stitches)"]}, "id": "ato-5fd45b417730", "note": null, "annotator": "wrmthorne", "ts": "2026-07-11T00:00:00"}
+{"status": "labelled", "verdict": "correct", "gold": {"atoms": ["Metals and Metalworking"]}, "id": "ato-d2b693f926f7", "note": null, "annotator": "wrmthorne", "ts": "2026-07-11T00:00:00"}
+{"status": "labelled", "verdict": "accept", "gold": {"atoms": ["Miscellaneous Lithics"]}, "id": "ato-0f79b5e0ee53", "note": null, "annotator": "wrmthorne", "ts": "2026-07-11T00:00:00"}
+{"status": "labelled", "verdict": "accept", "gold": {"atoms": ["Museum General"]}, "id": "ato-7767b3b856d7", "note": null, "annotator": "wrmthorne", "ts": "2026-07-11T00:00:00"}
+{"status": "labelled", "verdict": "correct", "gold": {"atoms": ["swordsmen on horseback", "landscapes", "flowers"]}, "id": "ato-409ad10e13e0", "note": null, "annotator": "wrmthorne", "ts": "2026-07-11T00:00:00"}
+{"status": "labelled", "verdict": "accept", "gold": {"atoms": ["Rozel Manor"]}, "id": "ato-b6ae2fcfc5ab", "note": null, "annotator": "wrmthorne", "ts": "2026-07-11T00:00:00"}
+{"status": "labelled", "verdict": "correct", "gold": {"atoms": []}, "id": "ato-e4850d416c5e", "note": "misplaced_field", "annotator": "wrmthorne", "ts": "2026-07-11T00:00:00"}
+{"status": "labelled", "verdict": "correct", "gold": {"atoms": []}, "id": "ato-dc5e29d1983a", "note": "misplaced_field", "annotator": "wrmthorne", "ts": "2026-07-11T00:00:00"}
+{"status": "labelled", "verdict": "correct", "gold": {"atoms": ["Satin", "Machine lace"]}, "id": "ato-f50e8e9207e2", "note": "identifier", "annotator": "wrmthorne", "ts": "2026-07-11T00:00:00"}
+{"status": "labelled", "verdict": "accept", "gold": {"atoms": ["Paper", "Ink"]}, "id": "ato-708b746ceced", "note": null, "annotator": "wrmthorne", "ts": "2026-07-11T00:00:00"}
+{"status": "labelled", "verdict": "correct", "gold": {"atoms": ["pencil", "paper"]}, "id": "ato-75e3469a8805", "note": null, "annotator": "wrmthorne", "ts": "2026-07-11T00:00:00"}
+{"status": "labelled", "verdict": "accept", "gold": {"atoms": ["photographic emulsion"]}, "id": "ato-5bf8ed644717", "note": null, "annotator": "wrmthorne", "ts": "2026-07-11T00:00:00"}
+{"status": "labelled", "verdict": "accept", "gold": {"atoms": ["stoneware", "sodium vapour glaze"]}, "id": "ato-afc1eab3ad80", "note": null, "annotator": "wrmthorne", "ts": "2026-07-11T00:00:00"}
+{"status": "labelled", "verdict": "correct", "gold": {"atoms": ["11th Century, Late", "12th Century, Early"]}, "id": "ato-3a4dfd17a967", "note": null, "annotator": "wrmthorne", "ts": "2026-07-11T00:00:00"}
+{"status": "labelled", "verdict": "accept", "gold": {"atoms": ["2nd Century, Late"]}, "id": "ato-74186706f586", "note": null, "annotator": "wrmthorne", "ts": "2026-07-11T00:00:00"}
+{"status": "labelled", "verdict": "accept", "gold": {"atoms": ["2nd Millennium, Mid"]}, "id": "ato-b9334b2d3275", "note": null, "annotator": "wrmthorne", "ts": "2026-07-11T00:00:00"}
+{"status": "labelled", "verdict": "correct", "gold": {"atoms": ["New Kingdom", "18th Dynasty"]}, "id": "ato-d49435685426", "note": null, "annotator": "wrmthorne", "ts": "2026-07-11T00:00:00"}
+{"status": "labelled", "verdict": "accept", "gold": {"atoms": ["Ramesside", "19th Dynasty", "New Kingdom"]}, "id": "ato-6e037763fd53", "note": null, "annotator": "wrmthorne", "ts": "2026-07-11T00:00:00"}

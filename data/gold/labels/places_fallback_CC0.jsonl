@@ -1,0 +1,13 @@
+{"id": "fallback/os_open_names/unique/Shaldon", "stratum": "os_open_names/unique", "status": "resolved", "verdict": "correct", "note": "", "ts": "2026-08-31T00:00:00", "annotator": "wrmthorne"}
+{"id": "fallback/geonames/prominent/unk", "stratum": "geonames/prominent", "status": "resolved", "verdict": "wrong", "note": "'unk' is an unknown-marker, resolved to a place in Tripura", "ts": "2026-08-31T00:00:00", "annotator": "wrmthorne"}
+{"id": "fallback/geonames/prominent/NW", "stratum": "geonames/prominent", "status": "resolved", "verdict": "wrong", "note": "'NW' is a compass abbreviation, resolved to North Rhine-Westphalia", "ts": "2026-08-31T00:00:00", "annotator": "wrmthorne"}
+{"id": "fallback/geonames/prominent/Tyneside", "stratum": "geonames/prominent", "status": "resolved", "verdict": "correct", "note": "", "ts": "2026-08-31T00:00:00", "annotator": "wrmthorne"}
+{"id": "fallback/geonames/prominent/Amfipoli", "stratum": "geonames/prominent", "status": "resolved", "verdict": "correct", "note": "", "ts": "2026-08-31T00:00:00", "annotator": "wrmthorne"}
+{"id": "fallback/geonames/prominent/Court House", "stratum": "geonames/prominent", "status": "resolved", "verdict": "wrong", "note": "'Court House' resolved to a place named Easton in Maryland", "ts": "2026-08-31T00:00:00", "annotator": "wrmthorne"}
+{"id": "fallback/geonames/prominent/Wurtemberg", "stratum": "geonames/prominent", "status": "resolved", "verdict": "wrong", "note": "Wurtemberg resolved to Nassau County, New York, not the German state", "ts": "2026-08-31T00:00:00", "annotator": "wrmthorne"}
+{"id": "fallback/geonames/prominent/Sinjar", "stratum": "geonames/prominent", "status": "resolved", "verdict": "correct", "note": "", "ts": "2026-08-31T00:00:00", "annotator": "wrmthorne"}
+{"id": "fallback/geonames/unique/Royal Mint", "stratum": "geonames/unique", "status": "resolved", "verdict": "correct", "note": "", "ts": "2026-08-31T00:00:00", "annotator": "wrmthorne"}
+{"id": "fallback/geonames/unique/Salisbury Cathedral", "stratum": "geonames/unique", "status": "resolved", "verdict": "correct", "note": "", "ts": "2026-08-31T00:00:00", "annotator": "wrmthorne"}
+{"id": "fallback/geonames/unique/La Hougue Bie", "stratum": "geonames/unique", "status": "resolved", "verdict": "correct", "note": "", "ts": "2026-08-31T00:00:00", "annotator": "wrmthorne"}
+{"id": "fallback/geonames/unique/Eastcourt", "stratum": "geonames/unique", "status": "resolved", "verdict": "correct", "note": "", "ts": "2026-08-31T00:00:00", "annotator": "wrmthorne"}
+{"id": "fallback/geonames/flagged/Le Pinacle", "stratum": "geonames/flagged", "status": "flagged", "verdict": "correct", "note": "", "ts": "2026-08-31T00:00:00", "annotator": "wrmthorne"}

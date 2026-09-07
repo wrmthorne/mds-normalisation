@@ -1,0 +1,130 @@
+{
+  "field": "persons_association",
+  "seed_terms": 185,
+  "total_occurrences": 2208608,
+  "route_occurrences": {
+    "null_marker": 991,
+    "semantic_marker": 22,
+    "prose": 2,
+    "cascade": 2207593
+  },
+  "pilot_exact_norm_whole_value": {
+    "occ": 1879916,
+    "share": 0.8512
+  },
+  "cascade_atom_occurrences": 2222973,
+  "resolved_atom_occurrences": 1916211,
+  "cascade_coverage_atom_occ": 0.862,
+  "llm_queue": {
+    "atoms": 1201,
+    "occ": 106679
+  },
+  "llm_note": "llm rung cost is measured (throughput/energy of LFM2.5-350M on this GPU) but its hit count is NOT valid: the transformers harness degenerates (prompt-example echoes) where the served endpoint does not; re-measure the rung's yield against the localhost:30000 endpoint when it is up. Upside is bounded by the queue mass, and the queue head is the deliberately-excluded field-misuse values (dorset worthys, association details, \u2026).",
+  "rungs": {
+    "exact": {
+      "seconds": 4.58,
+      "energy_kwh": 1.8539339460505285e-05,
+      "emissions_kg": 4.4047431230819904e-06,
+      "new_norms": 255,
+      "new_occ": 1901922,
+      "wh_per_1k_occ": 0.0
+    },
+    "exact_variant": {
+      "seconds": 4.6,
+      "energy_kwh": 1.7229551842208137e-05,
+      "emissions_kg": 4.093551992638389e-06,
+      "new_norms": 0,
+      "new_occ": 0,
+      "wh_per_1k_occ": null
+    },
+    "exact_paren": {
+      "seconds": 4.59,
+      "energy_kwh": 1.7910644638041735e-05,
+      "emissions_kg": 4.255372148907698e-06,
+      "new_norms": 164,
+      "new_occ": 10476,
+      "wh_per_1k_occ": 0.0017
+    },
+    "exact_morph": {
+      "seconds": 4.59,
+      "energy_kwh": 1.7679033712665097e-05,
+      "emissions_kg": 4.2003439407583875e-06,
+      "new_norms": 0,
+      "new_occ": 0,
+      "wh_per_1k_occ": null
+    },
+    "fuzzy": {
+      "seconds": 4.59,
+      "energy_kwh": 1.7218537009888838e-05,
+      "emissions_kg": 4.0909349896424786e-06,
+      "new_norms": 173,
+      "new_occ": 1347,
+      "wh_per_1k_occ": 0.0128
+    },
+    "semantic": {
+      "seconds": 10.89,
+      "energy_kwh": 0.0003399037360070845,
+      "emissions_kg": 8.07573887341872e-05,
+      "new_norms": 87,
+      "new_occ": 2466,
+      "wh_per_1k_occ": 0.1378
+    },
+    "llm_atomiser": {
+      "seconds": 15.27,
+      "energy_kwh": 0.0009171393047612346,
+      "emissions_kg": 0.00021790221027891696,
+      "new_norms": 0,
+      "new_occ": 0,
+      "wh_per_1k_occ": null
+    }
+  },
+  "unit_cost": {
+    "total_seconds": 63.5,
+    "total_kwh": 0.001409,
+    "wh_per_1k_occ_resolved": 0.0007
+  },
+  "target_restatement": {
+    "definition": "share of non-null occurrence mass in fields a value-level stage owns (>= owned_min_share of the field's occurrences left `untouched` in coverage_census); termlist-admissible = ControlledVocab fields (data model) not already cascaded or owned, N>=100k occ, M>=10 institutions, minus the 2026-07-14/16 exclusions",
+    "corpus_occurrences": 148429418,
+    "currently_touched": {
+      "owned_min_share": 0.05,
+      "fields": 62,
+      "occ": 61448612,
+      "share": 0.414
+    },
+    "admissible_termlist_fields": [
+      {
+        "field": "spectrum/acquisition_method",
+        "occ": 1954623,
+        "institutions": 24
+      },
+      {
+        "field": "spectrum/place_association",
+        "occ": 1248013,
+        "institutions": 13
+      },
+      {
+        "field": "spectrum/place_status",
+        "occ": 965528,
+        "institutions": 27
+      },
+      {
+        "field": "spectrum/object_component_information",
+        "occ": 495625,
+        "institutions": 20
+      },
+      {
+        "field": "spectrum/organisations_association",
+        "occ": 365112,
+        "institutions": 33
+      },
+      {
+        "field": "spectrum/inscription_position",
+        "occ": 283502,
+        "institutions": 30
+      }
+    ],
+    "admissible_termlist_occ": 5312403,
+    "restated_target_share": 0.4498
+  }
+}

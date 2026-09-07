@@ -1,0 +1,208 @@
+{"status": "labelled", "verdict": "clean", "gold": {"classes": []}, "id": "rec-0a1d0845558e", "note": "", "annotator": "wrmthorne", "ts": "2026-07-15T00:00:00"}
+{"status": "labelled", "verdict": "clean", "gold": {"classes": []}, "id": "rec-3b57d7d96a09", "note": "", "annotator": "wrmthorne", "ts": "2026-07-15T00:00:00"}
+{"status": "labelled", "verdict": "clean", "gold": {"classes": []}, "id": "rec-65f0b76f7bde", "note": "", "annotator": "wrmthorne", "ts": "2026-07-15T00:00:00"}
+{"status": "labelled", "verdict": "clean", "gold": {"classes": []}, "id": "rec-e428c8b7cd1f", "note": "", "annotator": "wrmthorne", "ts": "2026-07-15T00:00:00"}
+{"status": "labelled", "verdict": "clean", "gold": {"classes": []}, "id": "rec-a46fa6261c3d", "note": "", "annotator": "wrmthorne", "ts": "2026-07-15T00:00:00"}
+{"status": "labelled", "verdict": "clean", "gold": {"classes": []}, "id": "rec-dfe290b11351", "note": "", "annotator": "wrmthorne", "ts": "2026-07-15T00:00:00"}
+{"status": "labelled", "verdict": "clean", "gold": {"classes": []}, "id": "rec-645720caff4c", "note": "", "annotator": "wrmthorne", "ts": "2026-07-15T00:00:00"}
+{"status": "labelled", "verdict": "clean", "gold": {"classes": []}, "id": "rec-1e049c1e8b85", "note": "", "annotator": "wrmthorne", "ts": "2026-07-15T00:00:00"}
+{"status": "labelled", "verdict": "clean", "gold": {"classes": []}, "id": "rec-901bb68c43f5", "note": "", "annotator": "wrmthorne", "ts": "2026-07-15T00:00:00"}
+{"status": "labelled", "verdict": "clean", "gold": {"classes": []}, "id": "rec-6a36236c94aa", "note": "", "annotator": "wrmthorne", "ts": "2026-07-15T00:00:00"}
+{"status": "labelled", "verdict": "clean", "gold": {"classes": []}, "id": "rec-8245982280d5", "note": "", "annotator": "wrmthorne", "ts": "2026-07-15T00:00:00"}
+{"status": "labelled", "verdict": "clean", "gold": {"classes": []}, "id": "rec-b204f8e0b84b", "note": "", "annotator": "wrmthorne", "ts": "2026-07-15T00:00:00"}
+{"status": "labelled", "verdict": "clean", "gold": {"classes": []}, "id": "rec-877892b3877f", "note": "", "annotator": "wrmthorne", "ts": "2026-07-15T00:00:00"}
+{"status": "labelled", "verdict": "clean", "gold": {"classes": []}, "id": "rec-55a761322359", "note": "", "annotator": "wrmthorne", "ts": "2026-07-15T00:00:00"}
+{"status": "labelled", "verdict": "clean", "gold": {"classes": []}, "id": "rec-54a20fd10462", "note": "", "annotator": "wrmthorne", "ts": "2026-07-15T00:00:00"}
+{"status": "labelled", "verdict": "clean", "gold": {"classes": []}, "id": "rec-b84fbe806427", "note": "", "annotator": "wrmthorne", "ts": "2026-07-15T00:00:00"}
+{"status": "labelled", "verdict": "clean", "gold": {"classes": []}, "id": "rec-0fbd60d7d235", "note": "", "annotator": "wrmthorne", "ts": "2026-07-15T00:00:00"}
+{"status": "labelled", "verdict": "clean", "gold": {"classes": []}, "id": "rec-69b1f5b94ee8", "note": "", "annotator": "wrmthorne", "ts": "2026-07-15T00:00:00"}
+{"status": "labelled", "verdict": "clean", "gold": {"classes": []}, "id": "rec-05ae88699fdd", "note": "", "annotator": "wrmthorne", "ts": "2026-07-15T00:00:00"}
+{"status": "labelled", "verdict": "issue", "gold": {"classes": ["malformed"]}, "id": "rec-0d1c633b0f55", "note": "object_name='speciessheet' and field_collection_place='Angus, ScotlandNear Letham' are run-together (missing separators)", "annotator": "wrmthorne", "ts": "2026-07-15T00:00:00"}
+{"status": "labelled", "verdict": "clean", "gold": {"classes": []}, "id": "rec-61fdbc1041ba", "note": "", "annotator": "wrmthorne", "ts": "2026-07-15T00:00:00"}
+{"status": "labelled", "verdict": "clean", "gold": {"classes": []}, "id": "rec-ce17102a2a91", "note": "", "annotator": "wrmthorne", "ts": "2026-07-15T00:00:00"}
+{"status": "labelled", "verdict": "clean", "gold": {"classes": []}, "id": "rec-26e517d9b4b8", "note": "", "annotator": "wrmthorne", "ts": "2026-07-15T00:00:00"}
+{"status": "labelled", "verdict": "clean", "gold": {"classes": []}, "id": "rec-7954010a7597", "note": "", "annotator": "wrmthorne", "ts": "2026-07-15T00:00:00"}
+{"status": "labelled", "verdict": "clean", "gold": {"classes": []}, "id": "rec-da112f4e8398", "note": "", "annotator": "wrmthorne", "ts": "2026-07-15T00:00:00"}
+{"status": "labelled", "verdict": "clean", "gold": {"classes": []}, "id": "rec-a3d6875bc6c0", "note": "", "annotator": "wrmthorne", "ts": "2026-07-15T00:00:00"}
+{"status": "labelled", "verdict": "clean", "gold": {"classes": []}, "id": "rec-7498f2c75a9a", "note": "", "annotator": "wrmthorne", "ts": "2026-07-15T00:00:00"}
+{"status": "labelled", "verdict": "clean", "gold": {"classes": []}, "id": "rec-e911ea2a753c", "note": "", "annotator": "wrmthorne", "ts": "2026-07-15T00:00:00"}
+{"status": "labelled", "verdict": "clean", "gold": {"classes": []}, "id": "rec-aa4edf7b9dfb", "note": "", "annotator": "wrmthorne", "ts": "2026-07-15T00:00:00"}
+{"status": "labelled", "verdict": "clean", "gold": {"classes": []}, "id": "rec-9740650efcf0", "note": "", "annotator": "wrmthorne", "ts": "2026-07-15T00:00:00"}
+{"status": "labelled", "verdict": "clean", "gold": {"classes": []}, "id": "rec-c10283ceff78", "note": "", "annotator": "wrmthorne", "ts": "2026-07-15T00:00:00"}
+{"status": "labelled", "verdict": "clean", "gold": {"classes": []}, "id": "rec-397672be78ec", "note": "", "annotator": "wrmthorne", "ts": "2026-07-15T00:00:00"}
+{"status": "labelled", "verdict": "clean", "gold": {"classes": []}, "id": "rec-fe0271f1ad9a", "note": "", "annotator": "wrmthorne", "ts": "2026-07-15T00:00:00"}
+{"status": "labelled", "verdict": "clean", "gold": {"classes": []}, "id": "rec-bf7135610029", "note": "", "annotator": "wrmthorne", "ts": "2026-07-15T00:00:00"}
+{"status": "labelled", "verdict": "clean", "gold": {"classes": []}, "id": "rec-b79e15599b87", "note": "", "annotator": "wrmthorne", "ts": "2026-07-15T00:00:00"}
+{"status": "labelled", "verdict": "clean", "gold": {"classes": []}, "id": "rec-86a89bde14f4", "note": "", "annotator": "wrmthorne", "ts": "2026-07-15T00:00:00"}
+{"status": "labelled", "verdict": "clean", "gold": {"classes": []}, "id": "rec-33aa836036c6", "note": "", "annotator": "wrmthorne", "ts": "2026-07-15T00:00:00"}
+{"status": "labelled", "verdict": "clean", "gold": {"classes": []}, "id": "rec-b0c0d24b3626", "note": "", "annotator": "wrmthorne", "ts": "2026-07-15T00:00:00"}
+{"status": "labelled", "verdict": "clean", "gold": {"classes": []}, "id": "rec-a7b0b430db7e", "note": "", "annotator": "wrmthorne", "ts": "2026-07-15T00:00:00"}
+{"status": "labelled", "verdict": "clean", "gold": {"classes": []}, "id": "rec-402fd880b2a4", "note": "", "annotator": "wrmthorne", "ts": "2026-07-15T00:00:00"}
+{"status": "labelled", "verdict": "clean", "gold": {"classes": []}, "id": "rec-e2d9d3cc1a75", "note": "", "annotator": "wrmthorne", "ts": "2026-07-15T00:00:00"}
+{"status": "labelled", "verdict": "clean", "gold": {"classes": []}, "id": "rec-265f02bf4be5", "note": "", "annotator": "wrmthorne", "ts": "2026-07-15T00:00:00"}
+{"status": "labelled", "verdict": "clean", "gold": {"classes": []}, "id": "rec-4f0dbd0687e4", "note": "", "annotator": "wrmthorne", "ts": "2026-07-15T00:00:00"}
+{"status": "labelled", "verdict": "clean", "gold": {"classes": []}, "id": "rec-292f2339dc05", "note": "", "annotator": "wrmthorne", "ts": "2026-07-15T00:00:00"}
+{"status": "labelled", "verdict": "clean", "gold": {"classes": []}, "id": "rec-8ca0fa86ccbc", "note": "", "annotator": "wrmthorne", "ts": "2026-07-15T00:00:00"}
+{"status": "labelled", "verdict": "issue", "gold": {"classes": ["malformed"]}, "id": "rec-d69624daac40", "note": "brief_description has corrupted token 'fluiarchiveid' (should be 'fluid')", "annotator": "wrmthorne", "ts": "2026-07-15T00:00:00"}
+{"status": "labelled", "verdict": "clean", "gold": {"classes": []}, "id": "rec-a6fc17023d13", "note": "", "annotator": "wrmthorne", "ts": "2026-07-15T00:00:00"}
+{"status": "labelled", "verdict": "clean", "gold": {"classes": []}, "id": "rec-cc4a76b61a73", "note": "", "annotator": "wrmthorne", "ts": "2026-07-15T00:00:00"}
+{"status": "labelled", "verdict": "clean", "gold": {"classes": []}, "id": "rec-ddbd503ce48c", "note": "", "annotator": "wrmthorne", "ts": "2026-07-15T00:00:00"}
+{"status": "labelled", "verdict": "issue", "gold": {"classes": ["malformed"]}, "id": "rec-820227b74ffd", "note": "object_name='NULL NULL' is a literal null placeholder", "annotator": "wrmthorne", "ts": "2026-07-15T00:00:00"}
+{"status": "labelled", "verdict": "clean", "gold": {"classes": []}, "id": "rec-b7603c66fe0a", "note": "", "annotator": "wrmthorne", "ts": "2026-07-15T00:00:00"}
+{"status": "labelled", "verdict": "clean", "gold": {"classes": []}, "id": "rec-ea1040550157", "note": "", "annotator": "wrmthorne", "ts": "2026-07-15T00:00:00"}
+{"status": "labelled", "verdict": "clean", "gold": {"classes": []}, "id": "rec-f33b53a53b1a", "note": "", "annotator": "wrmthorne", "ts": "2026-07-15T00:00:00"}
+{"status": "labelled", "verdict": "clean", "gold": {"classes": []}, "id": "rec-6f1594128cd4", "note": "", "annotator": "wrmthorne", "ts": "2026-07-15T00:00:00"}
+{"status": "labelled", "verdict": "clean", "gold": {"classes": []}, "id": "rec-3d73d55e3f12", "note": "", "annotator": "wrmthorne", "ts": "2026-07-15T00:00:00"}
+{"status": "labelled", "verdict": "clean", "gold": {"classes": []}, "id": "rec-9ca42a6510d2", "note": "", "annotator": "wrmthorne", "ts": "2026-07-15T00:00:00"}
+{"status": "labelled", "verdict": "clean", "gold": {"classes": []}, "id": "rec-086616ce68b1", "note": "", "annotator": "wrmthorne", "ts": "2026-07-15T00:00:00"}
+{"status": "labelled", "verdict": "clean", "gold": {"classes": []}, "id": "rec-b9ec402b688a", "note": "", "annotator": "wrmthorne", "ts": "2026-07-15T00:00:00"}
+{"status": "labelled", "verdict": "clean", "gold": {"classes": []}, "id": "rec-35c37fcd4227", "note": "", "annotator": "wrmthorne", "ts": "2026-07-15T00:00:00"}
+{"status": "labelled", "verdict": "clean", "gold": {"classes": []}, "id": "rec-12b25711c60c", "note": "", "annotator": "wrmthorne", "ts": "2026-07-15T00:00:00"}
+{"status": "labelled", "verdict": "clean", "gold": {"classes": []}, "id": "rec-8d2099531fc3", "note": "", "annotator": "wrmthorne", "ts": "2026-07-15T00:00:00"}
+{"status": "labelled", "verdict": "clean", "gold": {"classes": []}, "id": "rec-d784f67dfc89", "note": "", "annotator": "wrmthorne", "ts": "2026-07-15T00:00:00"}
+{"status": "labelled", "verdict": "clean", "gold": {"classes": []}, "id": "rec-e4beebffd9af", "note": "", "annotator": "wrmthorne", "ts": "2026-07-15T00:00:00"}
+{"status": "labelled", "verdict": "clean", "gold": {"classes": []}, "id": "rec-f84cfa178b0e", "note": "", "annotator": "wrmthorne", "ts": "2026-07-15T00:00:00"}
+{"status": "labelled", "verdict": "clean", "gold": {"classes": []}, "id": "rec-bfb776b6dbee", "note": "", "annotator": "wrmthorne", "ts": "2026-07-15T00:00:00"}
+{"status": "labelled", "verdict": "issue", "gold": {"classes": ["malformed"]}, "id": "rec-6d441aac38a4", "note": "brief_description has unescaped HTML entity 'Belliss &amp; Morcom'", "annotator": "wrmthorne", "ts": "2026-07-15T00:00:00"}
+{"status": "labelled", "verdict": "clean", "gold": {"classes": []}, "id": "rec-313e685f6d86", "note": "", "annotator": "wrmthorne", "ts": "2026-07-15T00:00:00"}
+{"status": "labelled", "verdict": "clean", "gold": {"classes": []}, "id": "rec-d5b8a3cd83c9", "note": "", "annotator": "wrmthorne", "ts": "2026-07-15T00:00:00"}
+{"status": "labelled", "verdict": "clean", "gold": {"classes": []}, "id": "rec-bb9d461fc6c8", "note": "", "annotator": "wrmthorne", "ts": "2026-07-15T00:00:00"}
+{"status": "labelled", "verdict": "clean", "gold": {"classes": []}, "id": "rec-967c1e2c7206", "note": "", "annotator": "wrmthorne", "ts": "2026-07-15T00:00:00"}
+{"status": "labelled", "verdict": "clean", "gold": {"classes": []}, "id": "rec-70c203717a46", "note": "", "annotator": "wrmthorne", "ts": "2026-07-15T00:00:00"}
+{"status": "labelled", "verdict": "clean", "gold": {"classes": []}, "id": "rec-915a8a3dc98e", "note": "", "annotator": "wrmthorne", "ts": "2026-07-15T00:00:00"}
+{"status": "labelled", "verdict": "clean", "gold": {"classes": []}, "id": "rec-0e72cfd34108", "note": "", "annotator": "wrmthorne", "ts": "2026-07-15T00:00:00"}
+{"status": "labelled", "verdict": "clean", "gold": {"classes": []}, "id": "rec-7f2b1becc40a", "note": "", "annotator": "wrmthorne", "ts": "2026-07-15T00:00:00"}
+{"status": "labelled", "verdict": "clean", "gold": {"classes": []}, "id": "rec-969ae1471d21", "note": "", "annotator": "wrmthorne", "ts": "2026-07-15T00:00:00"}
+{"status": "labelled", "verdict": "clean", "gold": {"classes": []}, "id": "rec-be1e2bbdb2e1", "note": "", "annotator": "wrmthorne", "ts": "2026-07-15T00:00:00"}
+{"status": "labelled", "verdict": "issue", "gold": {"classes": ["malformed"]}, "id": "rec-6075f36167b4", "note": "object_name='[x]Delete' is leaked UI control text", "annotator": "wrmthorne", "ts": "2026-07-15T00:00:00"}
+{"status": "labelled", "verdict": "clean", "gold": {"classes": []}, "id": "rec-27fda95cb811", "note": "", "annotator": "wrmthorne", "ts": "2026-07-15T00:00:00"}
+{"status": "labelled", "verdict": "clean", "gold": {"classes": []}, "id": "rec-b74a1da72a40", "note": "", "annotator": "wrmthorne", "ts": "2026-07-15T00:00:00"}
+{"status": "labelled", "verdict": "clean", "gold": {"classes": []}, "id": "rec-294cc4794b30", "note": "", "annotator": "wrmthorne", "ts": "2026-07-15T00:00:00"}
+{"status": "labelled", "verdict": "issue", "gold": {"classes": ["text_dump"]}, "id": "rec-2cb1724e038f", "note": "object_production_note packs a MARC-style imprint 'Vivaldi, Antonio,1678-1741.Amsterdam :spesa di...le Cene,[1729]'; should decompose", "annotator": "wrmthorne", "ts": "2026-07-15T00:00:00"}
+{"status": "labelled", "verdict": "clean", "gold": {"classes": []}, "id": "rec-bb4edf3f6620", "note": "", "annotator": "wrmthorne", "ts": "2026-07-15T00:00:00"}
+{"status": "labelled", "verdict": "clean", "gold": {"classes": []}, "id": "rec-3685ec018a30", "note": "", "annotator": "wrmthorne", "ts": "2026-07-15T00:00:00"}
+{"status": "labelled", "verdict": "clean", "gold": {"classes": []}, "id": "rec-57dec6986cbb", "note": "", "annotator": "wrmthorne", "ts": "2026-07-15T00:00:00"}
+{"status": "labelled", "verdict": "clean", "gold": {"classes": []}, "id": "rec-f4b3cfc4237a", "note": "", "annotator": "wrmthorne", "ts": "2026-07-15T00:00:00"}
+{"status": "labelled", "verdict": "clean", "gold": {"classes": []}, "id": "rec-b05fdd44be65", "note": "", "annotator": "wrmthorne", "ts": "2026-07-15T00:00:00"}
+{"status": "labelled", "verdict": "clean", "gold": {"classes": []}, "id": "rec-ab08bb67a4d2", "note": "", "annotator": "wrmthorne", "ts": "2026-07-15T00:00:00"}
+{"status": "labelled", "verdict": "clean", "gold": {"classes": []}, "id": "rec-0b6e473b95cd", "note": "", "annotator": "wrmthorne", "ts": "2026-07-15T00:00:00"}
+{"status": "labelled", "verdict": "clean", "gold": {"classes": []}, "id": "rec-194778326d24", "note": "", "annotator": "wrmthorne", "ts": "2026-07-15T00:00:00"}
+{"status": "labelled", "verdict": "issue", "gold": {"classes": ["malformed"]}, "id": "rec-085310777817", "note": "other_number='PB685<br>PB693<br>PB697<br>PB694' contains HTML <br> tags", "annotator": "wrmthorne", "ts": "2026-07-15T00:00:00"}
+{"status": "labelled", "verdict": "issue", "gold": {"classes": ["malformed"]}, "id": "rec-b38a38feb709", "note": "object_production_organisation='NULL' is a literal null placeholder", "annotator": "wrmthorne", "ts": "2026-07-15T00:00:00"}
+{"status": "labelled", "verdict": "clean", "gold": {"classes": []}, "id": "rec-5e62d768c4bd", "note": "", "annotator": "wrmthorne", "ts": "2026-07-15T00:00:00"}
+{"status": "labelled", "verdict": "clean", "gold": {"classes": []}, "id": "rec-29f25df108cd", "note": "", "annotator": "wrmthorne", "ts": "2026-07-15T00:00:00"}
+{"status": "labelled", "verdict": "clean", "gold": {"classes": []}, "id": "rec-d730320fe6dd", "note": "", "annotator": "wrmthorne", "ts": "2026-07-15T00:00:00"}
+{"status": "labelled", "verdict": "clean", "gold": {"classes": []}, "id": "rec-f34fad7c0c6e", "note": "", "annotator": "wrmthorne", "ts": "2026-07-15T00:00:00"}
+{"status": "labelled", "verdict": "clean", "gold": {"classes": []}, "id": "rec-287f9915a711", "note": "", "annotator": "wrmthorne", "ts": "2026-07-15T00:00:00"}
+{"status": "labelled", "verdict": "clean", "gold": {"classes": []}, "id": "rec-659e324e7445", "note": "", "annotator": "wrmthorne", "ts": "2026-07-15T00:00:00"}
+{"status": "labelled", "verdict": "clean", "gold": {"classes": []}, "id": "rec-39d5f895af55", "note": "", "annotator": "wrmthorne", "ts": "2026-07-15T00:00:00"}
+{"status": "labelled", "verdict": "issue", "gold": {"classes": ["malformed"]}, "id": "rec-215eb0a391cf", "note": "object_name='SS Governor speeder spring (300-600 rpm no idler springg' has unclosed paren and 'springg' typo", "annotator": "wrmthorne", "ts": "2026-07-15T00:00:00"}
+{"status": "labelled", "verdict": "clean", "gold": {"classes": []}, "id": "rec-a4be7df09c3d", "note": "", "annotator": "wrmthorne", "ts": "2026-07-15T00:00:00"}
+{"status": "labelled", "verdict": "issue", "gold": {"classes": ["malformed"]}, "id": "rec-6852e57e9912", "note": "material='Screenprinbt (Coloour Proof)' has typos in the value", "annotator": "wrmthorne", "ts": "2026-07-15T00:00:00"}
+{"status": "labelled", "verdict": "clean", "gold": {"classes": []}, "id": "rec-a885497910ea", "note": "", "annotator": "wrmthorne", "ts": "2026-07-15T00:00:00"}
+{"status": "labelled", "verdict": "clean", "gold": {"classes": []}, "id": "rec-8fb262cc7fcf", "note": "", "annotator": "wrmthorne", "ts": "2026-07-15T00:00:00"}
+{"status": "labelled", "verdict": "clean", "gold": {"classes": []}, "id": "rec-c5cb74df9a09", "note": "", "annotator": "wrmthorne", "ts": "2026-07-15T00:00:00"}
+{"status": "labelled", "verdict": "clean", "gold": {"classes": []}, "id": "rec-51a79614cc5f", "note": "", "annotator": "wrmthorne", "ts": "2026-07-15T00:00:00"}
+{"status": "labelled", "verdict": "clean", "gold": {"classes": []}, "id": "rec-baa809d7a26f", "note": "", "annotator": "wrmthorne", "ts": "2026-07-15T00:00:00"}
+{"status": "labelled", "verdict": "clean", "gold": {"classes": []}, "id": "rec-fa01615f4c9a", "note": "", "annotator": "wrmthorne", "ts": "2026-07-15T00:00:00"}
+{"status": "labelled", "verdict": "clean", "gold": {"classes": []}, "id": "rec-6fef28dd62f0", "note": "", "annotator": "wrmthorne", "ts": "2026-07-15T00:00:00"}
+{"status": "labelled", "verdict": "clean", "gold": {"classes": []}, "id": "rec-b250524e31b3", "note": "", "annotator": "wrmthorne", "ts": "2026-07-15T00:00:00"}
+{"status": "labelled", "verdict": "clean", "gold": {"classes": []}, "id": "rec-6ffbcb3b50a4", "note": "", "annotator": "wrmthorne", "ts": "2026-07-15T00:00:00"}
+{"status": "labelled", "verdict": "clean", "gold": {"classes": []}, "id": "rec-04e91ef9b2fb", "note": "", "annotator": "wrmthorne", "ts": "2026-07-15T00:00:00"}
+{"status": "labelled", "verdict": "clean", "gold": {"classes": []}, "id": "rec-fbe5aac91264", "note": "", "annotator": "wrmthorne", "ts": "2026-07-15T00:00:00"}
+{"status": "labelled", "verdict": "issue", "gold": {"classes": ["malformed"]}, "id": "rec-50f41a1788ef", "note": "other_number='3B2833<br>3B2834<br>3B2835<br>3B2836' contains HTML <br> tags", "annotator": "wrmthorne", "ts": "2026-07-15T00:00:00"}
+{"status": "labelled", "verdict": "clean", "gold": {"classes": []}, "id": "rec-ebeec6586e13", "note": "", "annotator": "wrmthorne", "ts": "2026-07-15T00:00:00"}
+{"status": "labelled", "verdict": "clean", "gold": {"classes": []}, "id": "rec-da6ac2e01e36", "note": "", "annotator": "wrmthorne", "ts": "2026-07-15T00:00:00"}
+{"status": "labelled", "verdict": "clean", "gold": {"classes": []}, "id": "rec-35e0ae266b55", "note": "", "annotator": "wrmthorne", "ts": "2026-07-15T00:00:00"}
+{"status": "labelled", "verdict": "clean", "gold": {"classes": []}, "id": "rec-c40c15a42417", "note": "", "annotator": "wrmthorne", "ts": "2026-07-15T00:00:00"}
+{"status": "labelled", "verdict": "clean", "gold": {"classes": []}, "id": "rec-3c2c8623853c", "note": "", "annotator": "wrmthorne", "ts": "2026-07-15T00:00:00"}
+{"status": "labelled", "verdict": "clean", "gold": {"classes": []}, "id": "rec-c6c5126011ca", "note": "", "annotator": "wrmthorne", "ts": "2026-07-15T00:00:00"}
+{"status": "labelled", "verdict": "clean", "gold": {"classes": []}, "id": "rec-634f3d79be74", "note": "", "annotator": "wrmthorne", "ts": "2026-07-15T00:00:00"}
+{"status": "labelled", "verdict": "clean", "gold": {"classes": []}, "id": "rec-a2458c88f836", "note": "", "annotator": "wrmthorne", "ts": "2026-07-15T00:00:00"}
+{"status": "labelled", "verdict": "clean", "gold": {"classes": []}, "id": "rec-588ad24771cc", "note": "", "annotator": "wrmthorne", "ts": "2026-07-15T00:00:00"}
+{"status": "labelled", "verdict": "clean", "gold": {"classes": []}, "id": "rec-b403c04e4781", "note": "", "annotator": "wrmthorne", "ts": "2026-07-15T00:00:00"}
+{"status": "labelled", "verdict": "clean", "gold": {"classes": []}, "id": "rec-a6193becf4fa", "note": "", "annotator": "wrmthorne", "ts": "2026-07-15T00:00:00"}
+{"status": "labelled", "verdict": "clean", "gold": {"classes": []}, "id": "rec-9c828707b20f", "note": "", "annotator": "wrmthorne", "ts": "2026-07-15T00:00:00"}
+{"status": "labelled", "verdict": "issue", "gold": {"classes": ["text_dump"]}, "id": "rec-34584f78ac47", "note": "Text field is a labelled key:value ship record dump (Yard/Yard Number/Subsequent Names/Fate/Propulsion/Owners...); should decompose", "annotator": "wrmthorne", "ts": "2026-07-15T00:00:00"}
+{"status": "labelled", "verdict": "issue", "gold": {"classes": ["malformed"]}, "id": "rec-09510a541c5a", "note": "object_name='speciessheet' and field_collection_place='...UKSide of the burn...' run-together", "annotator": "wrmthorne", "ts": "2026-07-15T00:00:00"}
+{"status": "labelled", "verdict": "clean", "gold": {"classes": []}, "id": "rec-905758de7102", "note": "", "annotator": "wrmthorne", "ts": "2026-07-15T00:00:00"}
+{"status": "labelled", "verdict": "clean", "gold": {"classes": []}, "id": "rec-e4250bc6317f", "note": "", "annotator": "wrmthorne", "ts": "2026-07-15T00:00:00"}
+{"status": "labelled", "verdict": "clean", "gold": {"classes": []}, "id": "rec-cdc7e9e6b40f", "note": "", "annotator": "wrmthorne", "ts": "2026-07-15T00:00:00"}
+{"status": "labelled", "verdict": "clean", "gold": {"classes": []}, "id": "rec-1a3d37566b46", "note": "", "annotator": "wrmthorne", "ts": "2026-07-15T00:00:00"}
+{"status": "labelled", "verdict": "clean", "gold": {"classes": []}, "id": "rec-9084af141dc5", "note": "", "annotator": "wrmthorne", "ts": "2026-07-15T00:00:00"}
+{"status": "labelled", "verdict": "clean", "gold": {"classes": []}, "id": "rec-753b6b112d13", "note": "", "annotator": "wrmthorne", "ts": "2026-07-15T00:00:00"}
+{"status": "labelled", "verdict": "clean", "gold": {"classes": []}, "id": "rec-c235dee1a0be", "note": "", "annotator": "wrmthorne", "ts": "2026-07-15T00:00:00"}
+{"status": "labelled", "verdict": "clean", "gold": {"classes": []}, "id": "rec-9a788afd801f", "note": "", "annotator": "wrmthorne", "ts": "2026-07-15T00:00:00"}
+{"status": "labelled", "verdict": "clean", "gold": {"classes": []}, "id": "rec-55a0a8e5b070", "note": "", "annotator": "wrmthorne", "ts": "2026-07-15T00:00:00"}
+{"status": "labelled", "verdict": "clean", "gold": {"classes": []}, "id": "rec-3ab17333551f", "note": "", "annotator": "wrmthorne", "ts": "2026-07-15T00:00:00"}
+{"status": "labelled", "verdict": "clean", "gold": {"classes": []}, "id": "rec-976d390447cb", "note": "", "annotator": "wrmthorne", "ts": "2026-07-15T00:00:00"}
+{"status": "labelled", "verdict": "clean", "gold": {"classes": []}, "id": "rec-3cb9153389f0", "note": "", "annotator": "wrmthorne", "ts": "2026-07-15T00:00:00"}
+{"status": "labelled", "verdict": "clean", "gold": {"classes": []}, "id": "rec-9a1b600c60eb", "note": "", "annotator": "wrmthorne", "ts": "2026-07-15T00:00:00"}
+{"status": "labelled", "verdict": "clean", "gold": {"classes": []}, "id": "rec-2a787fe3e99a", "note": "", "annotator": "wrmthorne", "ts": "2026-07-15T00:00:00"}
+{"status": "labelled", "verdict": "clean", "gold": {"classes": []}, "id": "rec-a1d2d50a5775", "note": "", "annotator": "wrmthorne", "ts": "2026-07-15T00:00:00"}
+{"status": "labelled", "verdict": "issue", "gold": {"classes": ["prose_in_vocab"]}, "id": "rec-798f57b3cdfe", "note": "object_name='By the word of the Lord : Psalm 33 / [at end] R.J.S.S., C[harter] H[ouse]...' is a full title/colophon", "annotator": "wrmthorne", "ts": "2026-07-15T00:00:00"}
+{"status": "labelled", "verdict": "clean", "gold": {"classes": []}, "id": "rec-97dfe5558082", "note": "", "annotator": "wrmthorne", "ts": "2026-07-15T00:00:00"}
+{"status": "labelled", "verdict": "clean", "gold": {"classes": []}, "id": "rec-bc6858f249dc", "note": "", "annotator": "wrmthorne", "ts": "2026-07-15T00:00:00"}
+{"status": "labelled", "verdict": "clean", "gold": {"classes": []}, "id": "rec-dbae5d0f5e8b", "note": "", "annotator": "wrmthorne", "ts": "2026-07-15T00:00:00"}
+{"status": "labelled", "verdict": "issue", "gold": {"classes": ["malformed"]}, "id": "rec-717eb2000efe", "note": "object_name has HTML <br> tags separating three part names", "annotator": "wrmthorne", "ts": "2026-07-15T00:00:00"}
+{"status": "labelled", "verdict": "clean", "gold": {"classes": []}, "id": "rec-cc3c5e775d62", "note": "", "annotator": "wrmthorne", "ts": "2026-07-15T00:00:00"}
+{"status": "labelled", "verdict": "clean", "gold": {"classes": []}, "id": "rec-b840b1085791", "note": "", "annotator": "wrmthorne", "ts": "2026-07-15T00:00:00"}
+{"status": "labelled", "verdict": "clean", "gold": {"classes": []}, "id": "rec-cc3d65727eee", "note": "", "annotator": "wrmthorne", "ts": "2026-07-15T00:00:00"}
+{"status": "labelled", "verdict": "clean", "gold": {"classes": []}, "id": "rec-5b637fc65cab", "note": "", "annotator": "wrmthorne", "ts": "2026-07-15T00:00:00"}
+{"status": "labelled", "verdict": "clean", "gold": {"classes": []}, "id": "rec-34eb555ce58f", "note": "", "annotator": "wrmthorne", "ts": "2026-07-15T00:00:00"}
+{"status": "labelled", "verdict": "clean", "gold": {"classes": []}, "id": "rec-61bed54cbdd7", "note": "", "annotator": "wrmthorne", "ts": "2026-07-15T00:00:00"}
+{"status": "labelled", "verdict": "clean", "gold": {"classes": []}, "id": "rec-63d198870efc", "note": "", "annotator": "wrmthorne", "ts": "2026-07-15T00:00:00"}
+{"status": "labelled", "verdict": "issue", "gold": {"classes": ["malformed"]}, "id": "rec-59c1a13ecba3", "note": "object_name has HTML <br> tags separating three part names", "annotator": "wrmthorne", "ts": "2026-07-15T00:00:00"}
+{"status": "labelled", "verdict": "clean", "gold": {"classes": []}, "id": "rec-4073b6353b2c", "note": "", "annotator": "wrmthorne", "ts": "2026-07-15T00:00:00"}
+{"status": "labelled", "verdict": "clean", "gold": {"classes": []}, "id": "rec-27a0e9e62f8a", "note": "", "annotator": "wrmthorne", "ts": "2026-07-15T00:00:00"}
+{"status": "labelled", "verdict": "clean", "gold": {"classes": []}, "id": "rec-0b2de7a25faf", "note": "", "annotator": "wrmthorne", "ts": "2026-07-15T00:00:00"}
+{"status": "labelled", "verdict": "clean", "gold": {"classes": []}, "id": "rec-4be91583f5c5", "note": "", "annotator": "wrmthorne", "ts": "2026-07-15T00:00:00"}
+{"status": "labelled", "verdict": "clean", "gold": {"classes": []}, "id": "rec-f4bf7aebea3d", "note": "", "annotator": "wrmthorne", "ts": "2026-07-15T00:00:00"}
+{"status": "labelled", "verdict": "clean", "gold": {"classes": []}, "id": "rec-eaf7f21fb62a", "note": "", "annotator": "wrmthorne", "ts": "2026-07-15T00:00:00"}
+{"status": "labelled", "verdict": "clean", "gold": {"classes": []}, "id": "rec-246b75a66d89", "note": "", "annotator": "wrmthorne", "ts": "2026-07-15T00:00:00"}
+{"status": "labelled", "verdict": "clean", "gold": {"classes": []}, "id": "rec-5058329b50bf", "note": "", "annotator": "wrmthorne", "ts": "2026-07-15T00:00:00"}
+{"status": "labelled", "verdict": "clean", "gold": {"classes": []}, "id": "rec-d76aed2373ea", "note": "", "annotator": "wrmthorne", "ts": "2026-07-15T00:00:00"}
+{"status": "labelled", "verdict": "clean", "gold": {"classes": []}, "id": "rec-2cdc0fc428c3", "note": "", "annotator": "wrmthorne", "ts": "2026-07-15T00:00:00"}
+{"status": "labelled", "verdict": "clean", "gold": {"classes": []}, "id": "rec-840efcd80378", "note": "", "annotator": "wrmthorne", "ts": "2026-07-15T00:00:00"}
+{"status": "labelled", "verdict": "clean", "gold": {"classes": []}, "id": "rec-7258b370d221", "note": "", "annotator": "wrmthorne", "ts": "2026-07-15T00:00:00"}
+{"status": "labelled", "verdict": "clean", "gold": {"classes": []}, "id": "rec-2eda8dd96672", "note": "", "annotator": "wrmthorne", "ts": "2026-07-15T00:00:00"}
+{"status": "labelled", "verdict": "clean", "gold": {"classes": []}, "id": "rec-d949c8ca4099", "note": "", "annotator": "wrmthorne", "ts": "2026-07-15T00:00:00"}
+{"status": "labelled", "verdict": "clean", "gold": {"classes": []}, "id": "rec-f2877fa45298", "note": "", "annotator": "wrmthorne", "ts": "2026-07-15T00:00:00"}
+{"status": "labelled", "verdict": "clean", "gold": {"classes": []}, "id": "rec-e5980646f492", "note": "", "annotator": "wrmthorne", "ts": "2026-07-15T00:00:00"}
+{"status": "labelled", "verdict": "clean", "gold": {"classes": []}, "id": "rec-55f8a7e31964", "note": "", "annotator": "wrmthorne", "ts": "2026-07-15T00:00:00"}
+{"status": "labelled", "verdict": "issue", "gold": {"classes": ["malformed"]}, "id": "rec-e48ebc27c13c", "note": "object_name has HTML <br> tag separating two part names", "annotator": "wrmthorne", "ts": "2026-07-15T00:00:00"}
+{"status": "labelled", "verdict": "clean", "gold": {"classes": []}, "id": "rec-eddd18db1981", "note": "", "annotator": "wrmthorne", "ts": "2026-07-15T00:00:00"}
+{"status": "labelled", "verdict": "clean", "gold": {"classes": []}, "id": "rec-f10c6f891721", "note": "", "annotator": "wrmthorne", "ts": "2026-07-15T00:00:00"}
+{"status": "labelled", "verdict": "clean", "gold": {"classes": []}, "id": "rec-21ff15fd5cf6", "note": "", "annotator": "wrmthorne", "ts": "2026-07-15T00:00:00"}
+{"status": "labelled", "verdict": "clean", "gold": {"classes": []}, "id": "rec-0043805d335b", "note": "", "annotator": "wrmthorne", "ts": "2026-07-15T00:00:00"}
+{"status": "labelled", "verdict": "clean", "gold": {"classes": []}, "id": "rec-b1402d772c3c", "note": "", "annotator": "wrmthorne", "ts": "2026-07-15T00:00:00"}
+{"status": "labelled", "verdict": "clean", "gold": {"classes": []}, "id": "rec-7b7f695ac810", "note": "", "annotator": "wrmthorne", "ts": "2026-07-15T00:00:00"}
+{"status": "labelled", "verdict": "clean", "gold": {"classes": []}, "id": "rec-a18473d3adf3", "note": "", "annotator": "wrmthorne", "ts": "2026-07-15T00:00:00"}
+{"status": "labelled", "verdict": "clean", "gold": {"classes": []}, "id": "rec-35e8f64add1a", "note": "", "annotator": "wrmthorne", "ts": "2026-07-15T00:00:00"}
+{"status": "labelled", "verdict": "clean", "gold": {"classes": []}, "id": "rec-73a6a7ce2ffd", "note": "", "annotator": "wrmthorne", "ts": "2026-07-15T00:00:00"}
+{"status": "labelled", "verdict": "issue", "gold": {"classes": ["malformed"]}, "id": "rec-304ed38dbc75", "note": "other_number='206461<br><br>206462' contains HTML <br> tags", "annotator": "wrmthorne", "ts": "2026-07-15T00:00:00"}
+{"status": "labelled", "verdict": "clean", "gold": {"classes": []}, "id": "rec-1750444a0c0c", "note": "", "annotator": "wrmthorne", "ts": "2026-07-15T00:00:00"}
+{"status": "labelled", "verdict": "clean", "gold": {"classes": []}, "id": "rec-d7048ea6043b", "note": "", "annotator": "wrmthorne", "ts": "2026-07-15T00:00:00"}
+{"status": "labelled", "verdict": "issue", "gold": {"classes": ["wrong_field"]}, "id": "rec-1acde5bc310f", "note": "object_name='Gen/S/Shee/2' is the object number, not a name", "annotator": "wrmthorne", "ts": "2026-07-15T00:00:00"}
+{"status": "labelled", "verdict": "clean", "gold": {"classes": []}, "id": "rec-646dc0210ea2", "note": "", "annotator": "wrmthorne", "ts": "2026-07-15T00:00:00"}
+{"status": "labelled", "verdict": "issue", "gold": {"classes": ["malformed"]}, "id": "rec-1e441aa877a6", "note": "object_name='BAD' is a junk/error placeholder", "annotator": "wrmthorne", "ts": "2026-07-15T00:00:00"}
+{"status": "labelled", "verdict": "clean", "gold": {"classes": []}, "id": "rec-a25625500ca6", "note": "", "annotator": "wrmthorne", "ts": "2026-07-15T00:00:00"}
+{"status": "labelled", "verdict": "clean", "gold": {"classes": []}, "id": "rec-51cff4c7eb22", "note": "", "annotator": "wrmthorne", "ts": "2026-07-15T00:00:00"}
+{"status": "labelled", "verdict": "clean", "gold": {"classes": []}, "id": "rec-515b7cb0d3af", "note": "", "annotator": "wrmthorne", "ts": "2026-07-15T00:00:00"}
+{"status": "labelled", "verdict": "clean", "gold": {"classes": []}, "id": "rec-addb1b4a4b84", "note": "", "annotator": "wrmthorne", "ts": "2026-07-15T00:00:00"}
+{"status": "labelled", "verdict": "clean", "gold": {"classes": []}, "id": "rec-2c2b1a471ea4", "note": "", "annotator": "wrmthorne", "ts": "2026-07-15T00:00:00"}
+{"status": "labelled", "verdict": "issue", "gold": {"classes": ["malformed"]}, "id": "rec-3aac321fe06d", "note": "object_name='speciessheet' and field_collection_place='Angus, ScotlandCorrie Sharroch, Clova' run-together", "annotator": "wrmthorne", "ts": "2026-07-15T00:00:00"}
+{"status": "labelled", "verdict": "clean", "gold": {"classes": []}, "id": "rec-5f0ab04e424b", "note": "", "annotator": "wrmthorne", "ts": "2026-07-15T00:00:00"}
+{"status": "labelled", "verdict": "clean", "gold": {"classes": []}, "id": "rec-ab71aec9aee7", "note": "", "annotator": "wrmthorne", "ts": "2026-07-15T00:00:00"}
+{"status": "labelled", "verdict": "issue", "gold": {"classes": ["malformed"]}, "id": "rec-dafbc8c8226e", "note": "object_production_organisation='NULL' is a literal null placeholder", "annotator": "wrmthorne", "ts": "2026-07-15T00:00:00"}
+{"status": "labelled", "verdict": "clean", "gold": {"classes": []}, "id": "rec-617c11ae2d2f", "note": "", "annotator": "wrmthorne", "ts": "2026-07-15T00:00:00"}
+{"status": "labelled", "verdict": "clean", "gold": {"classes": []}, "id": "rec-8cfd5f98068d", "note": "", "annotator": "wrmthorne", "ts": "2026-07-15T00:00:00"}
+{"status": "labelled", "verdict": "clean", "gold": {"classes": []}, "id": "rec-29e1372ac202", "note": "", "annotator": "wrmthorne", "ts": "2026-07-15T00:00:00"}
+{"status": "labelled", "verdict": "issue", "gold": {"classes": ["malformed"]}, "id": "rec-92cffbb08a8f", "note": "other_number='8029/1<br>4064<br>8028/1<br>00569<br>439' contains HTML <br> tags", "annotator": "wrmthorne", "ts": "2026-07-15T00:00:00"}
+{"status": "labelled", "verdict": "clean", "gold": {"classes": []}, "id": "rec-c9d5227ace60", "note": "", "annotator": "wrmthorne", "ts": "2026-07-15T00:00:00"}
+{"status": "labelled", "verdict": "clean", "gold": {"classes": []}, "id": "rec-72933d94e2bd", "note": "", "annotator": "wrmthorne", "ts": "2026-07-15T00:00:00"}
+{"status": "labelled", "verdict": "clean", "gold": {"classes": []}, "id": "rec-760f93cdfc47", "note": "", "annotator": "wrmthorne", "ts": "2026-07-15T00:00:00"}
+{"status": "labelled", "verdict": "clean", "gold": {"classes": []}, "id": "rec-95ea580621ee", "note": "", "annotator": "wrmthorne", "ts": "2026-07-15T00:00:00"}
+{"status": "labelled", "verdict": "clean", "gold": {"classes": []}, "id": "rec-c6ecff105651", "note": "", "annotator": "wrmthorne", "ts": "2026-07-15T00:00:00"}
+{"status": "labelled", "verdict": "clean", "gold": {"classes": []}, "id": "rec-07183d665ed1", "note": "", "annotator": "wrmthorne", "ts": "2026-07-15T00:00:00"}
+{"status": "labelled", "verdict": "clean", "gold": {"classes": []}, "id": "rec-1d6e3636655e", "note": "", "annotator": "wrmthorne", "ts": "2026-07-15T00:00:00"}

@@ -1,0 +1,18 @@
+{"status": "labelled", "verdict": "accept", "gold": {"clean": "Yoshitoshi", "notation": "?"}, "id": "cer-cbbf05bc208b", "note": null, "annotator": "wrmthorne", "ts": "2026-07-11T00:00:00"}
+{"status": "labelled", "verdict": "accept", "gold": null, "id": "cer-7599ff1ce935", "note": "scoped_prose", "annotator": "wrmthorne", "ts": "2026-07-11T00:00:00"}
+{"status": "labelled", "verdict": "accept", "gold": null, "id": "cer-7e0da8fde763", "note": "prose", "annotator": "wrmthorne", "ts": "2026-07-11T00:00:00"}
+{"status": "labelled", "verdict": "accept", "gold": null, "id": "cer-300c88ad82a4", "note": "scoped_prose", "annotator": "wrmthorne", "ts": "2026-07-11T00:00:00"}
+{"status": "labelled", "verdict": "refuse", "gold": null, "id": "cer-07201c41559c", "note": "garbled_prose", "annotator": "wrmthorne", "ts": "2026-07-11T00:00:00"}
+{"status": "labelled", "verdict": "refuse", "gold": null, "id": "cer-f326d75e5edb", "note": "garbled_prose", "annotator": "wrmthorne", "ts": "2026-07-11T00:00:00"}
+{"status": "labelled", "verdict": "accept", "gold": null, "id": "cer-1fcbb236f119", "note": "prose", "annotator": "wrmthorne", "ts": "2026-07-11T00:00:00"}
+{"status": "labelled", "verdict": "accept", "gold": null, "id": "cer-30b3e8a84bcc", "note": "prose", "annotator": "wrmthorne", "ts": "2026-07-11T00:00:00"}
+{"status": "labelled", "verdict": "accept", "gold": null, "id": "cer-57f91d6afc7b", "note": "scoped_prose", "annotator": "wrmthorne", "ts": "2026-07-11T00:00:00"}
+{"status": "labelled", "verdict": "accept", "gold": null, "id": "cer-5cfd22adb71d", "note": "prose", "annotator": "wrmthorne", "ts": "2026-07-11T00:00:00"}
+{"status": "labelled", "verdict": "accept", "gold": null, "id": "cer-326ed586a7ee", "note": "prose", "annotator": "wrmthorne", "ts": "2026-07-11T00:00:00"}
+{"status": "labelled", "verdict": "accept", "gold": null, "id": "cer-3cb12f918508", "note": "prose", "annotator": "wrmthorne", "ts": "2026-07-11T00:00:00"}
+{"status": "labelled", "verdict": "compositional", "gold": null, "id": "cer-44841807d342", "note": "scoped certainty (linen/jute?)", "annotator": "wrmthorne", "ts": "2026-07-11T00:00:00"}
+{"status": "labelled", "verdict": "accept", "gold": null, "id": "cer-3e67ee885b1a", "note": "prose", "annotator": "wrmthorne", "ts": "2026-07-11T00:00:00"}
+{"status": "labelled", "verdict": "accept", "gold": null, "id": "cer-e8fe66304607", "note": "prose", "annotator": "wrmthorne", "ts": "2026-07-11T00:00:00"}
+{"status": "labelled", "verdict": "accept", "gold": null, "id": "cer-494248469ae9", "note": "prose", "annotator": "wrmthorne", "ts": "2026-07-11T00:00:00"}
+{"status": "labelled", "verdict": "refuse", "gold": null, "id": "cer-5c256623cbb2", "note": "garbled_prose", "annotator": "wrmthorne", "ts": "2026-07-11T00:00:00"}
+{"status": "labelled", "verdict": "refuse", "gold": null, "id": "cer-9ec0b64479a9", "note": "garbage", "annotator": "wrmthorne", "ts": "2026-07-11T00:00:00"}

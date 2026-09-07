@@ -1,0 +1,752 @@
+{
+  "fields": [
+    "value_edtf",
+    "date_earliest_single",
+    "date_latest",
+    "date_earliest_single_certainty"
+  ],
+  "groups": [
+    {
+      "name": "natural-language ordinal days, as in 18th October 1995",
+      "cases": [
+        {
+          "raw": "18th October 1995",
+          "expected": {
+            "value_edtf": "1995-10-18",
+            "date_earliest_single": "1995-10-18"
+          }
+        },
+        {
+          "raw": "3rd March 1801",
+          "expected": {
+            "value_edtf": "1801-03-03",
+            "date_earliest_single": "1801-03-03"
+          }
+        },
+        {
+          "raw": "1st January 1900",
+          "expected": {
+            "value_edtf": "1900-01-01",
+            "date_earliest_single": "1900-01-01"
+          }
+        },
+        {
+          "raw": "21st June 2012",
+          "expected": {
+            "value_edtf": "2012-06-21",
+            "date_earliest_single": "2012-06-21"
+          }
+        }
+      ]
+    },
+    {
+      "name": "ordinals that name a period, not a day, are left alone",
+      "cases": [
+        {
+          "raw": "18th century",
+          "expected": {
+            "value_edtf": "1700/1799",
+            "date_earliest_single": "1700",
+            "date_latest": "1799"
+          }
+        },
+        {
+          "raw": "1st half of the 19th century",
+          "expected": {
+            "value_edtf": "1800/1849",
+            "date_earliest_single": "1800",
+            "date_latest": "1849"
+          }
+        },
+        {
+          "raw": "1990s",
+          "expected": {
+            "value_edtf": "199X",
+            "date_earliest_single": "1990",
+            "date_latest": "1999"
+          }
+        }
+      ]
+    },
+    {
+      "name": "EDTF date sets collapse to earliest and latest member",
+      "cases": [
+        {
+          "raw": "{1667, 1668, 1670}",
+          "expected": {
+            "value_edtf": "1667/1670",
+            "date_earliest_single": "1667",
+            "date_latest": "1670"
+          }
+        },
+        {
+          "raw": "[1760, 1761, 1762]",
+          "expected": {
+            "value_edtf": "1760/1762",
+            "date_earliest_single": "1760",
+            "date_latest": "1762"
+          }
+        },
+        {
+          "raw": "{1667..1672}",
+          "expected": {
+            "value_edtf": "1667/1672",
+            "date_earliest_single": "1667",
+            "date_latest": "1672"
+          }
+        },
+        {
+          "raw": "[1850]",
+          "expected": {
+            "value_edtf": "1850?",
+            "date_earliest_single": "1850",
+            "date_earliest_single_certainty": "inferred"
+          }
+        }
+      ]
+    },
+    {
+      "name": "output defect classes: no ..~, no XXXX, no -00",
+      "cases": [
+        {
+          "raw": "c. before 1760",
+          "expected": {
+            "value_edtf": "../1760~",
+            "date_latest": "1760"
+          }
+        },
+        {
+          "raw": "circa 1850-1900",
+          "expected": {
+            "value_edtf": "1850~/1900~",
+            "date_earliest_single": "1850",
+            "date_latest": "1900",
+            "date_earliest_single_certainty": "circa"
+          }
+        }
+      ]
+    },
+    {
+      "name": "regressions: ordinary readings unchanged",
+      "cases": [
+        {
+          "raw": "October 1995",
+          "expected": {
+            "value_edtf": "1995-10",
+            "date_earliest_single": "1995-10"
+          }
+        },
+        {
+          "raw": "18 October 1995",
+          "expected": {
+            "value_edtf": "1995-10-18",
+            "date_earliest_single": "1995-10-18"
+          }
+        },
+        {
+          "raw": "c. 1850",
+          "expected": {
+            "value_edtf": "1850~",
+            "date_earliest_single": "1850",
+            "date_earliest_single_certainty": "circa"
+          }
+        },
+        {
+          "raw": "1850-1900",
+          "expected": {
+            "value_edtf": "1850/1900",
+            "date_earliest_single": "1850",
+            "date_latest": "1900"
+          }
+        },
+        {
+          "raw": "before 1760",
+          "expected": {
+            "value_edtf": "../1760",
+            "date_latest": "1760"
+          }
+        }
+      ]
+    },
+    {
+      "name": "recurring shapes: slashed month names, era-marked short years, parenthesised sub-century qualifiers",
+      "cases": [
+        {
+          "raw": "2008 / Apr / 5",
+          "expected": {
+            "value_edtf": "2008-04-05",
+            "date_earliest_single": "2008-04-05"
+          }
+        },
+        {
+          "raw": "1998 / September / 10",
+          "expected": {
+            "value_edtf": "1998-09-10",
+            "date_earliest_single": "1998-09-10"
+          }
+        },
+        {
+          "raw": "AD 43 - 418",
+          "expected": {
+            "value_edtf": "0043/0418",
+            "date_earliest_single": "0043",
+            "date_latest": "0418"
+          }
+        },
+        {
+          "raw": "43 BC",
+          "expected": {
+            "value_edtf": "-0042",
+            "date_earliest_single": "-0042"
+          }
+        },
+        {
+          "raw": "AD 79",
+          "expected": {
+            "value_edtf": "0079",
+            "date_earliest_single": "0079"
+          }
+        },
+        {
+          "raw": "20th century (early)",
+          "expected": {
+            "value_edtf": "1900/1932",
+            "date_earliest_single": "1900",
+            "date_latest": "1932"
+          }
+        },
+        {
+          "raw": "19th century (late)",
+          "expected": {
+            "value_edtf": "1867/1899",
+            "date_earliest_single": "1867",
+            "date_latest": "1899"
+          }
+        },
+        {
+          "raw": "18th century (mid)",
+          "expected": {
+            "value_edtf": "1733/1766",
+            "date_earliest_single": "1733",
+            "date_latest": "1766"
+          }
+        },
+        {
+          "raw": "95",
+          "expected": null,
+          "note": "a bare short year stays refused - no era marker, no guess"
+        },
+        {
+          "raw": "18/10/95",
+          "expected": null
+        }
+      ]
+    },
+    {
+      "name": "a point never populates date_latest, latest equals earliest",
+      "cases": [
+        {
+          "raw": "1885",
+          "expected": {
+            "value_edtf": "1885",
+            "date_earliest_single": "1885"
+          }
+        },
+        {
+          "raw": "15 June 1885",
+          "expected": {
+            "value_edtf": "1885-06-15",
+            "date_earliest_single": "1885-06-15"
+          }
+        },
+        {
+          "raw": "June 1885",
+          "expected": {
+            "value_edtf": "1885-06",
+            "date_earliest_single": "1885-06"
+          }
+        }
+      ]
+    },
+    {
+      "name": "signed BCE years pad to four digits, so -118 publishes as -0118",
+      "cases": [
+        {
+          "raw": "-118",
+          "expected": {
+            "value_edtf": "-0118",
+            "date_earliest_single": "-0118"
+          }
+        },
+        {
+          "raw": "-95",
+          "expected": {
+            "value_edtf": "-0095",
+            "date_earliest_single": "-0095"
+          }
+        },
+        {
+          "raw": "- 431",
+          "expected": {
+            "value_edtf": "-0431",
+            "date_earliest_single": "-0431"
+          }
+        },
+        {
+          "raw": "-1180",
+          "expected": {
+            "value_edtf": "-1180",
+            "date_earliest_single": "-1180"
+          }
+        },
+        {
+          "raw": "118 BCE",
+          "note": "a BCE-worded year converts to astronomical numbering; a signed year is already in it",
+          "expected": {
+            "value_edtf": "-0117",
+            "date_earliest_single": "-0117"
+          }
+        },
+        {
+          "raw": "-0",
+          "expected": null
+        },
+        {
+          "raw": "95",
+          "expected": null
+        }
+      ]
+    },
+    {
+      "name": "century ranges with an elided first 'century', as in mid 19th-mid 20th Century",
+      "cases": [
+        {
+          "raw": "mid 19th-mid 20th Century",
+          "expected": {
+            "value_edtf": "1833/1966",
+            "date_earliest_single": "1833",
+            "date_latest": "1966"
+          }
+        },
+        {
+          "raw": "19th-20th century",
+          "expected": {
+            "value_edtf": "1800/1999",
+            "date_earliest_single": "1800",
+            "date_latest": "1999"
+          }
+        },
+        {
+          "raw": "late 19th - early 20th century",
+          "expected": {
+            "value_edtf": "1867/1932",
+            "date_earliest_single": "1867",
+            "date_latest": "1932"
+          }
+        },
+        {
+          "raw": "19th to 20th century",
+          "expected": {
+            "value_edtf": "1800/1999",
+            "date_earliest_single": "1800",
+            "date_latest": "1999"
+          }
+        },
+        {
+          "raw": "18th century - 19th century",
+          "expected": {
+            "value_edtf": "1700/1899",
+            "date_earliest_single": "1700",
+            "date_latest": "1899"
+          }
+        }
+      ]
+    },
+    {
+      "name": "slash-written month and year, as in Amgueddfa's '1/1983'",
+      "cases": [
+        {
+          "raw": "1/1983",
+          "expected": {
+            "value_edtf": "1983-01",
+            "date_earliest_single": "1983-01"
+          }
+        },
+        {
+          "raw": "8/1993",
+          "expected": {
+            "value_edtf": "1993-08",
+            "date_earliest_single": "1993-08"
+          }
+        },
+        {
+          "raw": "12/2005",
+          "expected": {
+            "value_edtf": "2005-12",
+            "date_earliest_single": "2005-12"
+          }
+        },
+        {
+          "raw": "25/1983",
+          "expected": null,
+          "note": "not a month - left to its own reading, which refuses"
+        },
+        {
+          "raw": "1918/1983",
+          "expected": null,
+          "note": "slash is not a range separator - a 4-digit pair stays refused rather than guessed"
+        }
+      ]
+    },
+    {
+      "name": "circa family — glued prefix and parenthesised suffix (2026-08-01)",
+      "cases": [
+        {
+          "raw": "c1912",
+          "expected": {
+            "value_edtf": "1912~",
+            "date_earliest_single": "1912",
+            "date_earliest_single_certainty": "circa"
+          }
+        },
+        {
+          "raw": "c1890s",
+          "expected": {
+            "value_edtf": "189X~",
+            "date_earliest_single": "1890",
+            "date_latest": "1899",
+            "date_earliest_single_certainty": "circa"
+          }
+        },
+        {
+          "raw": "1916 (c)",
+          "expected": {
+            "value_edtf": "1916~",
+            "date_earliest_single": "1916",
+            "date_earliest_single_certainty": "circa"
+          }
+        },
+        {
+          "raw": "1843 (circa.)",
+          "expected": {
+            "value_edtf": "1843~",
+            "date_earliest_single": "1843",
+            "date_earliest_single_certainty": "circa"
+          }
+        },
+        {
+          "raw": "ca 1890",
+          "expected": {
+            "value_edtf": "1890~",
+            "date_earliest_single": "1890",
+            "date_earliest_single_certainty": "circa"
+          }
+        },
+        {
+          "raw": "C 1743",
+          "expected": {
+            "value_edtf": "1743~",
+            "date_earliest_single": "1743",
+            "date_earliest_single_certainty": "circa"
+          }
+        },
+        {
+          "raw": "1940 - 1960 (ca.)",
+          "expected": {
+            "value_edtf": "1940~/1960~",
+            "date_earliest_single": "1940",
+            "date_latest": "1960",
+            "date_earliest_single_certainty": "circa"
+          }
+        }
+      ]
+    },
+    {
+      "name": "century arithmetic, BCE astronomical numbering, endpoint order, and a year written once at the end of a range",
+      "cases": [
+        {
+          "raw": "17th century",
+          "expected": {
+            "value_edtf": "1600/1699",
+            "date_earliest_single": "1600",
+            "date_latest": "1699"
+          }
+        },
+        {
+          "raw": "1st century CE",
+          "note": "epoch special case: there is no year 0 CE",
+          "expected": {
+            "value_edtf": "0001/0100",
+            "date_earliest_single": "0001",
+            "date_latest": "0100"
+          }
+        },
+        {
+          "raw": "ca. second half of the 15th century",
+          "expected": {
+            "value_edtf": "1450~/1499~",
+            "date_earliest_single": "1450",
+            "date_latest": "1499",
+            "date_earliest_single_certainty": "circa"
+          }
+        },
+        {
+          "raw": "4th century BCE",
+          "expected": {
+            "value_edtf": "-0399/-0300",
+            "date_earliest_single": "-0399",
+            "date_latest": "-0300"
+          }
+        },
+        {
+          "raw": "circa 1st century BCE",
+          "note": "1 BCE is 0000, never -0000",
+          "expected": {
+            "value_edtf": "-0099~/0000~",
+            "date_earliest_single": "-0099",
+            "date_latest": "0000",
+            "date_earliest_single_certainty": "circa"
+          }
+        },
+        {
+          "raw": "799 CE - 780 CE",
+          "note": "a range written high-to-low denotes the same interval",
+          "expected": {
+            "value_edtf": "0780/0799",
+            "date_earliest_single": "0780",
+            "date_latest": "0799"
+          }
+        },
+        {
+          "raw": "21 Apr-5 May 1982",
+          "expected": {
+            "value_edtf": "1982-04-21/1982-05-05",
+            "date_earliest_single": "1982-04-21",
+            "date_latest": "1982-05-05"
+          }
+        },
+        {
+          "raw": "1914-15",
+          "note": "short-year range: the tail completes inside the opening year's century",
+          "expected": {
+            "value_edtf": "1914/1915",
+            "date_earliest_single": "1914",
+            "date_latest": "1915"
+          }
+        },
+        {
+          "raw": "1992/3",
+          "expected": {
+            "value_edtf": "1992/1993",
+            "date_earliest_single": "1992",
+            "date_latest": "1993"
+          }
+        },
+        {
+          "raw": "ca. 1863-8",
+          "expected": {
+            "value_edtf": "1863~/1868~",
+            "date_earliest_single": "1863",
+            "date_latest": "1868",
+            "date_earliest_single_certainty": "circa"
+          }
+        },
+        {
+          "raw": "1914-1815",
+          "note": "a four-digit tail is a real year, not a completion, so ordering applies instead",
+          "expected": {
+            "value_edtf": "1815/1914",
+            "date_earliest_single": "1815",
+            "date_latest": "1914"
+          }
+        }
+      ]
+    },
+    {
+      "name": "open-ended bounds written any way but the leading one (2026-08-03.2)",
+      "cases": [
+        {
+          "raw": "pre 1934",
+          "expected": {
+            "value_edtf": "../1934",
+            "date_latest": "1934"
+          }
+        },
+        {
+          "raw": "pre-1724",
+          "expected": {
+            "value_edtf": "../1724",
+            "date_latest": "1724"
+          }
+        },
+        {
+          "raw": "1867 before",
+          "expected": {
+            "value_edtf": "../1867",
+            "date_latest": "1867"
+          }
+        },
+        {
+          "raw": "1946 onwards",
+          "expected": {
+            "value_edtf": "1946/..",
+            "date_earliest_single": "1946"
+          }
+        },
+        {
+          "raw": "<=1974",
+          "expected": {
+            "value_edtf": "../1974",
+            "date_latest": "1974"
+          }
+        },
+        {
+          "raw": "2010 [pre]",
+          "expected": {
+            "value_edtf": "../2010?",
+            "date_latest": "2010"
+          }
+        },
+        {
+          "raw": "after 1900",
+          "expected": {
+            "value_edtf": "1900/..",
+            "date_earliest_single": "1900"
+          }
+        }
+      ]
+    },
+    {
+      "name": "a leading event verb names the year behind it (2026-08-03.2)",
+      "cases": [
+        {
+          "raw": "born 1927",
+          "expected": {
+            "value_edtf": "1927",
+            "date_earliest_single": "1927"
+          }
+        },
+        {
+          "raw": "established 1751",
+          "expected": {
+            "value_edtf": "1751",
+            "date_earliest_single": "1751"
+          }
+        },
+        {
+          "raw": "Published 1888",
+          "expected": {
+            "value_edtf": "1888",
+            "date_earliest_single": "1888"
+          }
+        },
+        {
+          "raw": "*1943",
+          "expected": {
+            "value_edtf": "1943",
+            "date_earliest_single": "1943"
+          }
+        },
+        {
+          "raw": "died 1618",
+          "expected": null
+        },
+        {
+          "raw": "****",
+          "expected": null
+        }
+      ]
+    },
+    {
+      "name": "quarter of a century (2026-08-03.2)",
+      "cases": [
+        {
+          "raw": "first quarter 19th century",
+          "expected": {
+            "value_edtf": "1800/1824",
+            "date_earliest_single": "1800",
+            "date_latest": "1824"
+          }
+        },
+        {
+          "raw": "second quarter 18th century",
+          "expected": {
+            "value_edtf": "1725/1749",
+            "date_earliest_single": "1725",
+            "date_latest": "1749"
+          }
+        },
+        {
+          "raw": "third quarter 19th century",
+          "expected": {
+            "value_edtf": "1850/1874",
+            "date_earliest_single": "1850",
+            "date_latest": "1874"
+          }
+        },
+        {
+          "raw": "fourth quarter 20th century",
+          "expected": {
+            "value_edtf": "1975/1999",
+            "date_earliest_single": "1975",
+            "date_latest": "1999"
+          }
+        },
+        {
+          "raw": "1st half of the 19th century",
+          "expected": {
+            "value_edtf": "1800/1849",
+            "date_earliest_single": "1800",
+            "date_latest": "1849"
+          }
+        }
+      ]
+    },
+    {
+      "name": "apostrophe decade, parenthesised certainty, shared-year month range (2026-08-03.2)",
+      "cases": [
+        {
+          "raw": "1930's",
+          "expected": {
+            "value_edtf": "193X",
+            "date_earliest_single": "1930",
+            "date_latest": "1939"
+          }
+        },
+        {
+          "raw": "c.1930's",
+          "expected": {
+            "value_edtf": "193X~",
+            "date_earliest_single": "1930",
+            "date_latest": "1939",
+            "date_earliest_single_certainty": "circa"
+          }
+        },
+        {
+          "raw": "1924 (?)",
+          "expected": {
+            "value_edtf": "1924?",
+            "date_earliest_single": "1924",
+            "date_earliest_single_certainty": "uncertain"
+          }
+        },
+        {
+          "raw": "Sept-Oct 1983",
+          "expected": {
+            "value_edtf": "1983-09/1983-10",
+            "date_earliest_single": "1983-09",
+            "date_latest": "1983-10"
+          }
+        },
+        {
+          "raw": "January - April 2015",
+          "expected": {
+            "value_edtf": "2015-01/2015-04",
+            "date_earliest_single": "2015-01",
+            "date_latest": "2015-04"
+          }
+        }
+      ]
+    }
+  ]
+}

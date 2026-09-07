@@ -1,0 +1,102 @@
+{
+  "field": "persons_association",
+  "seed_terms": 188,
+  "total_occurrences": 2208608,
+  "route_occurrences": {
+    "null_marker": 21748,
+    "semantic_marker": 22,
+    "prose": 2,
+    "cascade": 2186836
+  },
+  "pilot_exact_norm_whole_value": {
+    "occ": 1880124,
+    "share": 0.8513
+  },
+  "cascade_atom_occurrences": 2202215,
+  "resolved_atom_occurrences": 1916358,
+  "cascade_coverage_atom_occ": 0.8702,
+  "llm_queue": {
+    "atoms": 1630,
+    "occ": 86709
+  },
+  "llm_note": "llm rung skipped",
+  "rungs": {
+    "exact": {
+      "seconds": 4.6,
+      "energy_kwh": 1.8640262157939875e-05,
+      "emissions_kg": 4.428721245842777e-06,
+      "new_norms": 262,
+      "new_occ": 1902152,
+      "wh_per_1k_occ": 0.0
+    },
+    "exact_variant": {
+      "seconds": 4.6,
+      "energy_kwh": 1.8805457594012744e-05,
+      "emissions_kg": 4.467969864303894e-06,
+      "new_norms": 0,
+      "new_occ": 0,
+      "wh_per_1k_occ": null
+    },
+    "exact_paren": {
+      "seconds": 4.6,
+      "energy_kwh": 1.869574836202638e-05,
+      "emissions_kg": 4.441904157585486e-06,
+      "new_norms": 164,
+      "new_occ": 10476,
+      "wh_per_1k_occ": 0.0018
+    },
+    "exact_morph": {
+      "seconds": 4.61,
+      "energy_kwh": 1.8779483009424514e-05,
+      "emissions_kg": 4.461798588726161e-06,
+      "new_norms": 0,
+      "new_occ": 0,
+      "wh_per_1k_occ": null
+    },
+    "fuzzy": {
+      "seconds": 4.61,
+      "energy_kwh": 1.8932348823169007e-05,
+      "emissions_kg": 4.498117824547901e-06,
+      "new_norms": 174,
+      "new_occ": 1356,
+      "wh_per_1k_occ": 0.014
+    },
+    "semantic": {
+      "seconds": 11.7,
+      "energy_kwh": 0.00035900256906786437,
+      "emissions_kg": 8.529506138226482e-05,
+      "new_norms": 83,
+      "new_occ": 2374,
+      "wh_per_1k_occ": 0.1512
+    }
+  },
+  "unit_cost": {
+    "total_seconds": 49.3,
+    "total_kwh": 0.000563,
+    "wh_per_1k_occ_resolved": 0.0003
+  },
+  "target_restatement": {
+    "definition": "share of non-null occurrence mass in fields a value-level stage owns (>= owned_min_share of the field's occurrences left `untouched` in coverage_census); termlist-admissible = ControlledVocab fields (data model) not already cascaded or owned, N>=100k occ, M>=10 institutions, minus the 2026-07-14/16 exclusions",
+    "corpus_occurrences": 148430656,
+    "currently_touched": {
+      "owned_min_share": 0.05,
+      "fields": 104,
+      "occ": 90531589,
+      "share": 0.6099
+    },
+    "admissible_termlist_fields": [
+      {
+        "field": "spectrum/object_component_information",
+        "occ": 495625,
+        "institutions": 20
+      },
+      {
+        "field": "spectrum/inscription_position",
+        "occ": 283502,
+        "institutions": 30
+      }
+    ],
+    "admissible_termlist_occ": 779127,
+    "restated_target_share": 0.6152
+  }
+}

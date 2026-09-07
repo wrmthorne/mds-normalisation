@@ -1,0 +1,586 @@
+{
+ "fields": [
+  "dimension_type",
+  "dimension_value",
+  "dimension_measurement_unit",
+  "dimension_value_qualifier",
+  "dimension_measured_part"
+ ],
+ "groups": [
+  {
+   "name": "cross forms — trailing unit distributes; bare axes read h x w (x d)",
+   "cases": [
+    {
+     "raw": "100mm x 150mm",
+     "expected": [
+      {
+       "dimension_type": "height",
+       "dimension_value": 100.0,
+       "dimension_measurement_unit": "mm"
+      },
+      {
+       "dimension_type": "width",
+       "dimension_value": 150.0,
+       "dimension_measurement_unit": "mm"
+      }
+     ]
+    },
+    {
+     "raw": "6.8 x 3.6cm",
+     "expected": [
+      {
+       "dimension_type": "height",
+       "dimension_value": 6.8,
+       "dimension_measurement_unit": "cm"
+      },
+      {
+       "dimension_type": "width",
+       "dimension_value": 3.6,
+       "dimension_measurement_unit": "cm"
+      }
+     ]
+    },
+    {
+     "raw": "12.9 x 26 x 0.2cm",
+     "expected": [
+      {
+       "dimension_type": "height",
+       "dimension_value": 12.9,
+       "dimension_measurement_unit": "cm"
+      },
+      {
+       "dimension_type": "width",
+       "dimension_value": 26.0,
+       "dimension_measurement_unit": "cm"
+      },
+      {
+       "dimension_type": "depth",
+       "dimension_value": 0.2,
+       "dimension_measurement_unit": "cm"
+      }
+     ]
+    },
+    {
+     "raw": "28 × 21.5cm",
+     "expected": [
+      {
+       "dimension_type": "height",
+       "dimension_value": 28.0,
+       "dimension_measurement_unit": "cm"
+      },
+      {
+       "dimension_type": "width",
+       "dimension_value": 21.5,
+       "dimension_measurement_unit": "cm"
+      }
+     ]
+    },
+    {
+     "raw": "10cm * 15cm",
+     "expected": [
+      {
+       "dimension_type": "height",
+       "dimension_value": 10.0,
+       "dimension_measurement_unit": "cm"
+      },
+      {
+       "dimension_type": "width",
+       "dimension_value": 15.0,
+       "dimension_measurement_unit": "cm"
+      }
+     ]
+    },
+    {
+     "raw": "4insx6ins",
+     "expected": [
+      {
+       "dimension_type": "height",
+       "dimension_value": 4.0,
+       "dimension_measurement_unit": "in"
+      },
+      {
+       "dimension_type": "width",
+       "dimension_value": 6.0,
+       "dimension_measurement_unit": "in"
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "name": "explicit keywords beat the convention",
+   "cases": [
+    {
+     "raw": "140mm height x 90mm width",
+     "expected": [
+      {
+       "dimension_type": "height",
+       "dimension_value": 140.0,
+       "dimension_measurement_unit": "mm"
+      },
+      {
+       "dimension_type": "width",
+       "dimension_value": 90.0,
+       "dimension_measurement_unit": "mm"
+      }
+     ]
+    },
+    {
+     "raw": "Length571mm x Width35mm",
+     "expected": [
+      {
+       "dimension_type": "length",
+       "dimension_value": 571.0,
+       "dimension_measurement_unit": "mm"
+      },
+      {
+       "dimension_type": "width",
+       "dimension_value": 35.0,
+       "dimension_measurement_unit": "mm"
+      }
+     ]
+    },
+    {
+     "raw": "Length = 30",
+     "expected": [
+      {
+       "dimension_type": "length",
+       "dimension_value": 30.0
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "name": "fractions",
+   "cases": [
+    {
+     "raw": "14 3/16",
+     "expected": [
+      {
+       "dimension_value": 14.1875
+      }
+     ]
+    },
+    {
+     "raw": "13/16",
+     "expected": [
+      {
+       "dimension_value": 0.8125
+      }
+     ]
+    },
+    {
+     "raw": "4½",
+     "expected": [
+      {
+       "dimension_value": 4.5
+      }
+     ]
+    },
+    {
+     "raw": "18.5/8",
+     "expected": [
+      {
+       "dimension_value": 18.625
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "name": "label prefixes, embedded units, qualifiers",
+   "cases": [
+    {
+     "raw": "width excluding mount (mm):215",
+     "expected": [
+      {
+       "dimension_type": "width",
+       "dimension_value": 215.0,
+       "dimension_measurement_unit": "mm",
+       "dimension_measured_part": "excluding mount"
+      }
+     ]
+    },
+    {
+     "raw": "diameter / mm:23-23.5",
+     "expected": [
+      {
+       "dimension_type": "diameter",
+       "dimension_value": 23.0,
+       "dimension_measurement_unit": "mm",
+       "dimension_value_qualifier": "minimum"
+      },
+      {
+       "dimension_type": "diameter",
+       "dimension_value": 23.5,
+       "dimension_measurement_unit": "mm",
+       "dimension_value_qualifier": "maximum"
+      }
+     ]
+    },
+    {
+     "raw": "approx 20 cm high",
+     "expected": [
+      {
+       "dimension_type": "height",
+       "dimension_value": 20.0,
+       "dimension_measurement_unit": "cm",
+       "dimension_value_qualifier": "approx"
+      }
+     ]
+    },
+    {
+     "raw": "Weight: Normally 3.63 kg",
+     "expected": [
+      {
+       "dimension_type": "weight",
+       "dimension_value": 3.63,
+       "dimension_measurement_unit": "kg",
+       "dimension_value_qualifier": "nominal"
+      }
+     ]
+    },
+    {
+     "raw": "<1g",
+     "expected": [
+      {
+       "dimension_type": "weight",
+       "dimension_value": 1.0,
+       "dimension_measurement_unit": "g",
+       "dimension_value_qualifier": "maximum"
+      }
+     ]
+    },
+    {
+     "raw": "w(in) plate size:3 15/16",
+     "expected": [
+      {
+       "dimension_type": "width",
+       "dimension_value": 3.9375,
+       "dimension_measurement_unit": "in",
+       "dimension_measured_part": "plate size"
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "name": "compounds and mass typing from unit class",
+   "cases": [
+    {
+     "raw": "2 lb 3 oz",
+     "expected": [
+      {
+       "dimension_type": "weight",
+       "dimension_value": 35.0,
+       "dimension_measurement_unit": "oz"
+      }
+     ]
+    },
+    {
+     "raw": "5 ft 6 in",
+     "expected": [
+      {
+       "dimension_value": 66.0,
+       "dimension_measurement_unit": "in"
+      }
+     ]
+    },
+    {
+     "raw": "1' 6\"",
+     "expected": [
+      {
+       "dimension_value": 18.0,
+       "dimension_measurement_unit": "in"
+      }
+     ]
+    },
+    {
+     "raw": "1' 7\"",
+     "expected": [
+      {
+       "dimension_value": 19.0,
+       "dimension_measurement_unit": "in"
+      }
+     ]
+    },
+    {
+     "raw": "Maximum: 19mm, 1.38gm",
+     "expected": [
+      {
+       "dimension_value": 19.0,
+       "dimension_measurement_unit": "mm",
+       "dimension_value_qualifier": "maximum"
+      },
+      {
+       "dimension_type": "weight",
+       "dimension_value": 1.38,
+       "dimension_measurement_unit": "g"
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "name": "parentheticals: alternate readings kept, non-numeric ones are the part",
+   "cases": [
+    {
+     "raw": "15cm x 10cm (6\" x 4\")",
+     "expected": [
+      {
+       "dimension_type": "height",
+       "dimension_value": 15.0,
+       "dimension_measurement_unit": "cm"
+      },
+      {
+       "dimension_type": "width",
+       "dimension_value": 10.0,
+       "dimension_measurement_unit": "cm"
+      },
+      {
+       "dimension_type": "height",
+       "dimension_value": 6.0,
+       "dimension_measurement_unit": "in",
+       "dimension_value_qualifier": "parenthetical"
+      },
+      {
+       "dimension_type": "width",
+       "dimension_value": 4.0,
+       "dimension_measurement_unit": "in",
+       "dimension_value_qualifier": "parenthetical"
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "name": "continental decimals, unit typos, inverted unit-first",
+   "cases": [
+    {
+     "raw": "Object size 29,40  x 24,80  cm",
+     "expected": [
+      {
+       "dimension_type": "height",
+       "dimension_value": 29.4,
+       "dimension_measurement_unit": "cm",
+       "dimension_measured_part": "object size"
+      },
+      {
+       "dimension_type": "width",
+       "dimension_value": 24.8,
+       "dimension_measurement_unit": "cm",
+       "dimension_measured_part": "object size"
+      }
+     ]
+    },
+    {
+     "raw": "21.5 x 12.5 cms",
+     "expected": [
+      {
+       "dimension_type": "height",
+       "dimension_value": 21.5,
+       "dimension_measurement_unit": "cm"
+      },
+      {
+       "dimension_type": "width",
+       "dimension_value": 12.5,
+       "dimension_measurement_unit": "cm"
+      }
+     ]
+    },
+    {
+     "raw": "3.5 x 5.5 inhes",
+     "expected": [
+      {
+       "dimension_type": "height",
+       "dimension_value": 3.5,
+       "dimension_measurement_unit": "in"
+      },
+      {
+       "dimension_type": "width",
+       "dimension_value": 5.5,
+       "dimension_measurement_unit": "in"
+      }
+     ]
+    },
+    {
+     "raw": "mm209",
+     "expected": [
+      {
+       "dimension_value": 209.0,
+       "dimension_measurement_unit": "mm"
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "name": "bare numbers pass through (sibling field supplies the unit)",
+   "cases": [
+    {
+     "raw": "25",
+     "expected": [
+      {
+       "dimension_value": 25.0
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "name": "nothing parseable → defer, never force-resolve",
+   "cases": [
+    {
+     "raw": "mm",
+     "expected": null
+    },
+    {
+     "raw": "h(cm)",
+     "expected": null
+    },
+    {
+     "raw": "thickness / mm:",
+     "expected": null
+    },
+    {
+     "raw": "1 slide",
+     "expected": null
+    },
+    {
+     "raw": "unknown",
+     "expected": null
+    },
+    {
+     "raw": "",
+     "expected": null
+    }
+   ]
+  },
+  {
+   "name": "a parenthesised qualifier is a qualifier, not a measured part",
+   "cases": [
+    {
+     "raw": "233 mm (approx)",
+     "expected": [
+      {
+       "dimension_type": null,
+       "dimension_value": 233.0,
+       "dimension_measurement_unit": "mm",
+       "dimension_value_qualifier": "approx",
+       "dimension_measured_part": null
+      }
+     ]
+    },
+    {
+     "raw": "23.5 cms (approx.)",
+     "expected": [
+      {
+       "dimension_type": null,
+       "dimension_value": 23.5,
+       "dimension_measurement_unit": "cm",
+       "dimension_value_qualifier": "approx",
+       "dimension_measured_part": null
+      }
+     ]
+    },
+    {
+     "raw": "5 x 5 cm (mount)",
+     "expected": [
+      {
+       "dimension_type": "height",
+       "dimension_value": 5.0,
+       "dimension_measurement_unit": "cm",
+       "dimension_measured_part": "mount"
+      },
+      {
+       "dimension_type": "width",
+       "dimension_value": 5.0,
+       "dimension_measurement_unit": "cm",
+       "dimension_measured_part": "mount"
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "name": "segment recovery — by-crosses, juxtaposed labels, trailing words and stops (2026-08-01)",
+   "cases": [
+    {
+     "raw": "length 608 mm by width 68 mm by height 25 mm",
+     "expected": [
+      {
+       "dimension_type": "length",
+       "dimension_value": 608.0,
+       "dimension_measurement_unit": "mm"
+      },
+      {
+       "dimension_type": "width",
+       "dimension_value": 68.0,
+       "dimension_measurement_unit": "mm"
+      },
+      {
+       "dimension_type": "height",
+       "dimension_value": 25.0,
+       "dimension_measurement_unit": "mm"
+      }
+     ]
+    },
+    {
+     "raw": "L: 107 mm Dia: 19 mm",
+     "expected": [
+      {
+       "dimension_type": "length",
+       "dimension_value": 107.0,
+       "dimension_measurement_unit": "mm"
+      },
+      {
+       "dimension_type": "diameter",
+       "dimension_value": 19.0,
+       "dimension_measurement_unit": "mm"
+      }
+     ]
+    },
+    {
+     "raw": "30 oz CAPACITY",
+     "expected": [
+      {
+       "dimension_type": "weight",
+       "dimension_value": 30.0,
+       "dimension_measurement_unit": "oz"
+      }
+     ]
+    },
+    {
+     "raw": "H: 635 mm W 990 mm excluding frame",
+     "expected": [
+      {
+       "dimension_type": "height",
+       "dimension_value": 635.0,
+       "dimension_measurement_unit": "mm"
+      },
+      {
+       "dimension_type": "width",
+       "dimension_value": 990.0,
+       "dimension_measurement_unit": "mm"
+      }
+     ]
+    },
+    {
+     "raw": "85 cm (sleeve).",
+     "expected": [
+      {
+       "dimension_value": 85.0,
+       "dimension_measurement_unit": "cm",
+       "dimension_measured_part": "sleeve"
+      }
+     ]
+    },
+    {
+     "raw": "1 slide",
+     "expected": null
+    }
+   ]
+  }
+ ]
+}

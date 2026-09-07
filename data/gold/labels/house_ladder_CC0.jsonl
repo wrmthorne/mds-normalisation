@@ -1,0 +1,34 @@
+{"id": "house/house_morph/published", "stratum": "house_morph", "status": "resolved", "verdict": "correct", "note": "", "ts": "2026-08-31T00:00:00", "annotator": "wrmthorne"}
+{"id": "house/house_morph/glazed", "stratum": "house_morph", "status": "resolved", "verdict": "correct", "note": "", "ts": "2026-08-31T00:00:00", "annotator": "wrmthorne"}
+{"id": "house/house_compound/printed in gold", "stratum": "house_compound", "status": "resolved", "verdict": "correct", "note": "", "ts": "2026-08-31T00:00:00", "annotator": "wrmthorne"}
+{"id": "house/house_compound/printed in silver", "stratum": "house_compound", "status": "resolved", "verdict": "correct", "note": "", "ts": "2026-08-31T00:00:00", "annotator": "wrmthorne"}
+{"id": "house/house_paren/copper (alloy)", "stratum": "house_paren", "status": "resolved", "verdict": "wrong", "note": "'copper (alloy)' reads as a copper alloy; BM materials carries COPPER ALLOY as its own term, so mapping the head to COPPER asserts the pure metal", "ts": "2026-08-31T00:00:00", "annotator": "wrmthorne"}
+{"id": "house/house_paren/Paper (mounted on thin card)", "stratum": "house_paren", "status": "resolved", "verdict": "correct", "note": "", "ts": "2026-08-31T00:00:00", "annotator": "wrmthorne"}
+{"id": "house/house_paren/brass (handle)", "stratum": "house_paren", "status": "resolved", "verdict": "correct", "note": "", "ts": "2026-08-31T00:00:00", "annotator": "wrmthorne"}
+{"id": "house/house_paren/silk (textile)", "stratum": "house_paren", "status": "resolved", "verdict": "correct", "note": "", "ts": "2026-08-31T00:00:00", "annotator": "wrmthorne"}
+{"id": "house/house_paren/brass (nickel plated)", "stratum": "house_paren", "status": "resolved", "verdict": "correct", "note": "", "ts": "2026-08-31T00:00:00", "annotator": "wrmthorne"}
+{"id": "house/house_exact/working life", "stratum": "house_exact", "status": "resolved", "verdict": "correct", "note": "", "ts": "2026-08-31T00:00:00", "annotator": "wrmthorne"}
+{"id": "house/house_exact/paper", "stratum": "house_exact", "status": "resolved", "verdict": "correct", "note": "", "ts": "2026-08-31T00:00:00", "annotator": "wrmthorne"}
+{"id": "house/house_exact/Natural History", "stratum": "house_exact", "status": "resolved", "verdict": "correct", "note": "", "ts": "2026-08-31T00:00:00", "annotator": "wrmthorne"}
+{"id": "house/house_exact/community life", "stratum": "house_exact", "status": "resolved", "verdict": "correct", "note": "", "ts": "2026-08-31T00:00:00", "annotator": "wrmthorne"}
+{"id": "house/house_exact/glass", "stratum": "house_exact", "status": "resolved", "verdict": "correct", "note": "", "ts": "2026-08-31T00:00:00", "annotator": "wrmthorne"}
+{"id": "house/house_exact/costume", "stratum": "house_exact", "status": "resolved", "verdict": "correct", "note": "", "ts": "2026-08-31T00:00:00", "annotator": "wrmthorne"}
+{"id": "house/house_exact/warfare and defence", "stratum": "house_exact", "status": "resolved", "verdict": "correct", "note": "", "ts": "2026-08-31T00:00:00", "annotator": "wrmthorne"}
+{"id": "house/house_exact/steel", "stratum": "house_exact", "status": "resolved", "verdict": "correct", "note": "", "ts": "2026-08-31T00:00:00", "annotator": "wrmthorne"}
+{"id": "house/house_exact/wood", "stratum": "house_exact", "status": "resolved", "verdict": "correct", "note": "", "ts": "2026-08-31T00:00:00", "annotator": "wrmthorne"}
+{"id": "house/house_exact/copper alloy", "stratum": "house_exact", "status": "resolved", "verdict": "correct", "note": "", "ts": "2026-08-31T00:00:00", "annotator": "wrmthorne"}
+{"id": "house/house_exact/metal", "stratum": "house_exact", "status": "resolved", "verdict": "correct", "note": "", "ts": "2026-08-31T00:00:00", "annotator": "wrmthorne"}
+{"id": "house/house_exact/silver", "stratum": "house_exact", "status": "resolved", "verdict": "correct", "note": "", "ts": "2026-08-31T00:00:00", "annotator": "wrmthorne"}
+{"id": "house/house_exact/printed", "stratum": "house_exact", "status": "resolved", "verdict": "correct", "note": "", "ts": "2026-08-31T00:00:00", "annotator": "wrmthorne"}
+{"id": "house/house_exact/2.95", "stratum": "house_exact", "status": "resolved", "verdict": "correct", "note": "the SHIC term is itself a bare code; a numeric string matching by exact norm is the homograph shape the guards exist for, admitted here because the institution is a confirmed SHIC user", "ts": "2026-08-31T00:00:00", "annotator": "wrmthorne"}
+{"id": "house/house_exact/1.35", "stratum": "house_exact", "status": "resolved", "verdict": "correct", "note": "", "ts": "2026-08-31T00:00:00", "annotator": "wrmthorne"}
+{"id": "house/house_exact/flower", "stratum": "house_exact", "status": "resolved", "verdict": "correct", "note": "", "ts": "2026-08-31T00:00:00", "annotator": "wrmthorne"}
+{"id": "house/house_exact/lace", "stratum": "house_exact", "status": "resolved", "verdict": "correct", "note": "", "ts": "2026-08-31T00:00:00", "annotator": "wrmthorne"}
+{"id": "house/house_exact/straw", "stratum": "house_exact", "status": "resolved", "verdict": "correct", "note": "", "ts": "2026-08-31T00:00:00", "annotator": "wrmthorne"}
+{"id": "house/house_exact/ivory", "stratum": "house_exact", "status": "resolved", "verdict": "correct", "note": "", "ts": "2026-08-31T00:00:00", "annotator": "wrmthorne"}
+{"id": "house/house_exact/chrome", "stratum": "house_exact", "status": "resolved", "verdict": "correct", "note": "", "ts": "2026-08-31T00:00:00", "annotator": "wrmthorne"}
+{"id": "house/house_exact/brass", "stratum": "house_exact", "status": "resolved", "verdict": "correct", "note": "", "ts": "2026-08-31T00:00:00", "annotator": "wrmthorne"}
+{"id": "house/house_exact/shell", "stratum": "house_exact", "status": "resolved", "verdict": "correct", "note": "", "ts": "2026-08-31T00:00:00", "annotator": "wrmthorne"}
+{"id": "house/house_exact/horn", "stratum": "house_exact", "status": "resolved", "verdict": "correct", "note": "", "ts": "2026-08-31T00:00:00", "annotator": "wrmthorne"}
+{"id": "house/house_exact/tin", "stratum": "house_exact", "status": "resolved", "verdict": "correct", "note": "", "ts": "2026-08-31T00:00:00", "annotator": "wrmthorne"}
+{"id": "house/house_exact/silk", "stratum": "house_exact", "status": "resolved", "verdict": "correct", "note": "", "ts": "2026-08-31T00:00:00", "annotator": "wrmthorne"}

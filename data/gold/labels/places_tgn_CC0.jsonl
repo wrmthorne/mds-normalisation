@@ -1,0 +1,38 @@
+{"id": "tgn/partial/Chiswick, London, England", "stratum": "partial", "status": "flagged", "verdict": "correct", "note": "", "ts": "2026-08-31T00:00:00", "annotator": "wrmthorne"}
+{"id": "tgn/partial/Angus, ScotlandWaste ground, Friockheim", "stratum": "partial", "status": "flagged", "verdict": "correct", "note": "", "ts": "2026-08-31T00:00:00", "annotator": "wrmthorne"}
+{"id": "tgn/abbrev/St George", "stratum": "abbrev", "status": "flagged", "verdict": "wrong", "note": "", "ts": "2026-08-31T00:00:00", "annotator": "wrmthorne"}
+{"id": "tgn/abbrev/St Agnes", "stratum": "abbrev", "status": "flagged", "verdict": "correct", "note": "", "ts": "2026-08-31T00:00:00", "annotator": "wrmthorne"}
+{"id": "tgn/abbrev/St Just", "stratum": "abbrev", "status": "flagged", "verdict": "wrong", "note": "", "ts": "2026-08-31T00:00:00", "annotator": "wrmthorne"}
+{"id": "tgn/abbrev/St John's", "stratum": "abbrev", "status": "flagged", "verdict": "correct", "note": "", "ts": "2026-08-31T00:00:00", "annotator": "wrmthorne"}
+{"id": "tgn/abbrev/St Peters Church", "stratum": "abbrev", "status": "flagged", "verdict": "wrong", "note": "", "ts": "2026-08-31T00:00:00", "annotator": "wrmthorne"}
+{"id": "tgn/abbrev/St Thomas", "stratum": "abbrev", "status": "flagged", "verdict": "wrong", "note": "", "ts": "2026-08-31T00:00:00", "annotator": "wrmthorne"}
+{"id": "tgn/abbrev/St Pierre", "stratum": "abbrev", "status": "flagged", "verdict": "wrong", "note": "", "ts": "2026-08-31T00:00:00", "annotator": "wrmthorne"}
+{"id": "tgn/abbrev/St Stephens Church", "stratum": "abbrev", "status": "flagged", "verdict": "wrong", "note": "", "ts": "2026-08-31T00:00:00", "annotator": "wrmthorne"}
+{"id": "tgn/abbrev/St Mark", "stratum": "abbrev", "status": "flagged", "verdict": "wrong", "note": "", "ts": "2026-08-31T00:00:00", "annotator": "wrmthorne"}
+{"id": "tgn/abbrev/St Cloud", "stratum": "abbrev", "status": "flagged", "verdict": "wrong", "note": "", "ts": "2026-08-31T00:00:00", "annotator": "wrmthorne"}
+{"id": "tgn/abbrev/St.Martin", "stratum": "abbrev", "status": "flagged", "verdict": "wrong", "note": "", "ts": "2026-08-31T00:00:00", "annotator": "wrmthorne"}
+{"id": "tgn/abbrev/St Aubin", "stratum": "abbrev", "status": "flagged", "verdict": "correct", "note": "", "ts": "2026-08-31T00:00:00", "annotator": "wrmthorne"}
+{"id": "tgn/abbrev/St Paul", "stratum": "abbrev", "status": "flagged", "verdict": "wrong", "note": "", "ts": "2026-08-31T00:00:00", "annotator": "wrmthorne"}
+{"id": "tgn/abbrev/St. Giles", "stratum": "abbrev", "status": "flagged", "verdict": "correct", "note": "", "ts": "2026-08-31T00:00:00", "annotator": "wrmthorne"}
+{"id": "tgn/abbrev/St.Pauls", "stratum": "abbrev", "status": "flagged", "verdict": "wrong", "note": "", "ts": "2026-08-31T00:00:00", "annotator": "wrmthorne"}
+{"id": "tgn/context_full_prominent/Birmingham, England", "stratum": "context_full_prominent", "status": "resolved", "verdict": "correct", "note": "", "ts": "2026-08-31T00:00:00", "annotator": "wrmthorne"}
+{"id": "tgn/context_full_prominent/Leeds, England", "stratum": "context_full_prominent", "status": "resolved", "verdict": "correct", "note": "", "ts": "2026-08-31T00:00:00", "annotator": "wrmthorne"}
+{"id": "tgn/context_full_prominent/Coventry, England", "stratum": "context_full_prominent", "status": "resolved", "verdict": "correct", "note": "", "ts": "2026-08-31T00:00:00", "annotator": "wrmthorne"}
+{"id": "tgn/full_unsettled/Buffalo, New York, USA", "stratum": "full_unsettled", "status": "flagged", "verdict": "correct", "note": "", "ts": "2026-08-31T00:00:00", "annotator": "wrmthorne"}
+{"id": "tgn/context_full_kind/London, England", "stratum": "context_full_kind", "status": "resolved", "verdict": "correct", "note": "", "ts": "2026-08-31T00:00:00", "annotator": "wrmthorne"}
+{"id": "tgn/context_full_kind/Paris, France", "stratum": "context_full_kind", "status": "resolved", "verdict": "correct", "note": "", "ts": "2026-08-31T00:00:00", "annotator": "wrmthorne"}
+{"id": "tgn/context_full_kind/Westminster, England", "stratum": "context_full_kind", "status": "resolved", "verdict": "correct", "note": "", "ts": "2026-08-31T00:00:00", "annotator": "wrmthorne"}
+{"id": "tgn/none/Gela (“Florida”)", "stratum": "none", "status": "flagged", "verdict": "correct", "note": "", "ts": "2026-08-31T00:00:00", "annotator": "wrmthorne"}
+{"id": "tgn/abbrev_unique/St Austell", "stratum": "abbrev_unique", "status": "resolved", "verdict": "correct", "note": "", "ts": "2026-08-31T00:00:00", "annotator": "wrmthorne"}
+{"id": "tgn/abbrev_unique/St Buryan", "stratum": "abbrev_unique", "status": "resolved", "verdict": "correct", "note": "", "ts": "2026-08-31T00:00:00", "annotator": "wrmthorne"}
+{"id": "tgn/abbrev_unique/St Paul's Cathedral", "stratum": "abbrev_unique", "status": "resolved", "verdict": "correct", "note": "", "ts": "2026-08-31T00:00:00", "annotator": "wrmthorne"}
+{"id": "tgn/abbrev_unique/St. Buryan", "stratum": "abbrev_unique", "status": "resolved", "verdict": "correct", "note": "", "ts": "2026-08-31T00:00:00", "annotator": "wrmthorne"}
+{"id": "tgn/abbrev_unique/St Catherine's Valley", "stratum": "abbrev_unique", "status": "resolved", "verdict": "wrong", "note": "resolves into TGN's 'Unidentified Places' holding branch, which identifies nothing", "ts": "2026-08-31T00:00:00", "annotator": "wrmthorne"}
+{"id": "tgn/abbrev_unique/Stratford St. Mary", "stratum": "abbrev_unique", "status": "resolved", "verdict": "wrong", "note": "resolves into TGN's 'Unidentified Places' branch; Stratford St Mary is a real Suffolk village", "ts": "2026-08-31T00:00:00", "annotator": "wrmthorne"}
+{"id": "tgn/context_full/Yeovil, England", "stratum": "context_full", "status": "resolved", "verdict": "correct", "note": "", "ts": "2026-08-31T00:00:00", "annotator": "wrmthorne"}
+{"id": "tgn/context_full/Dursley, England", "stratum": "context_full", "status": "resolved", "verdict": "correct", "note": "", "ts": "2026-08-31T00:00:00", "annotator": "wrmthorne"}
+{"id": "tgn/context_full/United Kingdom: England", "stratum": "context_full", "status": "resolved", "verdict": "correct", "note": "", "ts": "2026-08-31T00:00:00", "annotator": "wrmthorne"}
+{"id": "tgn/context_full/Colchester, England", "stratum": "context_full", "status": "resolved", "verdict": "correct", "note": "", "ts": "2026-08-31T00:00:00", "annotator": "wrmthorne"}
+{"id": "tgn/context_full/Loughborough, England", "stratum": "context_full", "status": "resolved", "verdict": "correct", "note": "", "ts": "2026-08-31T00:00:00", "annotator": "wrmthorne"}
+{"id": "tgn/context_full/Queensland: Dunk Island", "stratum": "context_full", "status": "resolved", "verdict": "correct", "note": "", "ts": "2026-08-31T00:00:00", "annotator": "wrmthorne"}
+{"id": "tgn/abbrev_prominent/St Petersburg", "stratum": "abbrev_prominent", "status": "resolved", "verdict": "wrong", "note": "St Petersburg resolved to a Colorado hamlet over Sankt-Peterburg, 524 occurrences", "ts": "2026-08-31T00:00:00", "annotator": "wrmthorne"}

@@ -1,0 +1,78 @@
+{
+  "fields": ["entity", "sub", "defer_reason", "prefix", "given", "middle", "surname", "suffix"],
+  "defaults": {"entity": "person"},
+  "groups": [
+    {
+      "note": "inverted convention — the corpus's dominant person shape",
+      "cases": [
+        {"raw": "Dürer, Albrecht", "expected": {"sub": "inverted", "given": "Albrecht", "surname": "Dürer"}},
+        {"raw": "Vivarès, François", "expected": {"sub": "inverted", "given": "François", "surname": "Vivarès"}},
+        {"raw": "Glaisher, J. W. L.", "expected": {"sub": "inverted", "given": "J.", "middle": "W. L.", "surname": "Glaisher"}},
+        {"raw": "Hadow, A.H.L.", "expected": {"sub": "inverted", "given": "A.H.L.", "surname": "Hadow"},
+         "note": "a dotted initials run is one forename token; NAME_TOK refuses interior dots"},
+        {"raw": "Beek, Gosewijn van", "expected": {"sub": "inverted", "given": "Gosewijn", "surname": "van Beek"}},
+        {"raw": "Smith, Dr John", "expected": {"sub": "inverted", "prefix": "Dr", "given": "John", "surname": "Smith"}}
+      ]
+    },
+    {
+      "note": "inverted with a trailing title or post-nominal (repeated_component:surname, 32.6k occ)",
+      "cases": [
+        {"raw": "White, Francis Buchanan, Dr", "expected": {"sub": "inverted_tail", "prefix": "Dr", "given": "Francis", "middle": "Buchanan", "surname": "White"}},
+        {"raw": "Cook, Francis, Sir", "expected": {"sub": "inverted_tail", "prefix": "Sir", "given": "Francis", "surname": "Cook"}},
+        {"raw": "Elgar, Alan James, Sgt", "expected": {"sub": "inverted_tail", "prefix": "Sgt", "given": "Alan", "middle": "James", "surname": "Elgar"}},
+        {"raw": "Bell, D H, Miss", "expected": {"sub": "inverted_tail", "prefix": "Miss", "given": "D", "middle": "H", "surname": "Bell"}},
+        {"raw": "Hornblower, G. D., OBE", "expected": {"sub": "inverted_tail", "given": "G.", "middle": "D.", "surname": "Hornblower", "suffix": "OBE"}},
+        {"raw": "Reedie, Kenneth, Mr, MBE", "expected": {"sub": "inverted_tail", "prefix": "Mr", "given": "Kenneth", "surname": "Reedie", "suffix": "MBE"},
+         "note": "several trailing segments peel off, each into its own slot"},
+        {"raw": "Solis, Virgilius, the elder", "expected": {"sub": "inverted_tail", "given": "Virgilius", "surname": "Solis", "suffix": "the elder"}},
+        {"raw": "Cox, David, the elder", "expected": {"sub": "inverted_tail", "given": "David", "surname": "Cox", "suffix": "the elder"}},
+        {"raw": "Julian Carr, Woodbridge, Suffolk", "expected": {"sub": "crf", "defer_reason": "repeated_component:given"},
+         "note": "an address in the same shape: no closed set names it, so it defers"},
+        {"raw": "Shaw, H. T., Former owner", "expected": {"sub": "crf", "defer_reason": "unmapped_label:CorporationName"},
+         "note": "a role in the tail is not a name part"},
+        {"raw": "Major, Walker, P. Maurice", "expected": {"sub": "crf", "defer_reason": "repeated_component:given"},
+         "note": "further forenames in the tail are unreadable — which name is the surname?"}
+      ]
+    },
+    {
+      "note": "Nottingham's slash and angle-bracket convention",
+      "cases": [
+        {"raw": "Carr/J.W.<M.A", "expected": {"sub": "slashed", "given": "J.W.", "surname": "Carr", "suffix": "M.A"}},
+        {"raw": "HALLAM/Gillian", "expected": {"sub": "slashed", "given": "Gillian", "surname": "HALLAM"}},
+        {"raw": "Hornsey Casson/Dr John", "expected": {"sub": "slashed", "prefix": "Dr", "given": "John", "surname": "Hornsey Casson"}},
+        {"raw": "Carr, J.W. < M.A.", "expected": {"sub": "angle_tail", "given": "J.W.", "surname": "Carr", "suffix": "M.A."},
+         "note": "the same tail on a comma-inverted name; parse_slashed needs a '/' and never saw these"},
+        {"raw": "Goode, G. < M.A.", "expected": {"sub": "angle_tail", "given": "G.", "surname": "Goode", "suffix": "M.A."}},
+        {"raw": "Thurston, E. < C.I.E.", "expected": {"sub": "angle_tail", "given": "E.", "surname": "Thurston", "suffix": "C.I.E."}},
+        {"raw": "Sumlock / Compucorp", "expected": {"sub": "slashed", "defer_reason": "slash_convention"},
+         "note": "a spaced slash is an alternatives list, not the convention"},
+        {"raw": "Sloane Stanley/Miss Elizabeth <via Mr T. Hills Esq.", "expected": {"sub": "slashed", "defer_reason": "slash_convention"},
+         "note": "provenance text in the tail refuses the whole value; a short qualification (<Esq, <M.A) is kept"},
+        {"raw": "EDWARD I/King", "expected": {"sub": "slashed", "defer_reason": "slash_convention"},
+         "note": "regnal, not surname/forename"}
+      ]
+    },
+    {
+      "note": "coordinations — organisation, or two people? (unmapped_label:And, 32k occ)",
+      "cases": [
+        {"raw": "Harland and Wolff", "expected": {"entity": "organisation", "sub": "crf_and_organisation"}},
+        {"raw": "Davidson & Kay", "expected": {"entity": "organisation", "sub": "crf_and_organisation"}},
+        {"raw": "W. & D. Downey", "expected": {"entity": "organisation", "sub": "crf_and_organisation"}},
+        {"raw": "Marks and Spencer", "expected": {"entity": "organisation", "sub": "crf_and_organisation"}},
+        {"raw": "George Kenning and Son", "expected": {"entity": "organisation", "sub": "crf_and_organisation"}},
+        {"raw": "Gurney, Sophie and Hambro, Elisabeth", "expected": {"sub": "crf", "defer_reason": "unmapped_label:And"},
+         "note": "two comma-inverted people; a comma anywhere refuses the organisation reading"},
+        {"raw": "Batchelor, Ivor, Sir and Lady", "expected": {"sub": "crf", "defer_reason": "unmapped_label:And"}}
+      ]
+    },
+    {
+      "note": "placeholder and residue shapes keep deferring",
+      "cases": [
+        {"raw": "DCM", "expected": {"sub": "crf", "defer_reason": "unmapped_label:ShortForm"},
+         "note": "an initialism resolves to nobody without knowing whose initials it is"},
+        {"raw": "Wolseley", "expected": {"sub": "crf", "defer_reason": "no_surname"},
+         "note": "a mononym needs the field's own contract; see test_mononym_needs_an_organisation_field"}
+      ]
+    }
+  ]
+}

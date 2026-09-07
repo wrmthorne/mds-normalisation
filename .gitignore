@@ -1,0 +1,52 @@
+# Python-generated files
+__pycache__/
+*.py[oc]
+build/
+dist/
+wheels/
+*.egg-info
+
+# Virtual environments
+.venv
+.ner-env
+
+# Data. A parent directory cannot be excluded outright or git will not look inside it,
+# so each level is re-included and then emptied. Only the CC0 gold may be published.
+data/*
+!data/README.md
+!data/gold/
+data/gold/*
+!data/gold/labels/
+data/gold/labels/*
+!data/gold/labels/*_CC0.jsonl
+!data/gold/samples/
+data/gold/samples/*
+!data/gold/samples/*_CC0.jsonl
+!data/gold/retrieval/
+data/gold/retrieval/*
+!data/gold/retrieval/samples/
+data/gold/retrieval/samples/*
+!data/gold/retrieval/samples/*_CC0.jsonl
+!data/vocabularies/
+data/vocabularies/*
+!data/vocabularies/SHIC.txt
+!data/vocabularies/fetch_vocabs.sh
+!data/vocabularies/field_vocab_map.json
+!data/vocabularies/periods.csv
+
+# Not published: annotation tooling, working notes, planning documents
+labelling/
+docs/
+serve
+serve/
+scratch/
+PLAN.md
+CHAPTER*_SKELETON.md
+
+
+# Paper artefacts
+acmart-primary/
+*-paper/
+
+*.parquet
+*.pdf

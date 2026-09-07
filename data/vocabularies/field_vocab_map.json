@@ -1,0 +1,101 @@
+{
+ "material": [
+  "aat",
+  "fish_building_materials"
+ ],
+ "technique": [
+  "aat"
+ ],
+ "associated_concept": [
+  "aat"
+ ],
+ "content_concept": [
+  "aat"
+ ],
+ "object_component_name": [
+  "aat"
+ ],
+ "inscription_type": [
+  "aat"
+ ],
+ "inscription_method": [
+  "aat"
+ ],
+ "object_production_place": [
+  "tgn"
+ ],
+ "field_collection_place": [
+  "tgn"
+ ],
+ "associated_place": [
+  "tgn"
+ ],
+ "content_place": [
+  "tgn"
+ ],
+ "object_production_person": [
+  "ulan"
+ ],
+ "object_production_organisation": [
+  "ulan"
+ ],
+ "associated_person": [
+  "ulan"
+ ],
+ "associated_organisation": [
+  "ulan"
+ ],
+ "content_person": [
+  "ulan"
+ ],
+ "field_collector": [
+  "ulan"
+ ],
+ "date_period": [
+  "periodo"
+ ],
+ "field_collection_method": [
+  "fish_event_types",
+  "local_field_collection_method"
+ ],
+ "persons_association": [
+  "local_persons_association",
+  "loc_relators"
+ ],
+ "organisations_association": [
+  "local_persons_association",
+  "loc_relators"
+ ],
+ "date_association": [
+  "local_association_event"
+ ],
+ "place_association": [
+  "local_association_event"
+ ],
+ "acquisition_method": [
+  "local_acquisition_method"
+ ],
+ "place_status": [
+  "local_place_status",
+  "fish_monument_types"
+ ],
+ "condition": [
+  "local_condition"
+ ],
+ "title_type": [
+  "local_title_type"
+ ],
+ "object_name_level": [
+  "gbif_rank",
+  "local_object_name_level"
+ ],
+ "location_type": [
+  "local_location_type"
+ ],
+ "reproduction_type": [
+  "dcmi_type"
+ ],
+ "reproduction_format": [
+  "iana_media_types"
+ ]
+}
