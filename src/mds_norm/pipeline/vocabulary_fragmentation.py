@@ -6,11 +6,13 @@ from itertools import combinations
 
 import polars as pl
 
+from mds_norm.metrics import kiraly
 from mds_norm.paths import VOCAB_INSTITUTIONAL
 from mds_norm.pipeline.institutional_vocab_detect import FIELD_CANDIDATES, atom_universe
 
 OUT_PATH = VOCAB_INSTITUTIONAL / "fragmentation.parquet"
 CONFLATION_PATH = VOCAB_INSTITUTIONAL / "conflation.parquet"
+VALUE_IC_PATH = VOCAB_INSTITUTIONAL / "value_information_content.parquet"
 
 # The working vocabulary covers this share of occurrences
 COVERAGE = 0.80
@@ -49,6 +51,19 @@ def fragmentation(atoms: pl.DataFrame, field: str) -> pl.DataFrame:
         )
         .sort("fragmentation", descending=True)
     )
+
+
+def value_information_content(universes: dict[str, pl.DataFrame]) -> pl.DataFrame:
+    """Ochoa-Duval information content per term, and each institution's occurrence-weighted mean"""
+    frames = []
+    for field, atoms in universes.items():
+        counts = atoms.group_by("norm").agg(times=pl.col("occ").sum()).with_columns(field_type=pl.lit(field))
+        counts = counts.with_columns(n_f=pl.col("times").sum())
+        ic = kiraly.information_content(counts.rename({"norm": "value"}))
+        frames.append(
+            atoms.join(ic.rename({"value": "norm"}), on="norm", how="left").with_columns(field=pl.lit(field))
+        )
+    return pl.concat(frames).select("data_source", "field", "norm", "occ", "ic")
 
 
 def conflation(universes: dict[str, pl.DataFrame]) -> pl.DataFrame:
@@ -96,6 +111,10 @@ def main() -> None:
             singleton_rate=pl.col("singleton_rate").median(),
         )
     )
+
+    per_value = value_information_content(universes)
+    per_value.write_parquet(VALUE_IC_PATH)
+    log(f"{per_value.height:,} (institution, field, term) rows with information content → {VALUE_IC_PATH}")
 
     if len(universes) > 1:
         pairs = conflation(universes)

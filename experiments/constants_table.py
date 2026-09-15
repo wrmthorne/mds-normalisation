@@ -111,7 +111,7 @@ CONSTANTS: list[tuple[str, str, str, str]] = [
     (
         "mds_norm.pipeline.accession_schemes",
         "AGREE_CONFIRM",
-        "agreement with recorded accession years that confirms a scheme",
+        "agreement with recorded accession years that supports a scheme",
         "schemes an institution confirms or denies directly",
     ),
     (
@@ -183,7 +183,7 @@ CONSTANTS: list[tuple[str, str, str, str]] = [
     (
         "mds_norm.pipeline.institutional_vocab_detect",
         "CONFIRM_COV",
-        "coverage of a published list that confirms an institution catalogues from it",
+        "coverage of a published list that supports the reading that an institution catalogues from it",
         "institutions asked which list they use",
     ),
     (

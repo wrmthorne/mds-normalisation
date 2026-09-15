@@ -7,6 +7,7 @@ import numpy as np
 import polars as pl
 from scipy.sparse import csr_matrix, hstack
 from scipy.spatial.distance import jensenshannon
+from scipy.stats import pearsonr, spearmanr
 from sklearn.feature_extraction.text import TfidfVectorizer
 from sklearn.metrics import f1_score
 from sklearn.model_selection import StratifiedKFold
@@ -16,11 +17,13 @@ from sklearn.svm import LinearSVC
 from experiments import record_sample
 from experiments.harness import log
 from mds_norm import paths
+from mds_norm.metrics import completeness, conformance, kiraly, thinness
 from mds_norm.metrics.common import ADMIN, RELEASE
 
 SEED = record_sample.SEED
 OUT = paths.EXP_OUT / "fingerprinting"
 DIVERGENCE = paths.PATTERNS_OUT / "slot_divergence.parquet"
+CONSISTENCY_FIELD = paths.CONSISTENCY_OUT / "consistency_field_raw.parquet"
 
 # The three fields nearly every institution populates
 CORE = ["spectrum/object_number", "spectrum/object_name", "spectrum/brief_description"]
@@ -37,8 +40,9 @@ NAMES = {
 
 TEXT_KEYS = ("occ", "mor", "fmo", "lex")
 MAX_FEATURES = {"occ": 400, "mor": 5000, "fmo": 20000, "lex": 30000}
-# Each candidate alone, in pairs, and all together
-COMBOS = [(k,) for k in NAMES] + [("occ", "mor"), TEXT_KEYS, tuple(NAMES)]
+# Each candidate alone, the two coarse views, the three field views, and those with the quality vector. Value
+# morphology is the field-tagged distribution summed over fields, so it is left out of the larger combinations
+COMBOS = [(k,) for k in NAMES] + [("occ", "mor"), ("occ", "fmo", "lex"), ("occ", "fmo", "lex", "qual")]
 
 # The measures the quality vector stacks, in order
 QUALITY = ["completeness", "thinness", "decomposition_rate", "conformance", "consistency", "k_completeness_weighted"]
@@ -50,8 +54,9 @@ WITHIN_REPS = 3
 FOLDS = 5
 # Share of each record's populated fields withheld at test time
 DROPOUT = [0.0, 0.25, 0.5, 0.75, 0.9]
-# Records per half in the sample-efficiency sweep
-EFFICIENCY_SIZES = [1, 2, 5, 10, 25, 50, 100, 200, 400]
+# Records per half in the sample-efficiency sweep, and how many times each size is drawn
+EFFICIENCY_SIZES = [1, 2, 5, 10, 25, 50, 100, 150]
+EFFICIENCY_DRAWS = 20
 # Minimum records a side for the institution-level tests
 FP_MIN_SIDE = 150
 
@@ -131,6 +136,8 @@ def documents(populated: pl.DataFrame, short: pl.DataFrame, keys: pl.DataFrame) 
             populated.group_by("record_id").agg(pl.col("value").str.join(" ").alias("lex")), on="record_id", how="left"
         )
         .with_columns(pl.col("occ", "mor", "fmo", "lex").fill_null(""))
+        # unique() does not preserve order, so the folds would otherwise differ between runs
+        .sort("record_id")
     )
 
 
@@ -144,6 +151,87 @@ def quality_vectors(keys: pl.DataFrame) -> np.ndarray:
 def features(populated: pl.DataFrame, short: pl.DataFrame, keys: pl.DataFrame) -> tuple[pl.DataFrame, np.ndarray]:
     docs = documents(populated, short, keys)
     return docs, quality_vectors(docs)
+
+
+def frozen_tables() -> tuple[pl.DataFrame, pl.DataFrame, pl.DataFrame]:
+    """The corpus-wide weight tables the quality measures read, frozen across dropout"""
+    weights = pl.read_parquet(paths.METRICS_OUT / "field_weights.parquet")
+    propensity = pl.read_parquet(paths.METRICS_OUT / "decomposition_propensity.parquet")
+    importance = pl.read_parquet(paths.EXP_OUT / "kiraly" / "importance_weights.parquet")
+    return weights, propensity, importance
+
+
+def density_norm(populated: pl.DataFrame) -> pl.DataFrame:
+    """Per-institution 90th-percentile of total characters, from complete records, held fixed under dropout"""
+    counts = record_sample.institution_counts()
+    stats = thinness._char_stats(record_sample.typed(populated, counts, wide=True))
+    return stats.group_by("data_source").agg(
+        pl.col("c_total").quantile(thinness.DENSITY_PERCENTILE).alias("c_total_q90")
+    )
+
+
+def recompute_quality(
+    base: pl.DataFrame,
+    keys: pl.DataFrame,
+    frozen: tuple[pl.DataFrame, pl.DataFrame, pl.DataFrame],
+    dens: pl.DataFrame,
+    verdicts: pl.DataFrame,
+) -> np.ndarray:
+    """The six quality measures recomputed on the fields present in `base`, aligned to keys' record order"""
+    weights, propensity, importance = frozen
+    counts = record_sample.institution_counts()
+    typed = record_sample.typed(base, counts, wide=True)
+    ours = (
+        completeness.compute(typed, weights=weights)
+        .join(
+            thinness.compute(typed, propensity=propensity, density_norm=dens),
+            on=["record_id", "data_source"],
+            how="full",
+            coalesce=True,
+        )
+        .join(
+            conformance.compute(typed).select("record_id", "data_source", "conformance"),
+            on=["record_id", "data_source"],
+            how="full",
+            coalesce=True,
+        )
+        .join(
+            kiraly.completeness(typed, weights=importance).select(
+                "record_id", "data_source", "k_completeness_weighted"
+            ),
+            on=["record_id", "data_source"],
+            how="full",
+            coalesce=True,
+        )
+    )
+    # consistency over the record's surviving fields only, from the frozen per-field verdicts
+    surviving = base.select("record_id", "field_type").unique()
+    consistency = (
+        verdicts.join(surviving, on=["record_id", "field_type"], how="semi")
+        .group_by("record_id")
+        .agg(pl.col("n_conventional_ok").sum(), pl.col("n_conventional_applicable").sum())
+        .with_columns((pl.col("n_conventional_ok") / pl.col("n_conventional_applicable")).alias("consistency"))
+        .select("record_id", "consistency")
+    )
+    # documents() emits one row per record sorted by record_id; align the vector to that order
+    joined = (
+        keys.select("record_id")
+        .unique()
+        .sort("record_id")
+        .join(ours, on="record_id", how="left")
+        .join(consistency, on="record_id", how="left")
+    )
+    return np.column_stack([joined[m].fill_null(joined[m].median() or 0.0).fill_nan(0.0).to_numpy() for m in QUALITY])
+
+
+def quality_context(
+    populated: pl.DataFrame, keys: pl.DataFrame
+) -> tuple[tuple[pl.DataFrame, pl.DataFrame, pl.DataFrame], pl.DataFrame, pl.DataFrame]:
+    """The frozen tables, density normaliser and consistency verdicts recompute_quality needs"""
+    frozen = frozen_tables()
+    dens = density_norm(populated)
+    verdicts = pl.read_parquet(CONSISTENCY_FIELD).join(keys.select("record_id"), on="record_id", how="semi")
+    return frozen, dens, verdicts
 
 
 def solver(combo: tuple[str, ...]) -> bool:
@@ -220,6 +308,7 @@ def regime_sides() -> tuple[pl.DataFrame, list[str]]:
     sides = (
         accession.join(span, left_on=["data_source", "accession_year"], right_on=["data_source", "year"])
         .join(edges, on="data_source")
+        .sort("record_id")
         .with_columns(
             pl.when(pl.col("stratum_idx") == pl.col("earliest"))
             .then(pl.lit("early"))
@@ -417,7 +506,7 @@ def variant_fingerprint() -> None:
 def variant_efficiency() -> None:
     """How many records a fingerprint needs before it re-identifies its institution from a held-out half"""
     populated, short = prepare(corpus_rows(False))
-    keys = populated.select("record_id", "data_source").unique()
+    keys = populated.select("record_id", "data_source").unique().sort("record_id")
     rng = np.random.default_rng(SEED)
     halves = keys.with_columns(
         side=pl.Series([rng.integers(0, 2) for _ in range(keys.height)]).replace_strict({0: "early", 1: "late"})
@@ -428,22 +517,29 @@ def variant_efficiency() -> None:
     )
     log(f"sample efficiency over {len(insts)} institutions with >= {FP_MIN_SIDE} records a side")
 
+    # The halves stay fixed across draws, so the qualifying institutions do too and only the draw varies
     rows = []
     for n in EFFICIENCY_SIZES:
-        drawn = (
-            halves.filter(pl.col("data_source").is_in(insts))
-            .sample(fraction=1.0, shuffle=True, seed=SEED + n)
-            .with_columns(pos=pl.int_range(pl.len()).over("data_source", "side"))
-            .filter(pl.col("pos") < n)
-            .select("record_id", "data_source", "side")
-        )
-        prof = profiles(populated, short, drawn, insts)
-        rows.extend({"records_per_side": n, "features": combo_name(combo)} | match(prof, combo) for combo in COMBOS)
+        for draw in range(EFFICIENCY_DRAWS):
+            drawn = (
+                halves.filter(pl.col("data_source").is_in(insts))
+                .sample(fraction=1.0, shuffle=True, seed=SEED + 1000 * draw + n)
+                .with_columns(pos=pl.int_range(pl.len()).over("data_source", "side"))
+                .filter(pl.col("pos") < n)
+                .select("record_id", "data_source", "side")
+            )
+            prof = profiles(populated, short, drawn, insts)
+            rows.extend(
+                {"records_per_side": n, "draw": draw, "n_institutions": len(insts), "features": combo_name(combo)}
+                | match(prof, combo)
+                for combo in COMBOS
+            )
         log(f"  {n} records a side done")
 
     results = pl.DataFrame(rows)
     write(results, "sample_efficiency")
-    show(results.pivot(on="records_per_side", index="features", values="top1"), "features")
+    means = results.group_by("records_per_side", "features").agg(pl.col("top1").mean())
+    show(means.pivot(on="records_per_side", index="features", values="top1"), "features")
 
 
 def variant_partial(all_institutions: bool = False) -> None:
@@ -466,7 +562,14 @@ def variant_partial(all_institutions: bool = False) -> None:
 
     conditions: list[tuple[str, pl.Expr]] = [(f"drop {p:.0%}", pl.col("cut") < 1 - p) for p in DROPOUT]
     conditions.append(("core only", pl.col("field_type").is_in(CORE)))
-    variants = {name: features(populated.filter(keep), short.filter(keep), keys) for name, keep in conditions}
+    # The quality vector is recomputed on each condition's surviving fields, so it too sees the loss
+    frozen, dens, verdicts = quality_context(populated, keys)
+
+    def variant(keep: pl.Expr) -> tuple[pl.DataFrame, np.ndarray]:
+        kept_pop, kept_short = populated.filter(keep), short.filter(keep)
+        return documents(kept_pop, kept_short, keys), recompute_quality(kept_pop, keys, frozen, dens, verdicts)
+
+    variants = {name: variant(keep) for name, keep in conditions}
     full, qual = variants["drop 0%"]
     y = full["data_source"].cast(pl.String).to_numpy()
     log(f"partial-record variant: {len(y):,} records, {len(set(y))} institutions, chance = {1 / len(set(y)):.3f}")
@@ -499,18 +602,36 @@ def variant_partial(all_institutions: bool = False) -> None:
     show(results.pivot(on="condition", index="features", values="macro_f1"), "drop 0%")
 
 
+def predictions(model: LinearSVC, blocks: dict, combo: tuple[str, ...], record_id: np.ndarray) -> pl.DataFrame:
+    """Each record's predicted institution and the gap to the runner-up, so failures can be read back"""
+    scores = model.decision_function(hstack([blocks[k] for k in combo]).tocsr())
+    top = np.argsort(-scores, axis=1)[:, :2]
+    rows = np.arange(len(record_id))
+    return pl.DataFrame(
+        {
+            "record_id": record_id,
+            "predicted": model.classes_[top[:, 0]],
+            "runner_up": model.classes_[top[:, 1]],
+            "margin": scores[rows, top[:, 0]] - scores[rows, top[:, 1]],
+        }
+    )
+
+
 def variant_small() -> None:
     """Attribution over all 123 institutions, including those the record floor drops"""
     counts = record_sample.institution_counts()
     populated, short = prepare(corpus_rows(True))
     keys = populated.select("record_id", "data_source").unique()
 
-    rows_out, per_class = [], []
+    frozen, dens, verdicts = quality_context(populated, keys)
+    rows_out, per_class, guesses = [], [], []
     for scope, restrict in [("all fields", None), ("common core", CORE)]:
         pop = populated if restrict is None else populated.filter(pl.col("field_type").is_in(restrict))
         sht = short if restrict is None else short.filter(pl.col("field_type").is_in(restrict))
-        feats, qual = features(pop, sht, keys)
+        feats = documents(pop, sht, keys)
+        qual = recompute_quality(pop, keys, frozen, dens, verdicts)
         y = feats["data_source"].cast(pl.String).to_numpy()
+        rid = feats["record_id"].cast(pl.String).to_numpy()
         docs = as_docs(feats)
         scores: dict[tuple[str, ...], list[float]] = {}
         by_class: dict[tuple[str, str], list[float]] = {}
@@ -518,11 +639,17 @@ def variant_small() -> None:
             vecs, models = fit({k: [docs[k][i] for i in tr] for k in TEXT_KEYS}, qual[tr], y[tr])
             blocks = transform(vecs, {k: [docs[k][i] for i in te] for k in TEXT_KEYS}, qual[te])
             for combo in COMBOS:
-                pred = models[combo].predict(hstack([blocks[k] for k in combo]).tocsr())
+                guess = predictions(models[combo], blocks, combo, rid[te])
+                pred = guess["predicted"].to_numpy()
                 scores.setdefault(combo, []).append(float(f1_score(y[te], pred, average="macro")))
                 labels = sorted(set(y))
                 for inst, f1 in zip(labels, f1_score(y[te], pred, average=None, labels=labels), strict=True):
                     by_class.setdefault((combo_name(combo), inst), []).append(float(f1))
+                guesses.append(
+                    guess.with_columns(
+                        scope=pl.lit(scope), features=pl.lit(combo_name(combo)), data_source=pl.Series(y[te])
+                    )
+                )
         for combo, vals in scores.items():
             rows_out.append(
                 {
@@ -539,6 +666,10 @@ def variant_small() -> None:
 
     results = pl.DataFrame(rows_out)
     write(results, "all_institutions")
+    guessed = pl.concat(guesses).select(
+        "scope", "features", "record_id", "data_source", "predicted", "runner_up", "margin"
+    )
+    write(guessed, "record_predictions")
     classes = (
         pl.DataFrame(per_class)
         .join(counts, on="data_source")
@@ -552,6 +683,15 @@ def variant_small() -> None:
     n_inst = classes["data_source"].n_unique()
     print(f"\nmacro-F1 over all {n_inst} institutions, chance = {1 / n_inst:.4f}")
     show(results.pivot(on="scope", index="features", values="macro_f1"), "all fields")
+
+    for feature in ("lexical", combo_name(COMBOS[-1])):
+        wrong = guessed.filter(
+            (pl.col("scope") == "common core")
+            & (pl.col("features") == feature)
+            & (pl.col("predicted") != pl.col("data_source"))
+        )
+        print(f"\ncommon core, {feature}: {wrong.height:,} misattributed records, most confused pairs")
+        show(wrong.group_by("data_source", "predicted").len().sort("len", descending=True).head(15), "len")
 
 
 def single_field(short: pl.DataFrame, populated: pl.DataFrame, keys: pl.DataFrame, field: str) -> list[dict]:
@@ -613,11 +753,13 @@ def variant_fields() -> None:
     show(per_field.pivot(on="features", index="field", values="macro_f1"), "field")
 
     # The core with and without object_number, testing the numbering scheme
+    frozen, dens, verdicts = quality_context(populated, keys)
     scope_rows = []
     for scope, restrict in [("common core", CORE), ("core, no object_number", CORE[1:])]:
         pop = populated.filter(pl.col("field_type").is_in(restrict))
         sht = short.filter(pl.col("field_type").is_in(restrict))
-        feats, qual = features(pop, sht, keys)
+        feats = documents(pop, sht, keys)
+        qual = recompute_quality(pop, keys, frozen, dens, verdicts)
         y = feats["data_source"].cast(pl.String).to_numpy()
         docs = as_docs(feats)
         scores: dict[tuple[str, ...], list[float]] = {}
@@ -675,7 +817,9 @@ def variant_reliance() -> None:
         )
         joined = reliance.join(divergence, on=["data_source", "merged_pattern"], how="inner")
         write(joined, "reliance_against_divergence")
-        log(f"{joined.height} cells carry both a classifier weight and a divergence effect size")
+        rho, r = spearmanr(joined["weight"], joined["effect"])[0], pearsonr(joined["weight"], joined["effect"])[0]
+        write(pl.DataFrame({"cells": [joined.height], "spearman": [rho], "pearson": [r]}), "reliance_correlation")
+        log(f"{joined.height} cells carry a classifier weight and a divergence effect; rho = {rho:.2f}, r = {r:.2f}")
     show(reliance.group_by("field_type").agg(weight=pl.col("weight").mean(), n=pl.len()), "weight")
 
 

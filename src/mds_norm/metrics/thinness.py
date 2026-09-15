@@ -53,6 +53,16 @@ def decomposition_propensity(base: pl.LazyFrame) -> pl.DataFrame:
     )
 
 
+def decomposition_cells(base: pl.LazyFrame) -> pl.DataFrame:
+    """Per (institution, field): the share of fragments decomposed, and how far it sits from a consistent regime"""
+    return (
+        _fragments(base)
+        .group_by("data_source", "field_type")
+        .agg(fragments=pl.len(), decomposed=pl.col("is_decomposed").mean())
+        .collect(engine="streaming")
+    )
+
+
 def _decomposition(base: pl.LazyFrame, propensity: pl.DataFrame | None = None) -> pl.LazyFrame:
     """Per-record decomposition rate and depth"""
     fragments = _fragments(base)
@@ -84,15 +94,20 @@ def _decomposition(base: pl.LazyFrame, propensity: pl.DataFrame | None = None) -
     return rate.join(depth, on=["record_id", "data_source"], how="left")
 
 
-def compute(base: pl.LazyFrame, propensity: pl.DataFrame | None = None) -> pl.DataFrame:
-    """Per-record thinness sub-metrics"""
+def compute(
+    base: pl.LazyFrame, propensity: pl.DataFrame | None = None, density_norm: pl.DataFrame | None = None
+) -> pl.DataFrame:
+    """Per-record thinness sub-metrics; density_norm freezes the per-institution 90th-percentile normaliser"""
     char_stats = _char_stats(base)
+    if density_norm is None:
+        norm = pl.col("c_total").quantile(DENSITY_PERCENTILE).over("data_source")
+    else:
+        char_stats = char_stats.join(density_norm, on="data_source", how="left")
+        norm = pl.col("c_total_q90")
     thin = (
         char_stats.with_columns(
             # c_total over the institution's 90th percentile, capped at 1
-            pl.min_horizontal(
-                pl.col("c_total") / pl.col("c_total").quantile(DENSITY_PERCENTILE).over("data_source"), 1.0
-            ).alias("information_density"),
+            pl.min_horizontal(pl.col("c_total") / norm, 1.0).alias("information_density"),
             # skew = c_free / c_total; undefined below the character threshold
             pl.when(pl.col("c_total") >= SKEW_MIN_CHARS)
             .then(pl.col("c_free") / pl.col("c_total"))

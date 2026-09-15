@@ -16,8 +16,17 @@ def dehtml(value):
     [
         # tags stripped, whitespace collapsed
         ("<p>Oak chest</p>", "Oak chest"),
-        ("A carved<br/>oak table", "A carved oak table"),
         ('<span style="x:1">gilt</span> frame', "gilt frame"),
+        # a line break is a line break and a paragraph gets a blank line between
+        ("A carved<br/>oak table", "A carved\noak table"),
+        ("54228<br>54229<br>54230", "54228\n54229\n54230"),
+        ("<p>Marked on the base.</p><p>Chipped at the rim.</p>", "Marked on the base.\n\nChipped at the rim."),
+        ("<div>Gift of Miss Smith</div>\n<div>1954</div>", "Gift of Miss Smith\n\n1954"),
+        ("first<br><br>second", "first\n\nsecond"),
+        ("<ul><li>oak</li><li>iron</li></ul>", "oak\n\niron"),
+        # inline tags close up: a chemical formula must not gain spaces
+        ("CaSO<sub>4</sub>·2H<sub>2</sub>O", "CaSO4·2H2O"),
+        ("18<sup>th</sup> century", "18th century"),
         # entities unescaped
         ("Smith &amp; Sons", "Smith & Sons"),
         ("brass&nbsp;plate", "brass plate"),

@@ -10,6 +10,19 @@ from mds_norm.paths import RAW_RECORDS
 # export-only: array position, and what the schema could not hold
 SOURCE_ONLY = {"source_array_pos": pl.UInt16, "extra": pl.String}
 
+LICENCE_FIELD = "ciim/license"
+CC0_LICENCE = "CC 0"
+
+
+def cc0_licences(path: Path | None = None) -> pl.LazyFrame:
+    """Record ids and institutions of every record whose licence unit says CC0"""
+    return (
+        pl.scan_parquet(path or RAW_RECORDS)
+        .filter(pl.col("field_type") == LICENCE_FIELD, pl.col("value") == CC0_LICENCE)
+        .select("record_id", "data_source")
+        .unique()
+    )
+
 
 def source_only(frame: pl.LazyFrame) -> pl.LazyFrame:
     """Give a frame of generated nodes the source-only columns, null throughout"""

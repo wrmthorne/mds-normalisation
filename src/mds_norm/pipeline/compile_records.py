@@ -37,6 +37,7 @@ from mds_norm.parsers.parse_dimensions import PARSER_VERSION as DIM_PARSER_VERSI
 from mds_norm.paths import (
     COMPILED,
     EMISSIONS_LOG,
+    EVAL_OUT,
     FIELD_STATS,
     INSTITUTIONAL,
     MOJIBAKE_REPAIRS,
@@ -49,9 +50,9 @@ from mds_norm.paths import (
     VOCAB_ANNOTATIONS,
     VOCABS,
 )
-from mds_norm.tables import source_only
+from mds_norm.tables import cc0_licences, source_only
 from mds_norm.utils.atomise import PLACEHOLDER_MARKERS, SEMANTIC_MARKERS
-from mds_norm.utils.markup import HTML_ENTITY_RE, HTML_TAG_RE
+from mds_norm.utils.markup import HTML_BLOCK_TAG_RE, HTML_ENTITY_RE, HTML_LINE_TAG_RE, HTML_TAG_RE
 
 RAW_PATH = RAW_RECORDS
 EMISSIONS_LOG_PATH = EMISSIONS_LOG
@@ -213,11 +214,25 @@ def _unescape(col: pl.Expr) -> pl.Expr:
     )
 
 
+def _delayout(col: pl.Expr) -> pl.Expr:
+    """Turn block and line tags into the breaks they render as, drop inline tags, then settle the whitespace"""
+    return (
+        col.str.replace_all(r"\r\n?", "\n")
+        .str.replace_all(HTML_BLOCK_TAG_RE, "\n\n")
+        .str.replace_all(HTML_LINE_TAG_RE, "\n")
+        .str.replace_all(_HTML_TAG, "")
+        .str.replace_all(r"[ \t]+", " ")
+        .str.replace_all(r"[ \t]*\n[ \t]*", "\n")
+        # a blank line is the widest gap any markup earns
+        .str.replace_all(r"\n{3,}", "\n\n")
+    )
+
+
 def _dehtml(col: pl.Expr) -> pl.Expr:
-    """Unescape entities and strip HTML tags"""
+    """Unescape entities and strip HTML tags, keeping the line and paragraph breaks the markup expressed"""
     text = _unescape(col)
     unwrapped = text.str.extract(_BRACKETED_CONTENT, 1).str.strip_chars()
-    cleaned = text.str.replace_all(_HTML_TAG, " ").str.replace_all(r"[ \t]+", " ").str.strip_chars()
+    cleaned = _delayout(text).str.strip_chars()
     return (
         pl.when(unwrapped.is_not_null())
         .then(unwrapped)
@@ -320,8 +335,8 @@ def build_base(tmp_path: Path, sources: list[str] | None) -> pl.LazyFrame:
     cleaned = _dehtml(pl.coalesce("value_fixed", "value_t0", "value"))
     c, s = pl.col("_cleaned"), pl.col("_stripped")
     (
-        raw.join(fs, on="node_id", how="left", maintain_order="left")
-        .join(repairs, on="value_t0", how="left", maintain_order="left")
+        raw.join(fs, on="node_id", how="left")
+        .join(repairs, on="value_t0", how="left")
         .with_columns(_cleaned=cleaned)
         # The tests read the unstripped value too, so strip last
         .with_columns(_stripped=_strip_dangling(c))
@@ -2332,6 +2347,22 @@ def merge_proposals(base: pl.LazyFrame, proposals: pl.DataFrame, report: dict) -
     return winners.select("node_id", "new_value", "component"), conflicts
 
 
+def parser_dispositions(winners: pl.DataFrame, conflicts: pl.DataFrame, cert: pl.DataFrame) -> pl.DataFrame:
+    """Applied, flagged and refused counts per parser, over every node the compile touched"""
+    applied = winners.group_by("component").agg(n=pl.len()).with_columns(disposition=pl.lit("applied"))
+    flagged = (
+        cert.group_by(pl.col("source").alias("component")).agg(n=pl.len()).with_columns(disposition=pl.lit("flagged"))
+    )
+    refused = (
+        conflicts.group_by("component", "reason")
+        .agg(n=pl.len())
+        .select("component", "n", disposition=pl.lit("refused") + pl.lit(":") + pl.col("reason"))
+    )
+    return (
+        pl.concat([applied, flagged, refused]).select("component", "disposition", "n").sort("component", "disposition")
+    )
+
+
 def certainty_nodes(cert: pl.DataFrame, targets: pl.LazyFrame) -> pl.LazyFrame:
     """Inline every certainty annotation as a wrmthorne/certainty group node with scalar children"""
     with_depth = (
@@ -2386,6 +2417,7 @@ def main() -> None:
     ap = argparse.ArgumentParser(description="Compile all sidecars into the normalised record set.")
     ap.add_argument("--data-source", action="append", help="restrict to institution(s), for subset test runs")
     ap.add_argument("--out", type=Path, default=COMPILED)
+    ap.add_argument("--cc0", action="store_true", help="also write the CC0-licensed records as a second parquet")
     ap.add_argument("--keep-tmp", action="store_true")
     args = ap.parse_args()
     args.out.mkdir(parents=True, exist_ok=True)
@@ -2474,6 +2506,11 @@ def main() -> None:
         .collect(engine="streaming")
     )
     cert.write_parquet(args.out / "certainty_annotations.parquet")
+    per_parser = parser_dispositions(winners, conflicts, cert)
+    per_parser.write_parquet(EVAL_OUT / "parser_dispositions.parquet")
+    report["parser_dispositions"] = {r["component"]: {} for r in per_parser.iter_rows(named=True)}
+    for r in per_parser.iter_rows(named=True):
+        report["parser_dispositions"][r["component"]][r["disposition"]] = r["n"]
     inline = certainty_nodes(cert, targets)
     del date_cert, vocab_cert, place_cert, patch_cert, note_cert, dim_cert, count_cert, ident_cert, enc_cert
     gc.collect()
@@ -2703,6 +2740,13 @@ def main() -> None:
         raise RuntimeError("protected field was modified")
     if not checks["disposition_sum_holds"]:
         raise RuntimeError("disposition does not partition the rows")
+
+    if args.cc0:
+        # A second streaming pass over the finished output, so the full corpus is never at risk
+        cc0_path = args.out / "mds-normalised_CC0.parquet"
+        out.join(cc0_licences().select("record_id"), on="record_id", how="semi").sink_parquet(cc0_path)
+        n_cc0 = pl.scan_parquet(cc0_path).select(pl.len()).collect(engine="streaming").item()
+        log(f"CC0 subset: {n_cc0:,} nodes → {cc0_path}")
 
     if not args.keep_tmp:
         tmp_base.unlink()

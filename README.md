@@ -1,12 +1,14 @@
 # MDS Normalisation
 
-Normalisation of the Museum Data Service corpus: 166 million metadata nodes from 123 UK institutions. Every value is routed to the cheapest method that can resolve it — deterministic parsers first, string and embedding matching next, small language models only for what is left. Each stage writes to a saved external parquet, rather than mutating any values in-place. Only when the corpus is compiled from the raw data are those changes applied, so every change is reversible and carries its provenance.
+This repo provides a pipeline to normalise (make data in the same fields express their values in the same way) the Museum Data Service corpus: 166 million metadata nodes from 123 UK institutions (data collected on 6th April 2026). Every value is routed to the cheapest sufficient method: first, deterministic parsers; then, string and embedding matching; and finally, small language models only for what is left. Each stage writes to a saved external parquet (sidecar), rather than mutating any values in-place. Only when the corpus is compiled from the raw data are those changes applied, so every change is reversible and carries its provenance.
 
-Common functionality (evaluation, findability, metrics, parsers, pipeline, utils, plotting) are accessible through the python module built in this repository. Notebooks covering the main project functionality are in [notebooks/](notebooks/).
+The data model for this work is documented in a separate [Github repository](https://github.com/wrmthorne/mds-data-model).
+
+Common functionality (evaluation, findability, metrics, parsers, pipeline, utils, plotting) is written into a python module, built in this repository. Notebooks covering the main concepts of the analysis and the pipeline are given in [notebooks/](notebooks/).
 
 ## 1. Setup
 
-> All instructions expect the use of linux. Code and modified cli commands _may_ run on Windows but it is untested not be supported.
+> All instructions expect the use of systemd linux. Code _may_ run on Windows, but it is untested and unsupported.
 
 uv is the preferred package manager ([install instructions](https://docs.astral.sh/uv/getting-started/installation/)).
 
@@ -16,8 +18,6 @@ uv run pytest  # needs no corpus data
 ```
 
 ## 2. Dataset preparation
-
-> Update with huggingface details if MDS is happy with a normalised version being uploaded there
 
 The pipeline reads two files. `data/mds-flat-records.parquet` is a node table with one row per metadata assertion (`record_id`, `node_id`, `parent_id`, `depth`, `source_array_pos`, `label`, `path`, `field_type`, `value`, `extra`), and `data/mds-record-admin.parquet` holds the rest of each record's `@admin` block, one row per record, joined on `record_id`. Together they carry everything the export sends: 20,000 records rebuilt from the pair match the source JSON exactly. Anything a future export adds that the schema does not model arrives as JSON in `extra` rather than being dropped, and where the export re-emits a record that changed mid-download, the newest copy is the one kept. The compiled corpus is the same table with the compile's columns appended. Building them from the Museum Data Service takes two steps.
 
@@ -59,7 +59,7 @@ wget https://museweb.dcs.bbk.ac.uk/static/pdf/MappingMuseumsData2021_09_30.csv -
 
 The node table, built by the ingest described under [Exporting the corpus](#exporting-the-corpus-from-mds), and the authority releases fetched by the [vocabulary script](#downloading-supplementary-data), must exist before running anything.
 
-Every stage is a module with a `main()` and a `--help`. Each writes a sidecar under `data/analysis_output/` and mutates nothing, so a stage can be re-run in place and the compile at the end reads whatever sidecars exist. Run them in this order, and put the memory cap shown under [Compiling the dataset](#compiling-the-dataset) in front of any of them that scans the whole corpus.
+Every stage is a module with a `main()` and a `--help`. Each writes a the proposed changes to a separate file under `data/analysis_output/` and mutates nothing. Run in this order, and apply the memory cap shown under [Compiling the dataset](#compiling-the-dataset) where scripts scan the whole corpus.
 
 ### 3a. Model endpoints
 
@@ -92,6 +92,7 @@ uv run python -m mds_norm.pipeline.pattern_exports
 uv run python -m mds_norm.pipeline.accession_schemes
 uv run python -m mds_norm.pipeline.institutional_priors
 uv run python -m mds_norm.pipeline.institutional_fingerprints
+uv run python -m mds_norm.pipeline.practice_boundaries      # tested boundaries in field use by acquisition year
 ```
 
 Without the first, the others cannot run, and the compile falls back to empty conventions rather than failing. `accession_schemes` decides which institutions' object numbers carry an accession year, which the practice strata are segmented on. `--case-comparison` on `pattern_exports` writes the pattern counts under both maskings and exits, without touching the shipped artefacts.
@@ -195,6 +196,8 @@ uv run python -m mds_norm.pipeline.compile_records
 systemd-run --user --scope -p MemoryMax=48G -p MemorySwapMax=0 \
     .venv/bin/python3 -m mds_norm.pipeline.compile_records
 ```
+
+`--cc0` writes `mds-normalised_CC0.parquet` beside the full output, holding only the nodes of records whose licence unit says CC0.
 
 
 ## Brief overview

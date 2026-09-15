@@ -30,10 +30,12 @@ GT12_FRAC = 0.05
 GT31_FRAC = 0.01
 MAX_MONTH, MAX_DAY = 12, 31
 
-# Three-component numeric families with a 4-digit year anchor
+# Three-component numeric families: two short slots and a year anchor, with one separator throughout. Any short-slot
+# width qualifies, so a shape whose day and month are always two digits is tested alongside one where they vary
+SHORT_SLOT, YEAR_SLOT, SEPARATOR = r"d\{(?:1|2|1,2)\}", r"d\{(?:4|3,4)\}", r"([./-])"
 FAMILIES = {
-    "year_last": (["d{1,2}/d{1,2}/d{4}", "d{1,2}.d{1,2}.d{4}", "d{1,2}-d{1,2}-d{4}"], [0, 1], 2),
-    "year_first": (["d{4}-d{1,2}-d{1,2}", "d{4}.d{1,2}.d{1,2}", "d{4}/d{1,2}/d{1,2}"], [1, 2], 0),
+    "year_last": (re.compile(rf"^{SHORT_SLOT}{SEPARATOR}{SHORT_SLOT}\1{YEAR_SLOT}$"), [0, 1], 2),
+    "year_first": (re.compile(rf"^{YEAR_SLOT}{SEPARATOR}{SHORT_SLOT}\1{SHORT_SLOT}$"), [1, 2], 0),
 }
 
 # Zero-placeholder convention: a short slot mostly reading 0
@@ -171,7 +173,9 @@ def load_slot_values() -> pl.DataFrame:
 def date_orders(inst: pl.DataFrame) -> pl.DataFrame:
     """One row per institution: day/month-order verdict per family"""
     rows: dict[str, dict] = {}
-    for family, (shapes, short, year) in FAMILIES.items():
+    for family, (pattern, short, year) in FAMILIES.items():
+        # Matched in Python because the separator backreference is beyond the regex engine polars uses
+        shapes = [s for s in inst["shape"].unique() if pattern.match(s)]
         pooled = (
             inst.filter(pl.col("shape").is_in(shapes))
             .group_by("data_source", "slot_idx")

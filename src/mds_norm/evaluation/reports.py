@@ -503,10 +503,87 @@ def cmd_conformance_failures(_args: argparse.Namespace) -> None:
         print(per_field.head(15))
 
 
+# A cell needs this many fragments before its decomposition share means anything
+CELL_MIN_FRAGMENTS = 20
+# Below and above these shares a cell sits in a consistent regime
+REGIME_LOW, REGIME_HIGH = 0.05, 0.95
+# A field is mixed when this share of its cells is neither
+MIXED_MAX = 0.10
+
+
+def cmd_decomposition_cells(_args: argparse.Namespace) -> None:
+    """Per (institution, field) decomposition, and the mixed fields the weights average over"""
+    from mds_norm.metrics import load_base, thinness
+
+    base = load_base(RAW_PATH)
+    cells = (
+        thinness.decomposition_cells(base)
+        .with_columns(pl.col("field_type").cast(pl.String), pl.col("data_source").cast(pl.String))
+        .filter(pl.col("fragments") >= CELL_MIN_FRAGMENTS)
+    )
+    consistent = (pl.col("decomposed") < REGIME_LOW) | (pl.col("decomposed") > REGIME_HIGH)
+    summary = (
+        cells.group_by("field_type")
+        .agg(
+            cells=pl.len(),
+            mean_decomposition=pl.col("decomposed").mean(),
+            extremity=1 - consistent.mean(),
+            never_split=(pl.col("decomposed") < REGIME_LOW).mean(),
+            always_split=(pl.col("decomposed") > REGIME_HIGH).mean(),
+        )
+        .with_columns(
+            stratum=pl.when(pl.col("extremity") >= MIXED_MAX).then(pl.lit("mixed")).otherwise(pl.lit("consistent"))
+        )
+        .sort("cells", descending=True)
+    )
+    WEIGHTS_OUT_DIR.mkdir(parents=True, exist_ok=True)
+    cells.write_parquet(WEIGHTS_OUT_DIR / "decomposition_cells.parquet")
+    summary.write_parquet(WEIGHTS_OUT_DIR / "decomposition_mixed_fields.parquet")
+    log(f"{cells.height:,} (institution, field) cells over {summary.height} fields → {WEIGHTS_OUT_DIR}")
+    with pl.Config(tbl_rows=30):
+        print(summary)
+
+
+def cmd_extraction_vocab_conformance(_args: argparse.Namespace) -> None:
+    """Do the extracted material values already appear in the institution's own material vocabulary?"""
+    from mds_norm.pipeline.extraction import LLM_OPS
+    from mds_norm.pipeline.institutional_vocab_detect import atom_universe
+
+    house = atom_universe("material").select("data_source", norm=pl.col("norm").str.to_lowercase()).unique()
+    accepted = (
+        pl.scan_parquet(LLM_OPS)
+        .filter((pl.col("unit") == "material") & (pl.col("status") == "resolved"))
+        .select("data_source", norm=pl.col("value").str.strip_chars().str.to_lowercase())
+        .collect(engine="streaming")
+    )
+    scored = accepted.join(house.with_columns(in_house=True), on=["data_source", "norm"], how="left").with_columns(
+        pl.col("in_house").fill_null(value=False)
+    )
+    per_inst = (
+        scored.group_by("data_source")
+        .agg(accepted_values=pl.len(), in_house_share=pl.col("in_house").mean())
+        .sort("accepted_values", descending=True)
+    )
+    out = EVAL_OUT / "extraction_vocab_conformance.parquet"
+    EVAL_OUT.mkdir(parents=True, exist_ok=True)
+    per_inst.write_parquet(out)
+    log(
+        f"{scored.height:,} accepted material values, {scored['in_house'].mean():.1%} already written by the same "
+        f"institution → {out}"
+    )
+    with pl.Config(tbl_rows=20):
+        print(per_inst)
+
+
 COMMANDS = {
     "coverage": (cmd_coverage, "persist the census/coverage table"),
     "conformance-failures": (cmd_conformance_failures, "per-check conformance failure counts"),
     "freeze-weights": (cmd_freeze_weights, "freeze the raw-corpus metric weights"),
+    "decomposition-cells": (cmd_decomposition_cells, "per (institution, field) decomposition and mixed fields"),
+    "extraction-vocab-conformance": (
+        cmd_extraction_vocab_conformance,
+        "share of extracted material values the institution already writes",
+    ),
     "tier01-energy": (cmd_tier01_energy, "measure tier 0 + tier-1 date-parse energy"),
     "llm-queue": (cmd_llm_queue, "project full-queue LLM stage costs"),
 }

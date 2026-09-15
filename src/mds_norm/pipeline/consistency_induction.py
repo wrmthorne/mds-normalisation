@@ -1,5 +1,6 @@
 from __future__ import annotations
 
+import argparse
 import time
 from pathlib import Path
 
@@ -228,8 +229,8 @@ def mask_corpus(path: Path) -> pl.DataFrame:
     )
 
 
-def score_corpus(masked: pl.DataFrame) -> tuple[pl.DataFrame, pl.DataFrame]:
-    """(per-institution-field concentration, per-record consistency counts)"""
+def score_corpus(masked: pl.DataFrame) -> tuple[pl.DataFrame, pl.DataFrame, pl.DataFrame]:
+    """(per-institution-field concentration, per-record consistency counts, per-field verdict counts)"""
     counts = masked.group_by("data_source", "field_type", "merged_pattern").agg(pl.len().alias("count"))
     totals = counts.group_by("data_source", "field_type").agg(
         pl.col("count").sum().alias("n_records"),
@@ -290,13 +291,17 @@ def score_corpus(masked: pl.DataFrame) -> tuple[pl.DataFrame, pl.DataFrame]:
         pl.col("merged_pattern").is_not_null().alias("well_formed"),
         (pl.col("merged_pattern").is_not_null() & pl.col("in_head").fill_null(False)).alias("conventional"),
     )
+    well_formed = verdicts.filter(pl.col("well_formed"))  # malformed excluded from consistency
     consistency_rec = (
-        verdicts.filter(pl.col("well_formed"))  # malformed excluded from consistency
-        .group_by("record_id", "data_source")
+        well_formed.group_by("record_id", "data_source")
         .agg(pl.len().alias("n_conventional_applicable"), pl.col("conventional").sum().alias("n_conventional_ok"))
         .with_columns((pl.col("n_conventional_ok") / pl.col("n_conventional_applicable")).alias("consistency"))
     )
-    return concentration, consistency_rec
+    # Per-field counts so consistency can be recomputed over a subset of a record's fields
+    consistency_field = well_formed.group_by("record_id", "data_source", "field_type").agg(
+        pl.len().alias("n_conventional_applicable"), pl.col("conventional").sum().alias("n_conventional_ok")
+    )
+    return concentration, consistency_rec, consistency_field
 
 
 def head_floor_sweep(masked: pl.DataFrame) -> pl.DataFrame:
@@ -321,14 +326,16 @@ def head_floor_sweep(masked: pl.DataFrame) -> pl.DataFrame:
     return pl.concat(rows).select("tau", "data_source", "field_type", "n_values", "n_head_patterns", "divergent_share")
 
 
-def main() -> None:
+def main(corpora: list[str] | None = None) -> None:
     OUT_DIR.mkdir(parents=True, exist_ok=True)
-    for corpus, path in CORPORA.items():
+    for corpus in corpora or list(CORPORA):
+        path = CORPORA[corpus]
         log(f"masking {corpus} corpus {path.name}…")
         masked = mask_corpus(path)
         log(f"{corpus}: {masked.height:,} inducible field-values")
-        concentration, rec = score_corpus(masked)
+        concentration, rec, field_verdicts = score_corpus(masked)
         concentration.write_parquet(OUT_DIR / f"pattern_consistency_{corpus}.parquet")
+        field_verdicts.write_parquet(OUT_DIR / f"consistency_field_{corpus}.parquet")
         sweep = head_floor_sweep(masked)
         sweep.write_parquet(OUT_DIR / f"head_floor_sweep_{corpus}.parquet")
         pooled = sweep.group_by("tau").agg(
@@ -349,4 +356,8 @@ def main() -> None:
 
 
 if __name__ == "__main__":
-    main()
+    ap = argparse.ArgumentParser(description="Induce per-field patterns and score record consistency.")
+    ap.add_argument(
+        "--corpus", choices=list(CORPORA), action="append", help="restrict to these corpora (default: all)"
+    )
+    main(ap.parse_args().corpus)

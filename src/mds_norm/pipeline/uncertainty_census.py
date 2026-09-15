@@ -12,6 +12,7 @@ from mds_norm.pipeline.probe_scan import COMPOSITION_MIN_TOKENS, JOIN_SHARE_MAX
 OUT_PATH = INSTITUTIONAL / "uncertainty_marking.parquet"
 STYLES_PATH = INSTITUTIONAL / "uncertainty_styles.parquet"
 QUESTION_PATH = INSTITUTIONAL / "question_mark_uses.parquet"
+QUESTION_JOIN_PATH = INSTITUTIONAL / "question_mark_join_share.parquet"
 
 # The three ways a cataloguer marks doubt inside a value
 MARKERS = {
@@ -64,22 +65,37 @@ def marked_values() -> pl.DataFrame:
     )
 
 
+def _question_use(values: pl.DataFrame) -> pl.DataFrame:
+    """Every question-mark value labelled with the use its shape implies"""
+    return values.filter("question").with_columns(
+        use=pl.when(pl.col("urlish"))
+        .then(pl.lit("link or query string"))
+        .when(pl.col("join_share") > JOIN_SHARE_MAX)
+        .then(pl.lit("a sentence asking something"))
+        .when(~pl.col("trailing_q"))
+        .then(pl.lit("mid-value punctuation"))
+        .otherwise(pl.lit("doubt about the value"))
+    )
+
+
 def question_uses(values: pl.DataFrame) -> pl.DataFrame:
     """How the question marks divide between doubt, a sentence, a link, and a mark inside running text"""
     return (
-        values.filter("question")
-        .with_columns(
-            use=pl.when(pl.col("urlish"))
-            .then(pl.lit("link or query string"))
-            .when(pl.col("join_share") > JOIN_SHARE_MAX)
-            .then(pl.lit("a sentence asking something"))
-            .when(~pl.col("trailing_q"))
-            .then(pl.lit("mid-value punctuation"))
-            .otherwise(pl.lit("doubt about the value"))
-        )
+        _question_use(values)
         .group_by("use")
         .agg(n=pl.len(), fields=pl.col("field_type").n_unique(), institutions=pl.col("data_source").n_unique())
         .sort("n", descending=True)
+    )
+
+
+def question_join_share(values: pl.DataFrame, bins: int = 40) -> pl.DataFrame:
+    """The joining-word share of every question-mark value, binned, one series per use"""
+    return (
+        _question_use(values)
+        .with_columns(bin=(pl.col("join_share") * bins).floor().cast(pl.Int32).clip(0, bins - 1) / bins)
+        .group_by("use", "bin")
+        .agg(n=pl.len())
+        .sort("use", "bin")
     )
 
 
@@ -131,6 +147,10 @@ def main() -> None:
     uses.write_parquet(QUESTION_PATH)
     log(f"question-mark uses → {QUESTION_PATH}")
     print(uses)
+
+    shares = question_join_share(values)
+    shares.write_parquet(QUESTION_JOIN_PATH)
+    log(f"question-mark joining-word shares → {QUESTION_JOIN_PATH}")
 
     rates = per_institution(values)
     styled = styles(rates)

@@ -17,14 +17,12 @@ from scipy.spatial.distance import jensenshannon, squareform
 
 from mds_norm.metrics import kiraly
 from mds_norm.paths import EMISSIONS_LOG, INSTITUTIONAL, PATTERNS_OUT, RAW_RECORDS
-from mds_norm.pipeline.accession_schemes import field_years, objnum_years
+from mds_norm.pipeline.accession_schemes import field_years
 from mds_norm.utils.atomise import NULL_MARKERS
 from mds_norm.utils.masking import MASK, signature_of
 
 RAW_PATH = RAW_RECORDS
 PATTERNS = PATTERNS_OUT
-# Object-number year-encoding verdicts, from analysis.object_numbers
-ENC_PATH = PATTERNS_OUT / "object_number_year_encoding.parquet"
 OUT_DIR = INSTITUTIONAL
 EMISSIONS_LOG_PATH = EMISSIONS_LOG
 
@@ -60,25 +58,14 @@ def log(msg: str) -> None:
     print(f"[{time.strftime('%H:%M:%S')}] {msg}", flush=True)
 
 
-def accession_years(institutions: list[str], objnum_ok: list[str]) -> pl.DataFrame:
-    """One accession year per dated record, from the most reliable signal"""
-    objnum = objnum_years(objnum_ok).drop("value")
-
-    def date_year(field: str) -> pl.DataFrame:
-        return field_years(field).filter(pl.col("data_source").is_in(institutions))
-
+def accession_years() -> pl.DataFrame:
+    """One accession year per dated record: the accession date where recorded, else the acquisition date"""
+    # Years read from object numbers are not used: they are inferred, and the strata must rest on recorded dates
     sources = [
-        ("accession_date", date_year("spectrum/accession_date")),
-        ("acquisition_date", date_year("spectrum/acquisition_date")),
-        ("object_number", objnum),
+        ("accession_date", field_years("spectrum/accession_date")),
+        ("acquisition_date", field_years("spectrum/acquisition_date")),
     ]
-    pri = (
-        pl.when(pl.col("year_source") == "accession_date")
-        .then(0)
-        .when(pl.col("year_source") == "acquisition_date")
-        .then(1)
-        .otherwise(2)
-    )
+    pri = pl.when(pl.col("year_source") == "accession_date").then(0).otherwise(1)
     return (
         pl.concat([df.with_columns(year_source=pl.lit(src)) for src, df in sources])
         .with_columns(_pri=pri)
@@ -193,12 +180,7 @@ def consensus(rows: list[dict]) -> list[dict]:
 
 
 def export_strata() -> None:
-    enc = pl.read_parquet(ENC_PATH)
-    institutions = enc.filter(pl.col("verdict") != "rejected")["data_source"].to_list()
-    objnum_ok = enc.filter(pl.col("verdict") == "confirmed")["data_source"].to_list()
-    log(f"{len(institutions)} institutions in scope; object-number years from the {len(objnum_ok)} confirmed")
-
-    rec_year = accession_years(institutions, objnum_ok)
+    rec_year = accession_years()
     rec_year.write_parquet(OUT_DIR / "accession_years.parquet")
     log(
         f"records assigned an accession year: {rec_year.height:,} "
@@ -207,11 +189,7 @@ def export_strata() -> None:
 
     nodes = (
         pl.scan_parquet(RAW_PATH)
-        .filter(
-            pl.col("data_source").cast(pl.String).is_in(institutions)
-            & pl.col("value").is_not_null()
-            & (pl.col("value").str.strip_chars().str.len_chars() > 0)
-        )
+        .filter(pl.col("value").is_not_null() & (pl.col("value").str.strip_chars().str.len_chars() > 0))
         .join(rec_year.lazy().select("record_id", "accession_year"), on="record_id")
     )
 
