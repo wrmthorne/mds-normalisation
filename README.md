@@ -6,6 +6,8 @@ The data model for this work is documented in a separate [Github repository](htt
 
 Common functionality (evaluation, findability, metrics, parsers, pipeline, utils, plotting) is written into a python module, built in this repository. Notebooks covering the main concepts of the analysis and the pipeline are given in [notebooks/](notebooks/).
 
+> The project's MIT licence covers only the code in this repository. It does not cover any data obtained from MDS or any controlled vocabularies: each such data source retains its original licence. In particular, the per-record licence supplied by MDS continues to apply to every record.
+
 ## 1. Setup
 
 > All instructions expect the use of systemd linux. Code _may_ run on Windows, but it is untested and unsupported.
