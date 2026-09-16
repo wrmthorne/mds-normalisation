@@ -1,5 +1,3 @@
-"""Tested boundaries in each field's use over acquisition years, for the units the analysis paper draws"""
-
 import itertools
 import json
 
@@ -10,48 +8,36 @@ from scipy.sparse.csgraph import connected_components
 from mds_norm.paths import INSTITUTION_PSEUDONYMS, INSTITUTIONAL, RAW_RECORDS
 from mds_norm.pipeline.accession_schemes import field_years
 
-# the units drawn, with the stem their figures are saved under: an institution, or one department of an institution
-# whose records name one, chosen because most of their records carry a recorded date
+# the units drawn and the stem their figures save under; chosen for mostly dated records
 UNITS = {"Norfolk Museums Service | Museum of Norwich": "department", "Trowbridge Museum": "museum"}
-# a record's year is read from its accession date, else its acquisition date; never from its object number
+# a record's year comes from its accession date, else acquisition date
 DATE_FIELDS = ("spectrum/accession_date", "spectrum/acquisition_date")
 YEAR_LABEL = {"accession_date": "accession year", "acquisition_date": "acquisition year"}
 DEPARTMENT_FIELD = "spectrum/responsible_department_section"
 # a year is read only where it holds this many dated records
 MIN_YEAR_RECORDS = 30
-# a boundary needs this many readable years on each side and a permutation p-value below this, where years are
-# shuffled and the best split taken each time so the search is part of the null; survivors must then pass
-# Benjamini-Hochberg across all of a unit's tests
+# a boundary needs this many years each side and a permutation p-value below this
 BOUNDARY_SIDE_YEARS, BOUNDARY_ALPHA, BOUNDARY_FDR = 5, 0.01, 0.05
 BOUNDARY_PERMUTATIONS = 999
-# the mean fill rate must also change by this share of the field's own peak, its best run of side-length years, and by
-# at least this many points, below which the change cannot be seen on the figure
+# the mean fill rate must change by this share of field's peak, plus a floor
 BOUNDARY_EFFECT, BOUNDARY_EFFECT_FLOOR = 0.3, 0.10
-# each search also tries every shorter window whose ends lie on a grid this many years apart, so a plateau that later
-# falls back is split at its own edges rather than lost in the mean of the whole series
+# each search also tries shorter windows whose ends sit on this many years' grid
 BOUNDARY_WINDOW_GRID = 5
 # boundaries in different fields that move the same way this close together form one run
 BOUNDARY_GROUP_YEARS = 2
-# a boundary is kept only where this share of its change in fill rate survives holding the object name fixed, at the
-# full name and at its head noun, so a front that is really a change in what was collected is dropped
+# a boundary is kept where this share of its change survives fixing the object name
 COMPOSITION_SHARE = 0.5
-# fields filled on the same records are one decision, as a dimension's value and its unit are: two fields join one
-# group where their presence on the unit's dated records correlates by at least this phi coefficient
+# two fields join one group where their presence correlates by at least this phi coefficient
 FAMILY_PHI = 0.8
-# a boundary is shared where a run holds more field groups stepping the same way than chance puts together: the
-# smallest run size that shuffling every step's year produces anywhere in fewer than this share of shuffles
+# a boundary is shared where a run holds more field groups stepping alike than chance
 SHARED_ALPHA, SHARED_PERMUTATIONS = 0.05, 999
-# a field is marked where its commonest value is at least this share of its entries, since a field that mostly repeats
-# one value says little about cataloguing effort
+# a field is marked where its commonest value is at least this share of entries
 DOMINANT_SHARE = 0.6
-# a field that fills fewer records than this in every span is left off the figure
+# a field below this fill in every span is left off the figure
 MIN_FILL = 0.05
-# fields left off the figures, beside the aggregator's own: the dates the year axis is read from, which are filled on
-# every dated record by construction, and the department that names a unit
+# fields left off the figures: the date fields for the year axis, and the department
 HIDDEN_FIELDS = (*DATE_FIELDS, DEPARTMENT_FIELD)
-# a field's boundaries give it one of five signatures, in the order the figures draw them: fronts only is a practice
-# adopted and kept, a front then a fall a practice bounded to one stratum, falls only a practice retired, boundaries
-# that all vanish once the object name is held fixed a change in what was collected, and no boundary a steady fill
+# a field's boundaries give it one of five signatures, in the order figures draw them
 SIGNATURES = ("adopted", "bounded", "retired", "collected", "steady")
 
 raw = pl.scan_parquet(RAW_RECORDS)
@@ -128,7 +114,7 @@ def split_changes(rates: np.ndarray) -> tuple[np.ndarray, np.ndarray]:
     c = np.concatenate([np.zeros((*rates.shape[:-1], 1)), np.cumsum(rates, axis=-1)], axis=-1)
     s = np.arange(BOUNDARY_SIDE_YEARS, m - BOUNDARY_SIDE_YEARS + 1)
     change = (c[..., [m]] - c[..., s]) / (m - s) - c[..., s] / s
-    # a lopsided split's mean difference is noisier than an even one's, so splits compete on the scaled change
+    # a lopsided split is noisier, so splits compete on the scaled change
     return change, change / np.sqrt(1 / s + 1 / (m - s))
 
 
@@ -145,7 +131,7 @@ def abrupt(series: np.ndarray, split: int) -> bool:
 
 def field_tests(rates: np.ndarray) -> list[dict]:
     """Every split tested while segmenting one field's yearly fill rates, recursing only into the halves of a pass"""
-    # the same permutations for every field, so a verdict depends on the field's own series and nothing else
+    # the same permutations for every field, so each verdict depends on its own series
     rng = np.random.default_rng(0)
     peak = float(np.convolve(rates, np.ones(BOUNDARY_SIDE_YEARS) / BOUNDARY_SIDE_YEARS, mode="valid").max())
     effect = max(BOUNDARY_EFFECT * peak, BOUNDARY_EFFECT_FLOOR)
@@ -222,7 +208,7 @@ def detect_boundaries(cov: pl.DataFrame) -> pl.DataFrame:
         order = np.argsort(p)
         bh = np.empty_like(p)
         bh[order] = np.minimum.accumulate((p[order] * len(p) / np.arange(1, len(p) + 1))[::-1])[::-1]
-        # the tested window is kept as its first and last readable years, so the boundary can be re-examined on records
+        # the tested window is kept as its first and last readable years
         rows += [
             {**t, "year": int(years[t["split"]]), "from_year": int(years[t["lo"]]), "to_year": int(years[t["hi"] - 1])}
             for t, q in zip(tests, bh, strict=True)
@@ -351,7 +337,7 @@ def runs(years: np.ndarray, families: np.ndarray) -> list[tuple[float, int]]:
 def shared_boundaries(steps: pl.DataFrame, readable: np.ndarray) -> tuple[list[int], int, float]:
     """Years where more field groups step the same way than chance puts together, with the run size that takes"""
     rng = np.random.default_rng(0)
-    # grouped in a fixed order, so the seeded null does not depend on which direction polars happens to yield first
+    # grouped in a fixed order, so the seeded null is deterministic
     by_direction = {
         d: (g["year"].to_numpy(), g["family"].to_numpy())
         for (d,), g in steps.sort("direction", "year", "family").group_by("direction", maintain_order=True)
