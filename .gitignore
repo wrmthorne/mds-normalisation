@@ -34,6 +34,8 @@ data/vocabularies/*
 !data/vocabularies/field_vocab_map.json
 !data/vocabularies/periods.csv
 
+src/mds_norm/pipeline/build_institution_pseudonyms.py
+
 # Not published: annotation tooling, working notes, planning documents
 labelling/
 docs/
